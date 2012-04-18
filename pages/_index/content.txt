@@ -1,0 +1,18 @@
+<h1>Concept</h1>
+<p>The main objective was to create the most simple content management system for web sites, simple web sites.</p>
+<p>Actually, this stuff must be not even like CMS.</p>
+<p>Goal of productivity is first of all we were thinking of.</p>
+<br>
+<strong>Imagine!</strong>
+<h3>For about 90% of websites we don't even need any DB!</h3>
+<br>
+<p>All these sites made for only one mission &ndash; to tell about something or someone.</p>
+<p>Yes, they have a lot of dynamic content, like: news, photos, product line data and so on... Dynamic... yepp...</p>
+<p>But, please, ask Youself, how much of this content is entierly necessity to be in such dynamic way?</p>
+<br>
+<p>Please. We are well remembered about personal pages or organization promo sites with almost static news pages.</p>
+<p>So, do we really need News management in DB?</p>
+<p>Or do we really need Photo Album with odd storage and extremely hard management?</p>
+<p>Or do we really need goods promo with diversed settings but which is not as well as complicated?</p>
+<br>
+<strong>Then, may be we need to <a href="/screenshots/">get deeper?</a></strong>

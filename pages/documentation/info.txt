@@ -1,0 +1,49 @@
+{
+	"title": "Title",
+	"mainMenu": [{
+		"title": "About Us",
+		"type": "link",
+		"link": "/about/",
+		"active": false
+	}, {
+		"title": "How to Install",
+		"type": "link",
+		"link": "/install/",
+		"active": false
+	}, {
+		"title": "Documentation",
+		"type": "link",
+		"link": "/documentation/",
+		"active": true
+	}, {
+		"title": "Download",
+		"type": "link",
+		"link": "/download/",
+		"active": false
+	}],
+	"leftMenu": [{
+		"title": "More. More... More! ",
+		"type": "link",
+		"link": "/more/",
+		"active": false,
+		"menu": [{
+			"title": "Screenshots",
+			"link": "/about/screenshots/",
+			"type": "link"
+		}, {
+			"title": "Fork",
+			"link": "/about/forkus/",
+			"type": "link"
+		}]
+	}, {
+		"title": "Wow! Support!",
+		"type": "link",
+		"link": "/support/",
+		"active": false
+	}, {
+		"title": "Back to Main",
+		"type": "link",
+		"link": "/",
+		"active": false
+	}]
+}

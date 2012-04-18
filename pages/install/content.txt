@@ -1,0 +1,12 @@
+<ol>
+<li><a href="/download/" target="_blank">Download</a><br /><br />
+</li>
+<li>UnPack to your website folder, or any folder inside, code is directory relative.<br /><br />
+</li>
+<li><strong>Check!</strong> <pre>/_adm/settings.php</pre> for Your installation dir and settings.<br /><br />
+</li>
+<li><strong>Protect!</strong> <pre>/_adm/</pre> with <pre>.htpasswd</pre>
+<p>sample of code is inside <pre>/_adm/.htaccess</pre></p></li>
+<li><strong>Enjoy!</strong><br /><br />
+</li>
+</ol>
