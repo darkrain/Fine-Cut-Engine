@@ -45,6 +45,7 @@ AddHandler server-parsed .htm .html .shtml
 	
 	
 	RewriteRule ^index.html$ ./_engine/index.php [QSA,L]
+	RewriteRule ^index.htm$ ./_engine/index.php [QSA,L]
 	# RewriteRule ^index.html$ ./_engine/index.php [R=301,L]
 
 	RewriteCond %{REQUEST_FILENAME} !-f
