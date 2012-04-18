@@ -1,0 +1,3 @@
+Ligth weight frontend for small file based CMS.
+Repo contend includes example of backend.
+Actually, this is code of FineCut CMS Web Site.
