@@ -17,7 +17,7 @@ Options +Includes +FollowSymLinks -Indexes
 AddHandler server-parsed .htm .html .shtml
 
 <IfModule mod_dir.c>
-	DirectoryIndex index.html _index.html index.shtml index.php
+	DirectoryIndex index.htm index.html _index.html index.shtml index.php
 </IfModule>
 
 # PHP 5, Apache 1 and 2.
