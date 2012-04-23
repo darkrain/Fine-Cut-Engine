@@ -237,7 +237,7 @@
 							$('#treePagesEditor-info').click();
 						}, 300 );				
 					}
-
+					
 					$('#treePagesEditor-pageIsCode').attr( 'checked', obj.header.pageIsCode );
 					// if(obj.header.pageIsCode){
 						// $('#treePagesEditor-pageIsCode').attr('checked', true);
@@ -479,13 +479,20 @@
 		
 		// templates
 
-		
-		
 
 		$('#elfinder').elfinder({
 			  url: './elfinder-1.2/connectors/php/connector.php'  // connector URL (REQUIRED)
 			, lang: 'ru'
 			, height: '530px'
+			, disableShortcuts: true
+		}).elfinder('instance');
+
+		
+		
+		$('#full_server_elfinder').elfinder({
+			  url: './elfinder-1.2/connectors/php/connector_server.php'  // connector URL (REQUIRED)
+			, lang: 'ru'
+			, height: '455px'
 			, disableShortcuts: true
 		}).elfinder('instance');
 
