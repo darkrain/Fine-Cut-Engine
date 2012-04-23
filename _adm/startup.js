@@ -237,7 +237,8 @@
 							$('#treePagesEditor-info').click();
 						}, 300 );				
 					}
-					
+
+					$('#treePagesEditor-pageIsCode').attr( 'checked', obj.header.pageIsCode );
 					// if(obj.header.pageIsCode){
 						// $('#treePagesEditor-pageIsCode').attr('checked', true);
 						// $('#pages-editor-codearea').val( obj.content );
