@@ -467,12 +467,12 @@
 			configTemplateButtons(); templateAction( 'save' ); 
 		} );
 
-		$('#templ-units-elfinder').elfinder({
-			  url: './elfinder-1.2/connectors/php/connector_units.php'  // connector URL (REQUIRED)
-			, lang: 'ru'
-			, height: '445px'
-			, disableShortcuts: true
-		}).elfinder('instance');
+		// $('#templ-units-elfinder').elfinder({
+			  // url: './elfinder-1.2/connectors/php/connector_units.php'  // connector URL (REQUIRED)
+			// , lang: 'ru'
+			// , height: '445px'
+			// , disableShortcuts: true
+		// }).elfinder('instance');
 
 		configTemplateButtons();
 		templateAction( 'get' );
@@ -481,7 +481,8 @@
 
 
 		$('#elfinder').elfinder({
-			  url: './elfinder-1.2/connectors/php/connector.php'  // connector URL (REQUIRED)
+			//  url: './elfinder-1.2/connectors/php/connector.php'  // connector URL (REQUIRED)
+			  url: './elfinder-1.2/connectors/php/connector_server.php'  // connector URL (REQUIRED)
 			, lang: 'ru'
 			, height: '530px'
 			, disableShortcuts: true
@@ -489,12 +490,12 @@
 
 		
 		
-		$('#full_server_elfinder').elfinder({
-			  url: './elfinder-1.2/connectors/php/connector_server.php'  // connector URL (REQUIRED)
-			, lang: 'ru'
-			, height: '455px'
-			, disableShortcuts: true
-		}).elfinder('instance');
+		// $('#full_server_elfinder').elfinder({
+			  // url: './elfinder-1.2/connectors/php/connector_server.php'  // connector URL (REQUIRED)
+			// , lang: 'ru'
+			// , height: '455px'
+			// , disableShortcuts: true
+		// }).elfinder('instance');
 
 		// $('#pages-editor').elrte({
 				  // cssClass : 'el-rte'
