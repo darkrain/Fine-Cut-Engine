@@ -322,6 +322,7 @@
 						}, 300 );
 					}
 					
+					if( obj.header.blocks == undefined ){ obj.header.blocks = [{value:''}]; }
 					blocks.load( obj.header.blocks );
 
 					$('#treePagesEditor-pageIsCode').attr( 'checked', obj.header.pageIsCode );
