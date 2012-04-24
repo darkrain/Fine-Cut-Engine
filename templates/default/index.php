@@ -103,6 +103,11 @@
 						?>
 
 						<br>
+
+						<hr>
+						<pre>
+So, this is all about <?php echo $success['header']->blocks[0]->value; ?>
+						</pre>
 					</div>
 				</div>
 				<div class = "span2">

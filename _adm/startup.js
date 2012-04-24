@@ -2,14 +2,43 @@
 	var e;
 	try{
 
+		( function(){
+			if( $.cookie ){
+				var val = $.cookie( 'settings_growl_control_cookie_name' ) || false;
+				$('#settings-growl-notify').attr('checked' ,  val );
+				var val = $.cookie( 'settings_tree_expand_name' ) || false;
+				$('#settings-trees-expand').attr('checked' ,  val );
+			}
+			$('#settings-growl-notify').click( function(){
+				var opts = { name : 'settings_growl_control_cookie_name', opts : { expires: 7 } };
+				$.cookie( opts.name , $('#settings-growl-notify').attr('checked'), opts.opts );
+			} );
+			$('#settings-trees-expand').click( function(){
+				var opts = { name : 'settings_tree_expand_name', opts : { expires: 7 } };
+				$.cookie( opts.name , $('#settings-trees-expand').attr('checked'), opts.opts );
+			} );
+		} )();
+
+
+
 		$( '#tabsContent' ).tabs();
-		
+
 		// for saving changes: copy/paste;
 		var _emptyleaf = function(){
 			return {
-				  header : { title : '' , keywords : '' , description : '' 
-				  , pageIsCode : false, additional : '' , template : 'default' }
-				, content : '' , info : '' }; };
+				  header : {
+					  title			: ''
+					, keywords		: ''
+					, description	: ''
+					, pageIsCode	: false
+					, additional	: '' 
+					, template		: 'default' 
+					, blocks		: [ { value : '' } ]
+				}
+				, content : ''
+				, info : '' 
+			}; 
+		};
 		var emptyleaf = _emptyleaf();
 		var buffer = _emptyleaf();
 
@@ -20,7 +49,7 @@
 				  select	: function( leaf ){
 					var tree = $('#treePages').prop( 'tree' );
 					var path = tree.getPath( leaf );
-					helpers.clearValues();
+					// helpers.clearValues();
 					helpers.growl( 'Requesting Leaf Content...' );
 					tree.shLoader( path.leaf, true );
 					tree.ws( { leaf : path.str , action : 'content_get' } , function( data ) {
@@ -68,22 +97,58 @@
 		} ); //.hide().fadeIn( 1000 );
 
 
-		( function(){
-			if( $.cookie ){
-				var val = $.cookie( 'settings_growl_control_cookie_name' ) || false;
-				$('#settings-growl-notify').attr('checked' ,  val );
-				var val = $.cookie( 'settings_tree_expand_name' ) || false;
-				$('#settings-trees-expand').attr('checked' ,  val );
+
+		// Blocks
+
+
+		var BlocksModel = function( blocks ) {
+			var self = this;
+			
+			// self.blocks = ko.observableArray( ko.utils.arrayMap( blocks, function( block ) {
+				// return { value : blocks.value || '' };
+			// } ) );
+			
+			self.blocks = ko.mapping.fromJS( [ { value : '' } ] );
+
+			self.addBlock = function() { self.blocks.push( { value: '' } ); };
+
+			self.delBlock = function( block ) {
+				if( self.blocks().length > 1 ){
+					self.blocks.remove( block );
+				}else{
+					helpers.message( 'Keep in Mind', 'You can\'t delete last block.' )
+				}
+			};
+
+			self.save = function() {
+				return ko.toJS( self.blocks );
+			};
+
+			self.clear = function( tf ) {
+				// ko.utils.arrayMap( self.blocks(), function( block ) {
+					// self.blocks.remove( block );
+				// } ) ;
+				// if( tf === undefined){ self.blocks.push({ value: '' }); }
+				ko.mapping.fromJS( [ { value : '' } ] , self.blocks );
+			};
+			
+			self.load = function( blks ){
+				
+				// self.clear( true );
+				
+				ko.mapping.fromJS( blks , self.blocks );
+				// alert(111)
+				// ko.utils.arrayMap( blks , function( block ) {
+					// self.blocks.push( { value: block.value } );
+				// } ) ;
 			}
-			$('#settings-growl-notify').click( function(){
-				var opts = { name : 'settings_growl_control_cookie_name', opts : { expires: 7 } };
-				$.cookie( opts.name , $('#settings-growl-notify').attr('checked'), opts.opts );
-			} );
-			$('#settings-trees-expand').click( function(){
-				var opts = { name : 'settings_tree_expand_name', opts : { expires: 7 } };
-				$.cookie( opts.name , $('#settings-trees-expand').attr('checked'), opts.opts );
-			} );
-		} )();
+
+		};
+		var blocks = new BlocksModel( [{value:''}] );
+
+		ko.applyBindings( blocks );
+
+		// Blocks
 
 
 		$( '#treePagesEditor-info' ).on( 'click change' , function(){
@@ -93,7 +158,7 @@
 				try { snippetjson = $.parseJSON( val ); }
 				catch (e) { alert('Error in parsing json. ' + e); }
 			} else { snippetjson = {}; }
-			
+
 			$('#treePagesEditor-info-snippet').jsonEditor( snippetjson, { change: function() {
 				try{
 					$('#treePagesEditor-info').val( js_beautify ( JSON.stringify( snippetjson ) , {
@@ -105,10 +170,10 @@
 			} } );
 		} ).on('dblclick', function(){
 			if( $('#settings-trees-expand').attr('checked') ){
-				$('#treePagesEditor-info-snippet').toggleClass('expanded'); 
+				$('#treePagesEditor-info-snippet').toggleClass('expanded');
 			} } );
 
-		
+
 		// var controlCodeType = function(){
 			// if( $('#treePagesEditor-pageIsCode').attr('checked') ){
 				// $('#pages-editor-wrapper').hide();
@@ -119,9 +184,9 @@
 			// }
 		// }
 		// controlCodeType();
-		
+
 		// $('#treePagesEditor-pageIsCode').on( 'click', controlCodeType );
-		
+
 		var helpers = {
 			  growl : function( message , delay , opts ){
 				if( $('#settings-growl-notify').attr('checked') ){
@@ -176,6 +241,7 @@
 					}
 				}catch(e){ alert(e); }
 			}
+			
 			, clearValues : function(){
 				for( var i in emptyleaf.header ){
 					$( '#treePagesEditor-' + i ).val( '' );
@@ -184,19 +250,22 @@
 				window.setTimeout( function(){ // forcing jsoneditor
 					$('#treePagesEditor-info').click();
 				}, 300 );
-				
-				
+
+
 				$('#treePagesEditor-pageIsCode').attr('checked', false);
-				
+
 				// controlCodeType();
 				// $('#pages-editor-codearea').val( '' );
-				
+
 				$( '#pages-editor' ).val( '' );
-				
+
 				// $( '#pages-editor' ).elrte('val', '   ' )
 				// $( '#pages-editor' ).elrte('updateSource');
 				
-				
+				// alert( 111 );
+				blocks.clear();
+
+
 				$("#treePagesEditor-template").trigger("liszt:updated");
 			}
 			, getValues : function(){
@@ -207,38 +276,52 @@
 					, info		: $( '#treePagesEditor-info' ).val()
 				};
 				for( var i in emptyleaf.header ){
-					 obj.header[i] = $( '#treePagesEditor-' + i ).val();
+					if( $( '#treePagesEditor-' + i )[0] ){
+						obj.header[i] = $( '#treePagesEditor-' + i ).val();
+					}
 				}
-				
-				
+
+
 				var chkd = ( $('#treePagesEditor-pageIsCode').attr('checked') == 'checked' ) ? true : false;
+
 				// if(chkd){
 					// obj.content = $('#pages-editor-codearea').val( );
 				// }else{
 					// obj.content = $( '#pages-editor' ).elrte('val');
 				// }
-				
-				
+
+
 				obj.header.pageIsCode = chkd;
-				
+				obj.header.blocks = blocks.save();
+
 				return obj;
 			}
+			
 			, setValues : function( obj ){
 				try{
-					helpers.clearValues();
+					
+					// helpers.clearValues();
+					
 					if( obj.header !== undefined ){
-						for( var i in obj.header ){
-							if( obj.header[i] !== undefined ){ $( '#treePagesEditor-' + i ).val( obj.header[i] ); }
+						for( var i in emptyleaf.header ){
+							if( obj.header[i] !== undefined ){
+								$( '#treePagesEditor-' + i ).val( obj.header[i] ); 
+							}else{
+								$( '#treePagesEditor-' + i ).val( emptyleaf.header[i] ); 
+							}
 						}
 					}
 					if( obj.info !== undefined ){
 						$( '#treePagesEditor-info' ).val( obj.info );
 						window.setTimeout( function(){ // forcing jsoneditor
 							$('#treePagesEditor-info').click();
-						}, 300 );				
+						}, 300 );
 					}
 					
+					blocks.load( obj.header.blocks );
+
 					$('#treePagesEditor-pageIsCode').attr( 'checked', obj.header.pageIsCode );
+
 					// if(obj.header.pageIsCode){
 						// $('#treePagesEditor-pageIsCode').attr('checked', true);
 						// $('#pages-editor-codearea').val( obj.content );
@@ -247,19 +330,22 @@
 						// else{ $( '#pages-editor' ).elrte('val', '   ' ); }
 						// $( '#pages-editor' ).elrte('updateSource');
 					// }
-					
+
 					$( '#pages-editor' ).val( obj.content );
 					// controlCodeType();
 					$("#treePagesEditor-template").trigger("liszt:updated");
-					
+
 				}catch(e){ alert(e); }
 			}
 			, checkValues : function( compare ){
 				var compare = compare || emptyleaf;
 				var compare = JSON.stringify( compare );
 				var values = JSON.stringify( helpers.getValues() );
+				
+				// alert(compare + '\n\n' + values);
+				
 				if( compare ==  values ) {
-					return true; 
+					return true;
 				}else{
 					return false;
 				}
@@ -271,6 +357,7 @@
 			}
 			, saveLeaf : function(){
 				try{
+		
 					var tree = $('#treePages').prop( 'tree' );
 					var path = tree.currentPath();
 					if( path.arr.length > 1 ){
@@ -304,46 +391,209 @@
 			}
 		}
 
-		$(window).on( 'keydown' , function(evt) {
-			try{
-				if (evt.ctrlKey && evt.keyCode == 83) {
-					evt.stopPropagation();
-					evt.preventDefault();
-					if( !$( '#pagesManager' ).hasClass('ui-tabs-hide') ){
-						helpers.saveLeaf();
-					}
-					if( !$( '#templManager' ).hasClass('ui-tabs-hide') ){
-						templateAction( 'save' );
-					}
-				}
-			}catch(e){ alert(e); }
-		} );
 
-		try{
-			window.setTimeout( function(){
-				// http://stackoverflow.com/questions/6140632/how-to-handle-tab-in-textarea
-				$( '.tabEditable' ).on( 'keydown', function( evt ){
-					if( evt.keyCode === 9){
-						// get caret position/selection
-						var start = this.selectionStart, end = this.selectionEnd;
-						var $this = $(this);
-						// set textarea value to: text before caret + tab + text after caret
-						$this.val( $this.val().substring(0, start)
-									+ '\t'
-									+ $this.val().substring(end) );
-						// put caret at right position again
-						this.selectionStart = this.selectionEnd = start + 1;
-						// prevent the focus lose
-						return false;
+
+		$('#elfinder').elfinder({
+			//  url: './elfinder-1.2/connectors/php/connector.php'  // connector URL (REQUIRED)
+			  url: './elfinder-1.2/connectors/php/connector_server.php'  // connector URL (REQUIRED)
+			, lang: 'ru'
+			, height: '530px'
+			, disableShortcuts: true
+		}).elfinder('instance');
+
+
+
+		// $('#full_server_elfinder').elfinder({
+			  // url: './elfinder-1.2/connectors/php/connector_server.php'  // connector URL (REQUIRED)
+			// , lang: 'ru'
+			// , height: '455px'
+			// , disableShortcuts: true
+		// }).elfinder('instance');
+
+		// $('#pages-editor').elrte({
+				  // cssClass : 'el-rte'
+				// , lang     : 'en'
+				// , height : 370
+				// , styleWithCSS : true
+				// , fmAllow : false
+				// , toolbar  : 'vinni'
+				// , cssfiles : ['../_js/elrte-1.3/css/elrte-inner.css']
+				// , megaSave : helpers.saveLeaf
+		// });
+
+		// jQuery('#pages-editor').wymeditor();
+
+		$('#pages-editor').markItUp( mySettings );
+
+
+		$( '#leaf_save' ).button({ text: false, icons: { primary: 'ui-icon-disk' }
+			, label: '   Save Current Leaf \n( Ctrl + S also works )' }).click(	function(){ helpers.saveLeaf(); } );
+
+		$( '#leaf_copy' ).button({ text: false, icons: { primary: 'ui-icon-scissors' }
+			, label: 'Copy Leaf Contents to Internal Clipboard' }).click( function(){
+				buffer = helpers.getValues(); } );
+
+		$( '#leaf_paste' ).button({ text: false, icons: { primary: 'ui-icon-clipboard' }
+			, label: 'Paste Leaf Contents from Internal Clipboard' }).click( function(){
+				helpers.clearValues(); helpers.setValues( buffer ); } );
+
+		$( '#tree_refresh' ).button({ text: false, icons: { primary: 'ui-icon-refresh' }
+			, label: 'Refresh Tree' }).click( function(){
+				helpers.clearValues();
+				var tree = $('#treePages').prop( 'tree' );
+				// tree.x.obj.click(); // tree.x.current = null; + callbacks
+				tree.leaf( tree.treeViewModel ); } );
+
+		$( '#leaf_del' ).button({ text: false, icons: { primary: 'ui-icon-close' }
+			, label: 'Delete Leaf' }).click( function(){
+				var tree = $('#treePages').prop( 'tree' );
+				var path = tree.currentPath();
+				var pathParent = tree.currentPath( true );
+				if( path.arr.length > 1 ){
+					helpers.confirm( 'Are You Sure?', 'You will not be able to UnDo this action.' , function(){
+						tree.x.obj.click(); // tree.x.current = null; + callbacks == helpers.clearValues();
+						var obj = { leaf : path.str , action : 'del' };
+						tree.ws( obj , function( data ){
+							tree.leaf( pathParent.leaf );
+							if( data == 'success' ){
+							}else{ helpers.message('Notification!', data); }
+						} );
+					} );
+				}else{
+					helpers.message('Notification!', 'You need to Select some page before trying to delet it!');
+				}
+			} );
+
+		$( '#leaf_add' ).button({ text: false, icons: { primary: 'ui-icon-note' }
+			, label: 'Add Leaf' }).click( function(){
+
+					var tree = $('#treePages').prop( 'tree' );
+					var path = tree.currentPath();
+					if( path.arr.length < 2 ) {
+						$( '#tree-dialog-leaf-add-form' ).dialog( 'open' );
+					}else{
+						if( !helpers.checkValues( path.leaf.obj.page ) ) {
+							helpers.confirm( 'Wassup?', 'You have unsaved changes.\n If You Do Whant to save, press "Confirm" button!'
+							, function() {}
+							, function() {
+								$( '#tree-dialog-leaf-add-form' ).dialog( 'open' );
+							} );
+						}else{
+							$( '#tree-dialog-leaf-add-form' ).dialog( 'open' );
+						}
+					}
+
+			} );
+
+		$( '#toggle_tree' ).button({ text: false, icons: { primary: 'ui-icon-circle-arrow-w' }
+			, label: ' Hide / Show Tree' }).click(
+				function(){
+					$('#treePages').toggle();
+					var elem = $(this).find('span').eq(0);
+					if( elem.hasClass('ui-icon-circle-arrow-w') ){
+						elem.removeClass('ui-icon-circle-arrow-w').addClass('ui-icon-circle-arrow-e');
+					}else{
+						elem.removeClass('ui-icon-circle-arrow-e').addClass('ui-icon-circle-arrow-w');
 					}
 				} );
-			}, 3000 );
-		}catch(e){ alert(e); }
+
+
+		$( '#tree-dialog-leaf-add-form' ).dialog({
+			  autoOpen: false
+			, width: 420
+			, height:270
+			, modal: true
+			, buttons: {
+				  'Create Leaf': function() {
+					try{
+						var text = $( '#tree-dialog-leaf-add-form-text' ).val();
+						if( text.length > 0 ){
+							$( '#tree-dialog-leaf-add-form' ).prop( 'allFields' ).val('').removeClass( 'ui-state-error' );
+
+
+							var tree = $('#treePages').prop( 'tree' );
+							var path = tree.currentPath();
+							var leafData = emptyleaf;
+							if( path.arr.length > 1 ){
+								var chk = $( '#tree-dialog-leaf-add-form-checkbox' ).attr('checked') == 'checked';
+								path = tree.currentPath( chk );
+								// alert( path.str );
+								path.leaf.obj.folder = true;
+								path.leaf.obj.open = true;
+							}else{
+								if( !helpers.checkValues( emptyleaf ) ){ var leafData = helpers.getValues(); }
+								path = path;
+							}
+							leafData.header.template = $( '#tree-dialog-leaf-add-form-template' ).val();
+
+
+							tree.ws( { leaf : path.str , action : 'set' , path : text , data : JSON.stringify( leafData ) }
+							, function( data ){
+							if( data !== '' ){
+								var obj = $.parseJSON( data );
+								if( typeof( obj.error ) == 'string'){
+									helpers.message( 'Error Occures' , obj.error );
+								}else{
+									// helpers.clearValues();
+									var cb = function( leaf , controlObject ){
+										try{
+											$.map( leaf.children, function( el, idx ){
+												el.obj.page = emptyleaf;
+												if( el.name == text ){ el.elem.heading.click(); }
+												// do not uncomment, it forces 'You have unsaved changes!
+												// helpers.setValues( el.obj.page );
+											} );
+										}catch(e){ alert(e); }
+									};
+									if(path.leaf.obj.open){
+										tree.leaf( path.leaf , cb );
+									}else{
+										tree.leafControl( path.leaf , cb );
+									}
+								}
+							}
+
+							} );
+
+
+							$( this ).dialog( 'close' );
+						}else{ helpers.message('Notification!', '"Leaf Name" is required field!'); }
+					}catch(e){ alert(e); }
+				}
+				, Cancel: function() {
+					$( '#tree-dialog-leaf-add-form' ).prop( 'allFields' ).val('').removeClass( 'ui-state-error' );
+					$( this ).dialog( 'close' );
+				}
+			}
+			, show: { effect : 'explode', duration : 500 }
+			, hide: { effect : 'fold', duration : 500 }
+			, open: function( evt, ui ){
+					// var str = ''; for( var i in ui ){ str += i + ' ' + ui[i] + '\n'; }
+					$( '#tree-dialog-leaf-add-form' ).prop( 'allFields' ).val('').removeClass( 'ui-state-error' );
+
+					var path = $('#treePages').prop( 'tree' ).currentPath();
+					var checkbox = $( '#tree-dialog-leaf-add-form-checkbox-div' );
+					checkbox.hide();
+					if( path.arr.length > 1 ){ checkbox.show(); }
+					window.setTimeout( function() { $( '#tree-dialog-leaf-add-form-text' ).focus(); } , 1000 );
+			}
+			, close: function() {
+				$( '#tree-dialog-leaf-add-form' ).prop( 'allFields' ).val('').removeClass( 'ui-state-error' );
+			}
+		}).prop( 'allFields' , $( [] ).add( $( '#tree-dialog-leaf-add-form-text' ).width('95%') ) );
+
+		$( '#tree-dialog-leaf-add-form-checkbox' ).button().click( function(){
+			 $( 'label[for=tree-dialog-leaf-add-form-checkbox] input' )[0].checked =
+			  $( '#tree-dialog-leaf-add-form-checkbox ' )[0].checked;
+		} );
 
 		$( '#treePagesEditor-template' ).chosen();
 
+
+
+
 		// templates
-		
+
 		$('#templ-snippet-editor').on( 'click change', function(){
 			var snippetjson = {};
 			var val = $(this).val();
@@ -351,26 +601,28 @@
 				try { snippetjson = $.parseJSON( val ); }
 				catch (e) { alert('Error in parsing json. ' + e); }
 			} else { snippetjson = {}; }
-			
+
 			$('#snippeteditor').jsonEditor( snippetjson, { change: function() {
 				try{
 					$('#templ-snippet-editor').val( js_beautify ( JSON.stringify( snippetjson ) , {
 						  indent_size : 1
 						, indent_char : '\t'
 					} ) );
+					// $('#templ-snippet-editor').val( JSON.stringify( snippetjson , null , 2 ) );
 				}catch(e){ alert(e); }
 			} } ); //.addClass('expanded');
 		} ).on('dblclick', function(){
 			if( $('#settings-trees-expand').attr('checked') ){
-				$('#snippeteditor').toggleClass('expanded'); 
+				$('#snippeteditor').toggleClass('expanded');
 			} } );
-		
+
 		var currentTemplate = 'default' || $( '#templManager-template' ).val();
 		var configTemplateButtons = function(){
 			currentTemplate = $( '#templManager-template' ).val();
 			$( '#del_template' ).removeClass('disabled');
 			if( currentTemplate == 'default' ){ $( '#del_template').addClass('disabled'); }
 		}
+
 		var templateAction = function( action , tplname ){ // get add dell save
 			var callback = '';
 			var obj = { action : action , template : tplname || currentTemplate }
@@ -463,8 +715,9 @@
 
 			}
 		} );
+
 		$( '#save_template' ).click( function(){
-			configTemplateButtons(); templateAction( 'save' ); 
+			configTemplateButtons(); templateAction( 'save' );
 		} );
 
 		// $('#templ-units-elfinder').elfinder({
@@ -476,212 +729,48 @@
 
 		configTemplateButtons();
 		templateAction( 'get' );
-		
+
 		// templates
 
 
-		$('#elfinder').elfinder({
-			//  url: './elfinder-1.2/connectors/php/connector.php'  // connector URL (REQUIRED)
-			  url: './elfinder-1.2/connectors/php/connector_server.php'  // connector URL (REQUIRED)
-			, lang: 'ru'
-			, height: '530px'
-			, disableShortcuts: true
-		}).elfinder('instance');
-
-		
-		
-		// $('#full_server_elfinder').elfinder({
-			  // url: './elfinder-1.2/connectors/php/connector_server.php'  // connector URL (REQUIRED)
-			// , lang: 'ru'
-			// , height: '455px'
-			// , disableShortcuts: true
-		// }).elfinder('instance');
-
-		// $('#pages-editor').elrte({
-				  // cssClass : 'el-rte'
-				// , lang     : 'en'
-				// , height : 370
-				// , styleWithCSS : true
-				// , fmAllow : false
-				// , toolbar  : 'vinni'
-				// , cssfiles : ['../_js/elrte-1.3/css/elrte-inner.css']
-				// , megaSave : helpers.saveLeaf
-		// });
-		
-		// jQuery('#pages-editor').wymeditor();
-		
-		$('#pages-editor').markItUp( mySettings );
-		
-		
-		
-
-		window.setTimeout( function() {
-			var obj = $('#pages-editor-tab iframe')[0];
-		}, 1000 );
-
-		$( '#leaf_save' ).button({ text: false, icons: { primary: 'ui-icon-disk' }
-			, label: '   Save Current Leaf \n( Ctrl + S also works )' }).click(	function(){ helpers.saveLeaf(); } );
-
-		$( '#leaf_copy' ).button({ text: false, icons: { primary: 'ui-icon-scissors' }
-			, label: 'Copy Leaf Contents to Internal Clipboard' }).click( function(){
-				buffer = helpers.getValues(); } );
-
-		$( '#leaf_paste' ).button({ text: false, icons: { primary: 'ui-icon-clipboard' }
-			, label: 'Paste Leaf Contents from Internal Clipboard' }).click( function(){
-				helpers.clearValues(); helpers.setValues( buffer ); } );
-
-		$( '#tree_refresh' ).button({ text: false, icons: { primary: 'ui-icon-refresh' }
-			, label: 'Refresh Tree' }).click( function(){
-				helpers.clearValues();
-				var tree = $('#treePages').prop( 'tree' );
-				// tree.x.obj.click(); // tree.x.current = null; + callbacks
-				tree.leaf( tree.treeViewModel ); } );
-
-		$( '#leaf_del' ).button({ text: false, icons: { primary: 'ui-icon-close' }
-			, label: 'Delete Leaf' }).click( function(){
-				var tree = $('#treePages').prop( 'tree' );
-				var path = tree.currentPath();
-				var pathParent = tree.currentPath( true );
-				if( path.arr.length > 1 ){
-					helpers.confirm( 'Are You Sure?', 'You will not be able to UnDo this action.' , function(){
-						tree.x.obj.click(); // tree.x.current = null; + callbacks == helpers.clearValues();
-						var obj = { leaf : path.str , action : 'del' };
-						tree.ws( obj , function( data ){
-							tree.leaf( pathParent.leaf );
-							if( data == 'success' ){
-							}else{ helpers.message('Notification!', data); }
-						} );
-					} );
-				}else{
-					helpers.message('Notification!', 'You need to Select some page before trying to delet it!');
-				}
-			} );
-
-		$( '#leaf_add' ).button({ text: false, icons: { primary: 'ui-icon-note' }
-			, label: 'Add Leaf' }).click( function(){
-
-					var tree = $('#treePages').prop( 'tree' );
-					var path = tree.currentPath();
-					if( path.arr.length < 2 ) {
-						$( '#tree-dialog-leaf-add-form' ).dialog( 'open' );
-					}else{
-						if( !helpers.checkValues( path.leaf.obj.page ) ) {
-							helpers.confirm( 'Wassup?', 'You have unsaved changes.\n If You Do Whant to save, press "Confirm" button!'
-							, function() {}
-							, function() {
-								$( '#tree-dialog-leaf-add-form' ).dialog( 'open' );
-							} );
-						}else{
-							$( '#tree-dialog-leaf-add-form' ).dialog( 'open' );
-						}
+		$(window).on( 'keydown' , function(evt) {
+			try{
+				if (evt.ctrlKey && evt.keyCode == 83) {
+					evt.stopPropagation();
+					evt.preventDefault();
+					if( !$( '#pagesManager' ).hasClass('ui-tabs-hide') ){
+						helpers.saveLeaf();
 					}
-
-			} );
-			
-		$( '#toggle_tree' ).button({ text: false, icons: { primary: 'ui-icon-circle-arrow-w' }
-			, label: ' Hide / Show Tree' }).click(
-				function(){
-					$('#treePages').toggle();
-					var elem = $(this).find('span').eq(0);
-					if( elem.hasClass('ui-icon-circle-arrow-w') ){
-						elem.removeClass('ui-icon-circle-arrow-w').addClass('ui-icon-circle-arrow-e'); 
-					}else{
-						elem.removeClass('ui-icon-circle-arrow-e').addClass('ui-icon-circle-arrow-w'); 
+					if( !$( '#templManager' ).hasClass('ui-tabs-hide') ){
+						templateAction( 'save' );
 					}
-				} );
-			
-
-		$( '#tree-dialog-leaf-add-form' ).dialog({
-			  autoOpen: false
-			, width: 420
-			, height:270
-			, modal: true
-			, buttons: {
-				  'Create Leaf': function() {
-					try{
-						var text = $( '#tree-dialog-leaf-add-form-text' ).val();
-						if( text.length > 0 ){
-							$( '#tree-dialog-leaf-add-form' ).prop( 'allFields' ).val('').removeClass( 'ui-state-error' );
-
-
-							var tree = $('#treePages').prop( 'tree' );
-							var path = tree.currentPath();
-							var leafData = emptyleaf;
-							if( path.arr.length > 1 ){
-								var chk = $( '#tree-dialog-leaf-add-form-checkbox' ).attr('checked') == 'checked';
-								path = tree.currentPath( chk );
-								// alert( path.str );
-								path.leaf.obj.folder = true;
-								path.leaf.obj.open = true;
-							}else{
-								if( !helpers.checkValues( emptyleaf ) ){ var leafData = helpers.getValues(); }
-								path = path;
-							}
-							leafData.header.template = $( '#tree-dialog-leaf-add-form-template' ).val();
-
-
-							tree.ws( { leaf : path.str , action : 'set' , path : text , data : JSON.stringify( leafData ) }
-							, function( data ){
-							if( data !== '' ){
-								var obj = $.parseJSON( data );
-								if( typeof( obj.error ) == 'string'){
-									helpers.message( 'Error Occures' , obj.error );
-								}else{
-									// helpers.clearValues();
-									var cb = function( leaf , controlObject ){
-										try{
-											$.map( leaf.children, function( el, idx ){
-												el.obj.page = emptyleaf;
-												if( el.name == text ){ el.elem.heading.click(); }
-												// do not uncomment, it forces 'You have unsaved changes!
-												// helpers.setValues( el.obj.page );
-											} );
-										}catch(e){ alert(e); }
-									};
-									if(path.leaf.obj.open){
-										tree.leaf( path.leaf , cb );
-									}else{
-										tree.leafControl( path.leaf , cb );
-									}
-								}
-							}
-
-							} );
-
-
-							$( this ).dialog( 'close' );
-						}else{ helpers.message('Notification!', '"Leaf Name" is required field!'); }
-					}catch(e){ alert(e); }
 				}
-				, Cancel: function() {
-					$( '#tree-dialog-leaf-add-form' ).prop( 'allFields' ).val('').removeClass( 'ui-state-error' );
-					$( this ).dialog( 'close' );
-				}
-			}
-			, show: { effect : 'explode', duration : 500 }
-			, hide: { effect : 'fold', duration : 500 }
-			, open: function( evt, ui ){
-					// var str = ''; for( var i in ui ){ str += i + ' ' + ui[i] + '\n'; }
-					$( '#tree-dialog-leaf-add-form' ).prop( 'allFields' ).val('').removeClass( 'ui-state-error' );
-
-					var path = $('#treePages').prop( 'tree' ).currentPath();
-					var checkbox = $( '#tree-dialog-leaf-add-form-checkbox-div' );
-					checkbox.hide();
-					if( path.arr.length > 1 ){ checkbox.show(); }
-					window.setTimeout( function() { $( '#tree-dialog-leaf-add-form-text' ).focus(); } , 1000 );
-			}
-			, close: function() {
-				$( '#tree-dialog-leaf-add-form' ).prop( 'allFields' ).val('').removeClass( 'ui-state-error' );
-			}
-		}).prop( 'allFields' , $( [] ).add( $( '#tree-dialog-leaf-add-form-text' ).width('95%') ) );
-
-		$( '#tree-dialog-leaf-add-form-checkbox' ).button().click( function(){
-			 $( 'label[for=tree-dialog-leaf-add-form-checkbox] input' )[0].checked =
-			  $( '#tree-dialog-leaf-add-form-checkbox ' )[0].checked;
+			}catch(e){ alert(e); }
 		} );
 
-		
-		
+		try{
+			window.setTimeout( function(){
+				// http://stackoverflow.com/questions/6140632/how-to-handle-tab-in-textarea
+				$( '.tabEditable' ).on( 'keydown', function( evt ){
+					if( evt.keyCode === 9){
+						// get caret position/selection
+						var start = this.selectionStart, end = this.selectionEnd;
+						var $this = $(this);
+						// set textarea value to: text before caret + tab + text after caret
+						$this.val( $this.val().substring(0, start)
+									+ '\t'
+									+ $this.val().substring(end) );
+						// put caret at right position again
+						this.selectionStart = this.selectionEnd = start + 1;
+						// prevent the focus lose
+						return false;
+					}
+				} );
+			}, 3000 );
+		}catch(e){ alert(e); }
+
+
+
 		document.title = 'Configured...';
 
 		/* ie */
