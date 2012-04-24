@@ -123,6 +123,10 @@
 			self.save = function() {
 				return ko.toJS( self.blocks );
 			};
+			
+			self.visibl = function(){
+				return !( self.blocks().length > 0 );
+			}
 
 			self.clear = function( tf ) {
 				// ko.utils.arrayMap( self.blocks(), function( block ) {
