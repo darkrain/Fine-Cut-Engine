@@ -1,0 +1,1 @@
+O:8:"stdClass":7:{s:5:"title";s:0:"";s:8:"keywords";s:0:"";s:11:"description";s:0:"";s:10:"pageIsCode";b:1;s:10:"additional";s:0:"";s:8:"template";s:5:"blank";s:6:"blocks";a:1:{i:0;O:8:"stdClass":1:{s:5:"value";s:0:"";}}}
