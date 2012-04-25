@@ -12,7 +12,8 @@
 mySettings = {
 	onShiftEnter:	{keepDefault:false, replaceWith:'<br />\n'},
 	onCtrlEnter:	{keepDefault:false, openWith:'\n<p>', closeWith:'</p>\n'},
-	onTab:			{keepDefault:false, openWith:'	 '},
+	onTab:			{keepDefault:false, openWith:'\t'},
+	resizeHandle: true,
 	markupSet: [
 		{name:'Heading 1', key:'1', openWith:'<h1(!( class="[![Class]!]")!)>', closeWith:'</h1>', placeHolder:'Your title here...' },
 		{name:'Heading 2', key:'2', openWith:'<h2(!( class="[![Class]!]")!)>', closeWith:'</h2>', placeHolder:'Your title here...' },
@@ -35,6 +36,10 @@ mySettings = {
 		{name:'Link', key:'L', openWith:'<a href="[![Link:!:http://]!]"(!( title="[![Title]!]")!)>', closeWith:'</a>', placeHolder:'Your text to link...' },
 		{separator:'---------------' },
 		{name:'Clean', className:'clean', replaceWith:function(markitup) { return markitup.selection.replace(/<(.*?)>/g, "") } },
-		{name:'Preview', className:'preview', call:'preview' }
+		{name:'Preview', className:'preview', call:'preview' },
+		{key:'Q', openWith:'&laquo;', closeWith:'&raquo;' },
+		{key:'7', openWith:'&ndash; ' },
+		{key:'8', openWith:'&mdash; ' },
+		{key:' ', openWith:'&nbsp; ' }
 	]
 }
