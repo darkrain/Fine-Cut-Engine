@@ -37,6 +37,9 @@
 		if( $value->type == 'divider' ){
 			echo '<li class = "divider-vertical"></li>';
 		}
+		if( $value->type == 'header' ){
+			echo '<li class = "nav-header">'.$value->title.'</li>';
+		}
 	}
 	}
 ?>
