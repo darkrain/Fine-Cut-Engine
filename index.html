@@ -224,7 +224,7 @@ All that in there availiable as <pre>$success['components']</pre> inside of the 
 <pre>
 $success['header']		&mdash; JSON properties of 'title', 
 'description', 'keywords', 'template', 'pageIsCode' 
-and 'header addition'.
+'header addition' and 'blocks'.
 
 <strong>$success['header']->title;</strong>
 
@@ -252,7 +252,7 @@ $success['path']		&mdash; requested page path.
 $success['isMain']		&mdash; is this page Main or not.
 
 <strong>
-	if( !$success['isMain'] ) {
+	if( ! $success['isMain'] ) {
 	 	 // use logo with link;
 	 }
 </strong>
