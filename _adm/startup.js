@@ -321,7 +321,7 @@
 							$('#treePagesEditor-info').click();
 						}, 300 );
 					}
-					
+
 					if( obj.header.blocks == undefined ){ obj.header.blocks = [{value:''}]; }
 					blocks.load( obj.header.blocks );
 
@@ -430,7 +430,27 @@
 
 		$('#pages-editor').markItUp( mySettings );
 
+		$( '#leaf_path_copy' ).button({ text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-s' }
+		, label: ' Copy this Leaf Path '  }).click(	function(){ 
+			var tree = $('#treePages').prop( 'tree' );
+			var path = tree.currentPath( );
+			window.prompt ( "Copy to clipboard: Ctrl+C, Enter", path.strp );
+		} );
 
+		$( '#leaf_go_url' ).button({ text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-e' }
+		, label: ' Copy this Leaf FULL Path '  }).click(	function(){ 
+			var tree = $('#treePages').prop( 'tree' );
+			var path = tree.currentPath( );
+			
+			window.prompt ( "Copy to clipboard: Ctrl+C, Enter", window.location.href.split( window.location.pathname )[0] + path.strp );
+
+			// alert( window.location.href.split( window.location.pathname )[0] );
+			// alert( window.location.hostname );
+			// alert( window.location.pathname );
+			
+		} );
+
+		
 		$( '#leaf_save' ).button({ text: false, icons: { primary: 'ui-icon-disk' }
 			, label: '   Save Current Leaf \n( Ctrl + S also works )' }).click(	function(){ helpers.saveLeaf(); } );
 
