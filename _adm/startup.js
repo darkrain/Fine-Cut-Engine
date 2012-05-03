@@ -429,6 +429,7 @@
 		// jQuery('#pages-editor').wymeditor();
 
 		$('#pages-editor').markItUp( mySettings );
+		$('#markItUpPages-editor, .markItUpContainer').addClass('ui-corner-all');
 
 		$( '#leaf_path_copy' ).button({ text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-s' }
 		, label: ' Copy this Leaf Path '  }).click(	function(){ 
