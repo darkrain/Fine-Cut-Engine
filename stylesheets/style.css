@@ -13,3 +13,16 @@ div.thumbnail img {
 	width: 154px;
 	display: inline-block;
 }
+#project_title{
+	margin-bottom: 10px;
+	white-space: nowrap;
+}
+#project_version{
+	position: absolute;
+	left: 300px;
+	color: #E01B32;
+	background: transparent;
+	line-height: 33px;
+	font-size: 1.8em;
+}
+
