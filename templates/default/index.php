@@ -1,4 +1,3 @@
-<?php $page_time_start = microtime(true); ?>
 <!DOCTYPE html>
 <html lang="ru">
 	<head>
@@ -13,15 +12,16 @@
 		<meta name="keywords" content="<?php echo $success['header']->keywords; ?>">
 		<meta name ="description" content="<?php echo $success['header']->description; ?>">
 
-		<script type="text/javascript" src="/_jquery/jquery-1.7.2.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="<?php echo $success['deep']; ?>/_jquery/jquery-1.7.2.min.js" charset="utf-8"></script>
 
-		<link rel="stylesheet" type="text/css" media="screen" href="/_js/stanlemon-jgrowl-463438153435/jquery.jgrowl.css" charset="utf-8">
-		<script type="text/javascript" src="/_js/stanlemon-jgrowl-463438153435/jquery.jgrowl_minimized.js" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" media="screen" 
+			href="<?php echo $success['deep']; ?>/_js/stanlemon-jgrowl-463438153435/jquery.jgrowl.css" charset="utf-8">
+		<script type="text/javascript" src="<?php echo $success['deep']; ?>/_js/stanlemon-jgrowl-463438153435/jquery.jgrowl_minimized.js" charset="utf-8"></script>
 
-		<link rel="stylesheet" type="text/css" media="screen" href="/_tmps/bootstrap/css/bootstrap.css" charset="utf-8">
-		<script type="text/javascript" src="/_tmps/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $success['deep']; ?>/_tmps/bootstrap/css/bootstrap.css" charset="utf-8">
+		<script type="text/javascript" src="<?php echo $success['deep']; ?>_tmps/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
 
-		<link rel="stylesheet" type="text/css" media="screen" href="/units/style.css" charset="utf-8">
+		<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $success['deep']; ?>/units/style.css" charset="utf-8">
 
 
 		<?php echo $success['header']->additional; ?>
@@ -35,8 +35,8 @@
 				<table border = "0">
 				<tr>
 				<td>
-					<?php if( !$success['isMain'] ) { echo '<a href = "http://'.$_SERVER['HTTP_HOST'].'">'; } ?>
-					<image border = "0" src = "/units/img/logo.png" width = "100" height = "100"
+					<?php if( !$success['isMain'] ) { echo '<a href = "http://'.$_SERVER['HTTP_HOST'].$success['deep'].'">'; } ?>
+					<image border = "0" src = "<?php echo $success['deep']; ?>/units/img/logo.png" width = "100" height = "100"
 						alt = "FineCut Logo" class = "logo">
 					<?php if( !$success['isMain'] ) { echo '</a>'; } ?>
 				</td>
@@ -65,7 +65,7 @@
 							
 							<ul class = "nav pull-right">
 								<?php if( !$success['isMain'] ){ 
-									echo '<li><a href="/" > <span class = "icon-home"></span> </a></li>';
+									echo '<li><a href="'.$success['deep'].'/" > <span class = "icon-home"></span> </a></li>';
 									echo '<li class="divider-vertical"></li>';
 								 } ?>
 								<li>
@@ -138,8 +138,3 @@ So, this is all about <?php echo $success['header']->blocks[0]->value; ?>
 
 	</body>
 </html>
-
-<?php 
-	$page_time = microtime(true) - $page_time_start;
-	echo "<!-- page took in $page_time seconds //-->"; 
-?>

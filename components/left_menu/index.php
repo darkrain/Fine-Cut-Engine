@@ -8,10 +8,10 @@
 				echo '<li>';
 				if( isset ($value->active) ){
 					if( $value->active == true ){
-						echo '<a href = "'.$value->link.'" class = "active">'.$value->title.'</a>';
-					}else{ echo '<a href = "'.$value->link.'" >'.$value->title.'</a>'; }
+						echo '<a href = "'.$success['deep'].$value->link.'" class = "active">'.$value->title.'</a>';
+					}else{ echo '<a href = "'.$success['deep'].$value->link.'" >'.$value->title.'</a>'; }
 				}else{
-					echo '<a href = "'.$value->link.'" >'.$value->title.'</a>';
+					echo '<a href = "'.$success['deep'].$value->link.'" >'.$value->title.'</a>';
 				}
 				
 				echo '<ul>';
@@ -20,8 +20,8 @@
 					if( isset ($sub->type) ){
 						if( $sub->type == 'link' ){
 							if( $sub->active == true ){
-								echo '<li><a href = "'.$sub->link.'" class = "active">'.$sub->title.'</a></li>';
-							}else{ echo '<li><a href = "'.$sub->link.'" >'.$sub->title.'</a></li>'; }
+								echo '<li><a href = "'.$success['deep'].$sub->link.'" class = "active">'.$sub->title.'</a></li>';
+							}else{ echo '<li><a href = "'.$success['deep'].$sub->link.'" >'.$sub->title.'</a></li>'; }
 							
 							// echo '<li><a href = "'.$sub->link.'">'.$sub->title.'</a></li>';
 						}
@@ -38,12 +38,12 @@
 				echo '<li>';
 				if( isset ($value->active)  ){
 					if( $value->active == true ){
-						echo '<a href="'.$value->link.'" class = "active">'.$value->title.'</a>';
+						echo '<a href="'.$success['deep'].$value->link.'" class = "active">'.$value->title.'</a>';
 					}else{
-						echo '<a href="'.$value->link.'">'.$value->title.'</a>';
+						echo '<a href="'.$success['deep'].$value->link.'">'.$value->title.'</a>';
 					}
 				}else{
-					echo '<a href="'.$value->link.'">'.$value->title.'</a>';
+					echo '<a href="'.$success['deep'].$value->link.'">'.$value->title.'</a>';
 				}
 			}
 			
