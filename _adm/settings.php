@@ -4,9 +4,13 @@
 	$perm_folder = 0755;
 	$perm_file = 0644;
 	$pages = 'pages';
+    $static = 'static';
 	
-	// this is MAIN SETTINGS for service url discovery!
-	$deep = '//'; // REG EXP !
+	
+    $prepath = '';
+    // this is MAIN SETTINGS for service url discovery!
+	// $deep = '/\/finecut/'; // REG EXP !
+    $deep = '/'.preg_replace( '/\//' , '\\/' , $prepath ).'/';
 	/*
 	Examples:
 	$deep = '//';  							// this is default empty URI like http://example.com/ ( or http://example.com )

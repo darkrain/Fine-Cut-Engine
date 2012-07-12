@@ -14,7 +14,7 @@
 
 					if( isset ($sub->type) ){
 						if( $sub->type == 'link' ){
-							echo '<li><a href = "'.$sub->link.'">'.$sub->title.'</a></li>';
+							echo '<li><a href = "'.$success['deep'].$sub->link.'">'.$sub->title.'</a></li>';
 						}
 						if( $sub->type == 'divider' ){
 							echo '<li class = "divider"></li>';
@@ -29,7 +29,7 @@
 				if( isset ($value->active)  ){
 					if( $value->active == true ){ echo '<li class = "active">'; }else{ echo '<li>'; }
 				}else{ echo '<li>'; }
-				echo '<a href="'.$value->link.'">'.$value->title.'</a>';
+				echo '<a href="'.$success['deep'].$value->link.'">'.$value->title.'</a>';
 			}
 			
 			echo '</li>';
