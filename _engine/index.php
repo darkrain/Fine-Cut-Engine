@@ -3,7 +3,8 @@
 	$time_start = microtime(true);
 	
 	$root = dirname( dirname(__FILE__) ).DIRECTORY_SEPARATOR;
-	include_once $root.'_adm'.DIRECTORY_SEPARATOR.'settings.php';
+	$settings_path = $root.'_adm'.DIRECTORY_SEPARATOR.'settings.php';
+	include_once $settings_path;
 	
 	// echo '000 '.$_SERVER["REQUEST_URI"].'<br>';
 	
@@ -47,39 +48,55 @@
 	
 	if(file_exists($path) && is_dir($path)){
         
-        $static_Fpath = $static_path.DIRECTORY_SEPARATOR.'index.html';
-        $dynamic_path = $path.DIRECTORY_SEPARATOR.'content.txt';
+
+		function getfilescontent( $name , $path ){
+			$ppath = $path.DIRECTORY_SEPARATOR.$name;
+			// echo $ppath;
+			$handle = fopen($ppath, 'r') or die("can't open file");
+			if( filesize($ppath) > 0 ){
+				$contents = fread($handle, filesize($ppath));
+				fclose($handle);
+			}else{
+				return '';
+			}
+			return $contents;
+		}
+
+        $static_file_path = $static_path.DIRECTORY_SEPARATOR.'index.html';
+        $dynamic_path = $path.DIRECTORY_SEPARATOR.'header.txt';
         
-        $S_time = @filemtime($static_Fpath);
-        
-        if($S_time){
-            if($S_time > filemtime($dynamic_path)){
-                $get_static = true;
-            }
-        }
-        
+        $static_file_time = @filemtime($static_file_path);
+		$settings_time = @filemtime($settings_path);
+        $dynamic_file_time = @filemtime($dynamic_path);
+		
+        if(file_exists($static_file_path)){
+			if($static_file_time && $settings_time){
+			
+				// echo $static_file_time."\n";
+				// echo $settings_time."\n";
+				// echo $dynamic_file_time."\n";
+				
+				if( ($static_file_time > $dynamic_file_time) && ($static_file_time > $settings_time) ){
+					$header = unserialize( getfilescontent('header.txt', $path ) );
+					$templPath = dirname( dirname(__FILE__) ).DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.$header->template.DIRECTORY_SEPARATOR.'index.php';
+					$templ_time = @filemtime($templPath);
+					if( $static_file_time > $templ_time ){
+						$get_static = true;
+					}
+				}
+			}
+		}
+		
         if($get_static){
             
-            readfile($static_Fpath);
+            readfile($static_file_path);
             
         }else{
 
             
             // echo 'uri: '.$uri.'<br>';
 
-            function getfilescontent( $name , $path ){
-                $ppath = $path.DIRECTORY_SEPARATOR.$name;
-                // echo $ppath;
-                $handle = fopen($ppath, 'r') or die("can't open file");
-                if( filesize($ppath) > 0 ){
-                    $contents = fread($handle, filesize($ppath));
-                    fclose($handle);
-                }else{
-                    return '';
-                }
-                return $contents;
-            }
-            
+           
             $success = array();
             $success['header'] = unserialize( getfilescontent('header.txt', $path ) );
             // $success['contentText'] = ''.getfilescontent('content.txt', $path );
@@ -108,16 +125,15 @@
                 $templPath = dirname( dirname(__FILE__) ).DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.$success['header']->template.DIRECTORY_SEPARATOR.'index.php';
                 function parseTemplate( $templPath, $success ){
                     include $templPath;
-                    
                 }
                 ob_start();
 
                 parseTemplate( $templPath, $success );
                 
-                if(!file_exists(dirname($static_Fpath))){
-                    mkdir(dirname($static_Fpath), 0777, true);
+                if(!file_exists(dirname($static_file_path))){
+                    mkdir(dirname($static_file_path), 0777, true);
                 }
-                file_put_contents($static_Fpath, ob_get_contents());
+                file_put_contents($static_file_path, ob_get_contents());
 
             } catch (Exception $e) {
                 echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -126,7 +142,7 @@
 
         $time_end = microtime(true);
         $time = $time_end - $time_start;
-        if( $microtimeEcho == true ){ echo '<!-- [ microtime '.$time.' seconds ] static:'.$get_static.' //-->'; }
+        if( $microtimeEcho == true ){ echo '<!-- [ microtime '.$time.' seconds ] static:'.($get_static?'true':'false').' //-->'; }
 
     }else{
 		header("HTTP/1.0 404 Not Found");
