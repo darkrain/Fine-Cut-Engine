@@ -19,7 +19,7 @@
 		<script type="text/javascript" src="<?php echo $success['deep']; ?>/_js/stanlemon-jgrowl-463438153435/jquery.jgrowl_minimized.js" charset="utf-8"></script>
 
 		<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $success['deep']; ?>/_tmps/bootstrap/css/bootstrap.css" charset="utf-8">
-		<script type="text/javascript" src="<?php echo $success['deep']; ?>_tmps/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="<?php echo $success['deep']; ?>/_tmps/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
 
 		<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $success['deep']; ?>/units/style.css" charset="utf-8">
 
@@ -137,4 +137,4 @@ So, this is all about <?php echo $success['header']->blocks[0]->value; ?>
 		<br>
 
 	</body>
-</html>
+</html><!-- -->
