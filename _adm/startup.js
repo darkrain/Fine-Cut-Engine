@@ -2,24 +2,6 @@
 	var e;
 	try{
 
-		( function(){
-			if( $.cookie ){
-				var val = $.cookie( 'settings_growl_control_cookie_name' ) || false;
-				$('#settings-growl-notify').attr('checked' ,  val );
-				var val = $.cookie( 'settings_tree_expand_name' ) || false;
-				$('#settings-trees-expand').attr('checked' ,  val );
-			}
-			$('#settings-growl-notify').click( function(){
-				var opts = { name : 'settings_growl_control_cookie_name', opts : { expires: 7 } };
-				$.cookie( opts.name , $('#settings-growl-notify').attr('checked'), opts.opts );
-			} );
-			$('#settings-trees-expand').click( function(){
-				var opts = { name : 'settings_tree_expand_name', opts : { expires: 7 } };
-				$.cookie( opts.name , $('#settings-trees-expand').attr('checked'), opts.opts );
-			} );
-		} )();
-
-
 
 		$( '#tabsContent' ).tabs();
 
@@ -759,6 +741,77 @@
 		// templates
 
 
+		
+		
+		
+		
+		// settings
+		( function(){
+			if( $.cookie ){
+				var val = $.cookie( 'settings_growl_control_cookie_name' ) || false;
+				$('#settings-growl-notify').attr('checked' ,  val );
+				var val = $.cookie( 'settings_tree_expand_name' ) || false;
+				$('#settings-trees-expand').attr('checked' ,  val );
+			}
+			$('#settings-growl-notify').click( function(){
+				var opts = { name : 'settings_growl_control_cookie_name', opts : { expires: 7 } };
+				$.cookie( opts.name , $('#settings-growl-notify').attr('checked'), opts.opts );
+			} );
+			$('#settings-trees-expand').click( function(){
+				var opts = { name : 'settings_tree_expand_name', opts : { expires: 7 } };
+				$.cookie( opts.name , $('#settings-trees-expand').attr('checked'), opts.opts );
+			} );
+			$('#settings-trees-expand').click( function(){
+				var opts = { name : 'settings_tree_expand_name', opts : { expires: 7 } };
+				$.cookie( opts.name , $('#settings-trees-expand').attr('checked'), opts.opts );
+			} );
+
+			$('#saveSettingsButton').click( function(){
+				helpers.growl( 'Saving Settings.' );
+				var val = $('#settings-editor-text').val();
+				$.ajax( {
+					  type: "POST"
+					, async: true
+					, data : { action: 'settings', data: val }
+					, dataType : 'text'
+					, url: './api.php'
+					, success: function( data ){
+						$('#settings-editor-text').val(data);
+						if( $('#settings-growl-notify').attr('checked') ){
+							helpers.growl( 'Settings Saved.' );
+						}else{
+							alert( 'Settings Saved.' );
+						}
+					}
+				} ) ;
+
+				
+			} );
+
+			$('#clearCacheButton').click( function(){
+				var val = $('#settings-editor-text').val();
+				$.ajax( {
+					  type: "POST"
+					, async: true
+					, data : { action: 'clear_cache' }
+					, dataType : 'text'
+					, url: './api.php'
+					, success: function( data ){ alert(data); }
+				} ) ;
+			} );
+
+
+		} )();
+		
+		// settings
+
+		
+		
+		
+		
+		
+		
+		
 		$(window).on( 'keydown' , function(evt) {
 			try{
 				if (evt.ctrlKey && evt.keyCode == 83) {
