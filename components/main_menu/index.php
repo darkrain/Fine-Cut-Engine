@@ -1,4 +1,7 @@
 <?php
+	$menuFilePath = dirname(__FILE__).DIRECTORY_SEPARATOR.'menu.js';
+	// echo '<!-- '.$menuFilePath.'//-->';
+	
 	foreach ($info->mainMenu as &$value) {
 	if( isset ($value->type) ){
 		if( $value->type == 'link' ){
