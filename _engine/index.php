@@ -79,10 +79,14 @@
 					
 					if( ($static_file_time > $dynamic_file_time) && ($static_file_time > $settings_time) ){
 						$header = unserialize( getfilescontent('header.txt', $path ) );
-						$templPath = dirname( dirname(__FILE__) ).DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.$header->template.DIRECTORY_SEPARATOR.'index.php';
-						$templ_time = @filemtime($templPath);
-						if( $static_file_time > $templ_time ){
-							$get_static = true;
+						if($header->pageIsCode){
+							$get_static = false;
+						}else{
+							$templPath = dirname( dirname(__FILE__) ).DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.$header->template.DIRECTORY_SEPARATOR.'index.php';
+							$templ_time = @filemtime($templPath);
+							if( $static_file_time > $templ_time ){
+								$get_static = true;
+							}
 						}
 					}
 				}

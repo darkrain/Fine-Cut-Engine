@@ -69,8 +69,8 @@
 									echo '<li class="divider-vertical"></li>';
 								 } ?>
 								<li>
-									<form class = "navbar-search">
-										<input type="text" class="search-query span2" placeholder="Search">
+									<form class = "navbar-search" action = "/search/"  method = "POST">
+										<input type="text" class="search-query span2" placeholder="Search" name = "q">
 										<span class = "icon-search" id = "searchButton"></span>
 									</form>
 								</li>
