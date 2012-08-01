@@ -1,5 +1,6 @@
 <?php
 	// phpinfo();
+	
 	$time_start = microtime(true);
 	
 	$root = dirname( dirname(__FILE__) ).DIRECTORY_SEPARATOR;
