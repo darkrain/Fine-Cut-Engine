@@ -3,8 +3,9 @@
 	// default settings, usually not need to change
 	$perm_folder = 0755;
 	$perm_file = 0644;
-	$pages = 'pages';
-	$static = 'static';
+	$pages = 'pages';		// path to pages
+	$static = 'static'; 	// path to static
+	$use_static = true;	// to use static cache or not
 	
 	
 	$prepath = '';
