@@ -1,4 +1,4 @@
-( function( undefined ) { $(function() {
+( function( undefined ) { $(document).ready(function() {
 	var e;
 	try{
 
@@ -806,7 +806,60 @@
 		// settings
 
 		
+		// resizer
 		
+		window.setTimeout(function(){
+
+
+			var initialHeightsConfig = ['tabsContent', 'treePages', 'treePagesEditor', 'pages-editor',
+				'treePagesEditor-description', 'treePagesEditor-additional', 'treePagesEditor-info-snippet',
+				'templ-source-editor', 'snippeteditor', 'fileManager', 'settings-editor-text'];
+			
+			var initialHeights = {};
+			
+			$.map(initialHeightsConfig, function(val, i){
+				initialHeights[val] = $('#' + val).height();
+			});
+			
+			var starter = initialHeights.tabsContent;
+			
+			var resizerTrack = 0;
+			
+			var resizer = function(){
+				var wh = $(window).height();
+				if( wh > starter + 7 ){
+					for(var i in initialHeights){
+						var diff = starter - initialHeights[i];
+						console.log(i + ' ' + diff + ' ' + $('#' + i).height());
+						$('#' + i).height( wh - 27 - diff );
+					};
+
+
+					$('#elfinder').find('div.el-finder-nav, div.el-finder-cwd')
+						.height( wh - ( starter - 530 ) - 27 );
+				}else{
+					for(var i in initialHeights){
+						$('#' + i).height( initialHeights[i] );
+					};
+					$('#elfinder').find('div.el-finder-nav, div.el-finder-cwd')
+						.height( 530 );
+				}
+			};
+			
+			$(window).on('resize', function(){ 
+				resizerTrack++;
+				(function(track){
+					window.setTimeout(function(){
+						if(track == resizerTrack){ resizer(); }
+					}, 500);
+				})(resizerTrack);
+			});
+			
+			resizer();
+			
+		}, 1000);
+		
+		// resizer
 		
 		
 		

@@ -1,0 +1,36 @@
+<div id="cse-search-form" style="width: 100%;"><br />
+Google CSE Search <br />
+<strong>Admin, it is necessary to place Your Google CSE Search JavaScript code into this page!</strong><br />
+<br />
+<br />
+Keyord was: " <?php echo $_POST["q"]; ?> ".
+</div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+	// You need to place CSE code here
+</script>
+<div id="cse" style="width:100%;"></div>
+
+<script>
+(function(q){
+	if(q){
+		var placeSearch = function(){
+			try{
+				if( $('#gsc-i-id1')[0] == undefined ){
+					window.setTimeout( placeSearch, 300 );
+				}else{
+					$('#gsc-i-id1').click();
+					$('#gsc-i-id1').focus();
+					$('#gsc-i-id1').val( q );
+					window.setTimeout( function(){
+						$('#cse-search-form input.gsc-search-button').click();
+					}, 200 );
+				}
+			}catch(e){
+				window.setTimeout( placeSearch, 300 );
+			}
+		}
+		window.setTimeout( placeSearch, 300 );
+	}
+})('<?php echo $_POST["q"]; ?>');
+</script>
