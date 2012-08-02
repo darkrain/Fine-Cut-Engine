@@ -25,14 +25,17 @@
 		return $pagesPath;
 	}
 	function getfiles( $name , $path ){
-		$ppath = $path.DIRECTORY_SEPARATOR.$name;
-		$handle = fopen($ppath, 'r') or die("can't open file");
-		$contents = '';
-		if( filesize($ppath) > 0 ){
-			$contents = fread($handle, filesize($ppath));
-		}
-		fclose($handle);
-		return $contents;
+		try {
+			$ppath = $path.DIRECTORY_SEPARATOR.$name;
+			$handle = fopen($ppath, 'r');
+			$contents = '';
+			if( filesize($ppath) > 0 ){
+				$contents = @fread($handle, filesize($ppath));
+			}
+			fclose($handle);
+			return $contents;
+		} catch (Exception $e) {}
+		return '';
 	}
 	function setfiles( $name , $path , $str ){
 		// echo "writing1$name \n";
@@ -44,6 +47,7 @@
 		// echo "writing2$name \n";
 	}
 
+	// to get entire tree
 	if( $action == 'get' ){
 		$pagesPath = paths( $leaf );
 		if ($handle = opendir($pagesPath)) {
@@ -71,6 +75,7 @@
 		}
 	}
 
+	// delete leaf
 	if( $action == 'del' ){
 		$pagePath = paths( $leaf );
 		// * Great thanks to Elfinder for this _remove()!
@@ -104,6 +109,7 @@
 			$success['page']['header'] = unserialize( getfiles('header.txt', $pagePath ) );
 			$success['page']['content'] = ''.getfiles('content.txt', $pagePath );
 			$success['page']['info'] = ''.getfiles('info.txt', $pagePath );
+			$success['page']['blocks'] = ''.getfiles('blocks.txt', $pagePath );
 			$success['status'] = true;
 			echo json_encode ($success);			
 		}
@@ -117,6 +123,7 @@
 			$data = json_decode( $data );
 			setfiles( 'header.txt' , $pagePath , serialize( $data->header ) );
 			setfiles( 'content.txt' , $pagePath , $data->content );
+			setfiles( 'blocks.txt' , $pagePath , $data->blocks );
 			// setfiles( 'info.txt' , $pagePath , $data->info );
 			
 			$contents = $data->info;
@@ -152,6 +159,7 @@
 			setfiles( 'info.txt' , $new_path , '' );
 			setfiles( 'header.txt' , $new_path , '' );
 			setfiles( 'content.txt' , $new_path , '' );
+			setfiles( 'blocks.txt' , $new_path , '' );
 			
 			setPage( $new_path , $data );
 

@@ -106,7 +106,7 @@
 
 						<hr>
 						<pre>
-So, this is all about <?php echo $success['header']->blocks[0]->value; ?>
+So, this is all about <?php echo  $success['blocks'][0]->value; ?>
 						</pre>
 					</div>
 				</div>

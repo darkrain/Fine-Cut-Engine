@@ -50,16 +50,20 @@
 		
 
 		function getfilescontent( $name , $path ){
-			$ppath = $path.DIRECTORY_SEPARATOR.$name;
-			// echo $ppath;
-			$handle = fopen($ppath, 'r') or die("can't open file");
-			if( filesize($ppath) > 0 ){
-				$contents = fread($handle, filesize($ppath));
-				fclose($handle);
-			}else{
-				return '';
-			}
-			return $contents;
+			try{
+				$ppath = $path.DIRECTORY_SEPARATOR.$name;
+				// echo $ppath;
+				$contents = '';
+				$handle = fopen($ppath, 'r'); // or die("can't open file");
+				if( filesize($ppath) > 0 ){
+					$contents = fread($handle, filesize($ppath));
+					fclose($handle);
+				}else{
+					return '';
+				}
+				return $contents;
+			} catch (Exception $e) {}
+			return '';
 		}
 
 		$static_file_path = $static_path.DIRECTORY_SEPARATOR.'index.html';
@@ -107,7 +111,8 @@
 			$success['header'] = unserialize( getfilescontent('header.txt', $path ) );
 			// $success['contentText'] = ''.getfilescontent('content.txt', $path );
 			$success['content'] = $path.DIRECTORY_SEPARATOR.'content.txt';
-			$success['info'] = ''.getfilescontent('info.txt', $path );
+			$success['info'] = ''.getfilescontent( 'info.txt', $path );
+			$success['blocks'] = json_decode( ''.getfilescontent( 'blocks.txt', $path ) );
 			$success['root'] = $root;
 			$success['deep'] = $prepath;
 			$success['path'] = $path;
