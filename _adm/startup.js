@@ -1,7 +1,12 @@
 ( function( undefined ) { $(document).ready(function() {
 	var e;
 	try{
-
+		
+		var ServerPaths = {
+			  pages		: './tree_pages.php'
+			, templates	: './template_action.php'
+			, api		: './api.php'
+		};
 
 		$( '#tabsContent' ).tabs();
 
@@ -10,15 +15,15 @@
 			return {
 				  header : {
 					  title			: ''
+					, template		: 'default' 
+					, pageIsCode	: false
 					, keywords		: ''
 					, description	: ''
-					, pageIsCode	: false
 					, additional	: '' 
-					, template		: 'default' 
-					, blocks		: [ { value : '' } ]
 				}
 				, content : ''
 				, info : '' 
+				, blocks		: [ { value : '' } ]
 			}; 
 		};
 		var emptyleaf = _emptyleaf();
@@ -68,7 +73,7 @@
 							, async: true
 							, data : val
 							, dataType : 'text'
-							, url: './tree_pages.php'
+							, url: ServerPaths.pages
 							, success: function( data ){ if( data !== ''){ cb( data ); } }
 							, error: function(data){ alert(data); }
 						} ) ;
@@ -278,7 +283,7 @@
 
 
 				obj.header.pageIsCode = chkd;
-				obj.header.blocks = blocks.save();
+				obj.blocks = blocks.save();
 
 				return obj;
 			}
@@ -304,8 +309,17 @@
 						}, 300 );
 					}
 
-					if( obj.header.blocks == undefined ){ obj.header.blocks = [{value:''}]; }
-					blocks.load( obj.header.blocks );
+					if( ( obj.blocks == undefined ) || ( obj.blocks == '' )){
+						if( obj.header.blocks !== undefined ){
+							obj.blocks = obj.header.blocks;
+						}else{
+							obj.blocks = [{value:''}];
+						}
+					}else{
+						obj.blocks = $.parseJSON( obj.blocks );
+					}
+
+					blocks.load( obj.blocks );
 
 					$('#treePagesEditor-pageIsCode').attr( 'checked', obj.header.pageIsCode );
 
@@ -352,6 +366,8 @@
 						tree.shLoader( path.leaf, true );
 						// var enc = function(str){ return encodeURIComponent(str); }
 						var data = helpers.getValues();
+						data.blocks = JSON.stringify( data.blocks );
+
 						var obj = { leaf : path.str , action : 'content_set' , data : JSON.stringify( data ) };
 						tree.ws( obj , function( data ){
 							helpers.clearValues();
@@ -413,24 +429,28 @@
 		$('#pages-editor').markItUp( mySettings );
 		$('#markItUpPages-editor, .markItUpContainer').addClass('ui-corner-all');
 
-		$( '#leaf_path_copy' ).button({ text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-s' }
-		, label: ' Copy this Leaf Path '  }).click(	function(){ 
+		$( '#leaf_copy_path' ).button({ text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-e' }
+			, label: ' Copy this Leaf Path '  }).click(	function(){ 
 			var tree = $('#treePages').prop( 'tree' );
 			var path = tree.currentPath( );
 			window.prompt ( "Copy to clipboard: Ctrl+C, Enter", path.strp );
 		} );
 
-		$( '#leaf_go_url' ).button({ text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-e' }
-		, label: ' Copy this Leaf FULL Path '  }).click(	function(){ 
+		$( '#leaf_copy_url' ).button({ text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-s' }
+			, label: ' Copy this Leaf URL '  }).click(	function(){ 
 			var tree = $('#treePages').prop( 'tree' );
 			var path = tree.currentPath( );
 			
 			window.prompt ( "Copy to clipboard: Ctrl+C, Enter", window.location.href.split( window.location.pathname )[0] + path.strp );
 
-			// alert( window.location.href.split( window.location.pathname )[0] );
-			// alert( window.location.hostname );
-			// alert( window.location.pathname );
+		} );
+		$( '#leaf_go_url' ).button({ text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-n' }
+			, label: ' Go this Leaf URL '  }).click(	function(){ 
+			var tree = $('#treePages').prop( 'tree' );
+			var path = tree.currentPath( );
 			
+			window.open ( window.location.href.split( window.location.pathname )[0] + path.strp );
+		
 		} );
 
 		
@@ -686,7 +706,7 @@
 				, async: true
 				, data : obj
 				, dataType : 'text'
-				, url: './template_action.php'
+				, url: ServerPaths.templates
 				, success: function( data ){ if( data !== '' ){ callback && callback ( data ); } }
 				, error: function(data){ alert(data); }
 			} ) ;
@@ -746,6 +766,27 @@
 		
 		
 		// settings
+		
+		var saveSettingsAction = function(){ // used for keydown Ctrl + S reaction
+			helpers.growl( 'Saving Settings.' );
+			var val = $('#settings-editor-text').val();
+			$.ajax( {
+				  type: "POST"
+				, async: true
+				, data : { action: 'settings', data: val }
+				, dataType : 'text'
+				, url: ServerPaths.api
+				, success: function( data ){
+					$('#settings-editor-text').val(data);
+					if( $('#settings-growl-notify').attr('checked') ){
+						helpers.growl( 'Settings Saved.' );
+					}else{
+						alert( 'Settings Saved.' );
+					}
+				}
+			} );
+		};
+		
 		( function(){
 			if( $.cookie ){
 				var val = $.cookie( 'settings_growl_control_cookie_name' ) || false;
@@ -766,27 +807,8 @@
 				$.cookie( opts.name , $('#settings-trees-expand').attr('checked'), opts.opts );
 			} );
 
-			$('#saveSettingsButton').click( function(){
-				helpers.growl( 'Saving Settings.' );
-				var val = $('#settings-editor-text').val();
-				$.ajax( {
-					  type: "POST"
-					, async: true
-					, data : { action: 'settings', data: val }
-					, dataType : 'text'
-					, url: './api.php'
-					, success: function( data ){
-						$('#settings-editor-text').val(data);
-						if( $('#settings-growl-notify').attr('checked') ){
-							helpers.growl( 'Settings Saved.' );
-						}else{
-							alert( 'Settings Saved.' );
-						}
-					}
-				} ) ;
-
-				
-			} );
+			
+			$('#saveSettingsButton').click( function(){ saveSettingsAction(); } );
 
 			$('#clearCacheButton').click( function(){
 				var val = $('#settings-editor-text').val();
@@ -795,7 +817,7 @@
 					, async: true
 					, data : { action: 'clear_cache' }
 					, dataType : 'text'
-					, url: './api.php'
+					, url: ServerPaths.api
 					, success: function( data ){ alert(data); }
 				} ) ;
 			} );
@@ -867,6 +889,7 @@
 		
 		$(window).on( 'keydown' , function(evt) {
 			try{
+				// Ctrl + S
 				if (evt.ctrlKey && evt.keyCode == 83) {
 					evt.stopPropagation();
 					evt.preventDefault();
@@ -875,6 +898,9 @@
 					}
 					if( !$( '#templManager' ).hasClass('ui-tabs-hide') ){
 						templateAction( 'save' );
+					}
+					if( !$( '#settingsManager' ).hasClass('ui-tabs-hide') ){
+						saveSettingsAction();
 					}
 				}
 			}catch(e){ alert(e); }
