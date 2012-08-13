@@ -1,9 +1,14 @@
 <div id="cse-search-form" style="width: 100%;"><br />
-Google CSE Search <br />
-<strong>Admin, it is necessary to place Your Google CSE Search JavaScript code into this page!</strong><br />
+Google Custom Search Egine <br />
+<strong>This is demonstration page about how, for example Google CSE Search could be used in this page!</strong><br />
 <br />
+<p>You need to place You Google CSE code to this page.</p>
+<pre>
+and uncomment following inside JS
+// window.setTimeout( placeSearch, 300 );
+</pre>
 <br />
-Keyord was: " <?php echo $_POST["q"]; ?> ".
+<strong>Search keyord was:</strong> &laquo; <?php echo $_POST["q"]; ?> &raquo;.
 </div>
 <script src="http://www.google.com/jsapi" type="text/javascript"></script>
 <script type="text/javascript"> 
@@ -30,7 +35,7 @@ Keyord was: " <?php echo $_POST["q"]; ?> ".
 				window.setTimeout( placeSearch, 300 );
 			}
 		}
-		window.setTimeout( placeSearch, 300 );
+		// window.setTimeout( placeSearch, 300 );
 	}
 })('<?php echo $_POST["q"]; ?>');
 </script>
