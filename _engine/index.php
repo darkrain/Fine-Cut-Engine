@@ -72,6 +72,7 @@
 		$static_file_time = @filemtime($static_file_path);
 		$settings_time = @filemtime($settings_path);
 		$dynamic_file_time = @filemtime($dynamic_path);
+		$engine_time = @filemtime(__FILE__);
 		
 		if($use_static){ // from settings
 			if(file_exists($static_file_path)){
@@ -81,7 +82,8 @@
 					// echo $settings_time."\n";
 					// echo $dynamic_file_time."\n";
 					
-					if( ($static_file_time > $dynamic_file_time) && ($static_file_time > $settings_time) ){
+					if( ($static_file_time > $dynamic_file_time) && ($static_file_time > $settings_time)
+					&& ($static_file_time > $engine_time) ){
 						$header = unserialize( getfilescontent('header.txt', $path ) );
 						if($header->pageIsCode){
 							$get_static = false;
@@ -116,8 +118,12 @@
 			$success['root'] = $root;
 			$success['deep'] = $prepath;
 			$success['path'] = $path;
+			$success['pagesPath'] = $root.$pages.DIRECTORY_SEPARATOR;
+			$success['pagesName'] = $pages;
 			$success['isMain'] = $isMain;
 			$success['components'] = array();
+			$success['fileNameEncoding'] = $fileNameEncoding;
+			
 			$components = $root.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR;
 
 			if ($handle = opendir($components)) {
