@@ -1,1 +1,1 @@
-O:8:"stdClass":6:{s:5:"title";s:12:"Fine Cut CMS";s:8:"template";s:7:"default";s:10:"pageIsCode";b:0;s:8:"keywords";s:12:"Fine Cut CMS";s:11:"description";s:12:"Fine Cut CMS";s:10:"additional";s:0:"";}
+O:8:"stdClass":6:{s:5:"title";s:26:"Fine Cut CMS Documentation";s:8:"template";s:9:"documents";s:10:"pageIsCode";b:0;s:8:"keywords";s:12:"Fine Cut CMS";s:11:"description";s:12:"Fine Cut CMS";s:10:"additional";s:0:"";}
