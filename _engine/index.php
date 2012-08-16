@@ -14,6 +14,8 @@
 	$uri = preg_replace( '/index.php/' , '' , $uri , 1 );
 	$uri = preg_replace( '/index.htm/' , '' , $uri , 1 );
 	$uri = preg_replace( '/index.html/' , '' , $uri , 1 );
+	$uri = preg_replace( '/_index\//' , '' , $uri , 1 );
+	$uri = preg_replace( '/_index/' , '' , $uri , 1 );
 	$uri = preg_replace( '/\//' , '' , $uri , 1 );
 	
 	// echo '00 '.$uri.'<br>';
