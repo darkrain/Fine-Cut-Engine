@@ -1,22 +1,5 @@
 <?php
 
-	// $menuFilePath = dirname(__FILE__).DIRECTORY_SEPARATOR.'menu.js';
-	// echo '<!-- '.$menuFilePath.'//-->';
-	// $menuFileStr = '';
-	
-	/*
-	$handle = fopen($menuFilePath, 'r') or die("can't open file");
-	if( filesize($menuFilePath) > 0 ){
-		$contents = fread($handle, filesize($menuFilePath));
-		fclose($handle);
-	}
-	
-	$mainMenu = json_decode($menuFileStr);
-	*/
-
-	// foreach ($mainMenu->mainMenu as &$value) {
-	
-	
 	foreach ($info->mainMenu as &$value) {
 		if( isset ($value->type) ){
 			if( $value->type == 'link' ){

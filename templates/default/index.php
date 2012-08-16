@@ -60,7 +60,7 @@
 								<li style = "padding: 12px 9px 0px 0px"><span class = "icon-home"></span></li>
 								<?php } ?>
 								<li class="divider-vertical"></li>
-								<?php include ( $success['components']['menu_main'] ); ?>
+								<?php include ( $success['components']['menu_main_json'] ); ?>
 							</ul>
 							
 							<ul class = "nav pull-right">
