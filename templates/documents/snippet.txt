@@ -20,5 +20,9 @@
 		"type": "link",
 		"link": "/download/",
 		"active": false
-	}]
+	}],
+	"leftMenu": {
+		"menuFile": "menu.js",
+		"active": "documents"
+	}
 }

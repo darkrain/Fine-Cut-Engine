@@ -60,7 +60,7 @@
 								<li style = "padding: 12px 9px 0px 0px"><span class = "icon-home"></span></li>
 								<?php } ?>
 								<li class="divider-vertical"></li>
-								<?php include ( $success['components']['main_menu'] ); ?>
+								<?php include ( $success['components']['menu_main'] ); ?>
 							</ul>
 							
 							<ul class = "nav pull-right">
@@ -84,9 +84,7 @@
 			<div class = "row-fluid">
 				<div class = "span3">
 					<div class = "well white" >
-						<ul class = "left_menu">
-						<?php include ( $success['components']['documents_menu'] ); ?>
-						</ul>
+						<?php include ( $success['components']['menu_documents'] ); ?>
 					</div>
 				</div>
 				<div class = "span7">
