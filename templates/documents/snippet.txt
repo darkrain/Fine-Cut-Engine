@@ -1,26 +1,9 @@
 {
 	"title": "Title",
-	"mainMenu": [{
-		"title": "About Us",
-		"type": "link",
-		"link": "/about/",
-		"active": false
-	}, {
-		"title": "How to Install",
-		"type": "link",
-		"link": "/install/",
-		"active": false
-	}, {
-		"title": "Documentation",
-		"type": "link",
-		"link": "/documentation/",
-		"active": true
-	}, {
-		"title": "Download",
-		"type": "link",
-		"link": "/download/",
-		"active": false
-	}],
+	"mainMenu": {
+		"menuFile": "menu.js",
+		"active": "/download/"
+	},
 	"leftMenu": {
 		"menuFile": "menu.js",
 		"active": "documents"

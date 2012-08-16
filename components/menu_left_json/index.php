@@ -1,60 +1,67 @@
 <?php
 
-$dirNameMenu = 'documentation';
+include_once dirname(__FILE__).'/../commonFn.php';
 
-$menuPath = $success['pagesPath'].$dirNameMenu.DIRECTORY_SEPARATOR;
+$menuFileName = $info->leftMenu->menuFile;
+$menuFilePath = dirname(__FILE__).DIRECTORY_SEPARATOR.$menuFileName;
+$menuActiveLink = $info->leftMenu->active;
 
-function nameU( $str ){
-	$turn = mb_convert_encoding($str, $success['fileNameEncoding'], "UTF-8");
-	return $turn;
-}
-
-function nameS( $str ){
-	$turn = mb_convert_encoding($str, "UTF-8", $success['fileNameEncoding']);
-	return $turn;
-}
-
-function getfiles( $ppath ){
-	try {
-		$handle = fopen($ppath, 'r');
-		$contents = '';
-		if( filesize($ppath) > 0 ){
-			$contents = @fread($handle, filesize($ppath));
-		}
-		fclose($handle);
-		return $contents;
-	} catch (Exception $e) {}
-	return '';
-}
+$menu = json_decode(getfile($menuFilePath));
 
 
-function readDirs($dir, $prefix){
-	$pagesPath = nameU($dir);
-	$handle = opendir($pagesPath);
-	if ($handle) {
-		while (false !== ($entry = readdir($handle))) {
-			if( $entry != "." && $entry != ".." ){
-				$entryNM = nameS( $entry );
-				$entryPth = $pagesPath.$entryNM.DIRECTORY_SEPARATOR;
-				if( is_dir( $entryPth ) ){
-					
-					$headerPth = $entryPth.'header.txt';
-					
-					if(file_exists($headerPth)){
-						$header = unserialize( getfiles( $headerPth ) );
-						// echo $headerPth;
-						echo '<li><a href = "/'.$prefix.'/'.$entryNM.'/">'.$header->title.'</a></li><br>';
+foreach ($menu as &$value) {
+	if( isset ($value->type) ){
+		if( $value->type == 'link' ){
+			
+			
+			if( isset ($value->menu) ){
+				echo '<li>';
+				if( $value->link == $menuActiveLink ){
+					echo '<a href = "'.$success['deep'].$value->link.'" class = "active">'.$value->title.'</a>';
+				}else{
+					echo '<a href = "'.$success['deep'].$value->link.'" >'.$value->title.'</a>';
+				}
+				
+				echo '<ul>';
+				foreach ($value->menu as &$sub) {
+
+					if( isset ($sub->type) ){
+						if( $sub->type == 'link' ){
+							if( $value->link == $menuActiveLink ){
+								echo '<li><a href = "'.$success['deep'].$sub->link.'" class = "active">'.$sub->title.'</a></li>';
+							}else{
+								echo '<li><a href = "'.$success['deep'].$sub->link.'" >'.$sub->title.'</a></li>';
+							}
+							
+							// echo '<li><a href = "'.$sub->link.'">'.$sub->title.'</a></li>';
+						}
+						if( $sub->type == 'divider' ){
+							echo '<li class = "divider"></li>';
+						}
+						if( $sub->type == 'header' ){
+							echo '<li class = "header">'.$sub->title.'</li>';
+						}
 					}
-
-					readDirs($entryPth, $prefix.'/'.$entryNM);
+				}
+				echo '</ul>';
+			}else{
+				echo '<li>';
+				if( $value->link == $menuActiveLink ){
+					echo '<a href="'.$success['deep'].$value->link.'" class = "active">'.$value->title.'</a>';
+				}else{
+					echo '<a href="'.$success['deep'].$value->link.'">'.$value->title.'</a>';
 				}
 			}
+			
+			echo '</li>';
+		}
+		if( $value->type == 'divider' ){
+			echo '<li class = "divider"></li>';
+		}
+		if( $sub->type == 'header' ){
+			echo '<li class = "header">'.$sub->title.'</li>';
 		}
 	}
-	closedir($handle);
 }
-echo '<ol>';
-readDirs($menuPath, $dirNameMenu);
-echo '</ol>';
 
 ?>
