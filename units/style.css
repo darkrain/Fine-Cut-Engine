@@ -1,6 +1,7 @@
 body {
 	margin: 10px 5px 0px 5px;
 	min-width: 950px;
+	overflow-y: scroll;
 }
 .white {
 	background: white;
