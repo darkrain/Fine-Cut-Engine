@@ -5,9 +5,9 @@
 	<li class="span2">
 		<div class="thumbnail">
 	 	 	 <a href="/files/images/pm_settings.png" rel="lightbox[screenshost]" target="_blank">
-				<img border = "0"  src="/files/tumbs/pm_settings.png" alt="Pages Manager : Page Settings " width = "132" >
+				<img border = "0"  src="/files/tumbs/pm_settings.png" alt="Pages Manager : Page Settings " width = "132" height = "89">
 	 	 	 </a>
-			<h5>Page Editor</h5>
+			<h5>Page &lt;Head&gt;</h5>
 			<p>Settings: keywords, description, title etc...</p>
 		</div>
 	</li>
@@ -23,7 +23,7 @@
 	<li class="span2">
 		<div class="thumbnail">
 	 	 	 <a href="/files/images/pm_props.png" rel="lightbox[screenshost]" target="_blank">
-				<img border = "0"  src="/files/tumbs/pm_props.png" alt="Pages Manager : Page Properties JSON  Editor" width = "132" >
+				<img border = "0"  src="/files/tumbs/pm_props.png" alt="Pages Manager : Page Properties JSON  Editor" width = "132" height = "89">
 	 	 	 </a>
 			<h5>Page Properties Editor</h5>
 			<p>With JSON editing from <a href="http://www.daviddurman.com/flexi-json-editor/jsoneditor.html" target="_blank">
@@ -32,18 +32,18 @@
 	</li>
 	<li class="span2">
 		<div class="thumbnail">
-	 	 	 <a href="/files/images/filemanager.png" rel="lightbox[screenshost]" target="_blank">
-				<img border = "0"  src="/files/tumbs/filemanager.png" alt="File Manager" width = "132" >
+	 	 	 <a href="/files/images/pm_blocks.png" rel="lightbox[screenshost]" target="_blank">
+				<img border = "0"  src="/files/tumbs/pm_blocks.png" alt="Pages Manager : block parts" width = "132" height = "89">
 	 	 	 </a>
-			<h5>File Manager</h5>
-			<p>From Studio 42 <a href="https://github.com/Studio-42/elFinder/tree/1.x" target="_blank">
-	 	 	 	 elFinder 1.x git</a></p>
+			<h5>Pages: block parts</h5>
+			<p>Thanks to <a href="http://knockoutjs.com/" target="_blank">
+				knockoutjs.com</a></p>
 		</div>
 	</li>
 	<li class="span2">
 		<div class="thumbnail">
 	 	 	 <a href="/files/images/templates_ed.png" rel="lightbox[screenshost]" target="_blank">
-				<img border = "0"  src="/files/tumbs/templates_ed.png" alt="Template Editor" width = "132" >
+				<img border = "0"  src="/files/tumbs/templates_ed.png" alt="Template Editor" width = "132" height = "89">
 	 	 	 </a>
 			<h5>Template Editor</h5>
 			<p>Simple Textarea with [Tab] key from US</p>
@@ -52,7 +52,7 @@
 	<li class="span2">
 		<div class="thumbnail">
 	 	 	 <a href="/files/images/templates_snipp.png" rel="lightbox[screenshost]" target="_blank">
-				<img border = "0"  src="/files/tumbs/templates_snipp.png" alt="Template Editor: Properties" width = "132" >
+				<img border = "0"  src="/files/tumbs/templates_snipp.png" alt="Template Editor: Properties" width = "132" height = "89">
 	 	 	 </a>
 			<h5>Template Properties Snippet Editor</h5>
 			<p>Thanks again to <a href="http://www.daviddurman.com/flexi-json-editor/jsoneditor.html" target="_blank">
@@ -61,21 +61,21 @@
 	</li>
 	<li class="span2">
 		<div class="thumbnail">
-	 	 	 <a href="/files/images/templates_units.png" rel="lightbox[screenshost]" target="_blank">
-				<img border = "0"  src="/files/tumbs/templates_units.png" alt="Template Units" width = "132" >
+	 	 	 <a href="/files/images/filemanager.png" rel="lightbox[screenshost]" target="_blank">
+				<img border = "0"  src="/files/tumbs/filemanager.png" alt="File Manager" width = "132" height = "89">
 	 	 	 </a>
-			<h5>Template Units</h5>
-			<p>Thanks again to <a href="https://github.com/Studio-42/elFinder/tree/1.x" target="_blank">
-	 	 	 	 elFinder</a></p>
+			<h5>File Manager</h5>
+			<p>From Studio 42 <a href="https://github.com/Studio-42/elFinder/tree/1.x" target="_blank">
+	 	 	 	 elFinder 1.x git</a></p>
 		</div>
 	</li>
 	<li class="span2">
 		<div class="thumbnail">
 	 	 	 <a href="/files/images/settings.png" rel="lightbox[screenshost]" target="_blank">
-				<img border = "0"  border = "0"  src="/files/tumbs/settings.png" alt="Settings" width = "132" style = "margin-bottom: 7px" >
+				<img border = "0"  src="/files/tumbs/settings.png" alt="Settings" width = "132" height = "89">
 	 	 	 </a>
 			<h5>Settings</h5>
-			<p>Simple settings page based on jQuery cookies browser based storage</p>
+			<p>Growler, JSON, Engine, Cache</p>
 		</div>
 	</li>
 	<li class="span2">
