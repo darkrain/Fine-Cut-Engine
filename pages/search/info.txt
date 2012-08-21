@@ -2,31 +2,10 @@
 	"title": "Title",
 	"mainMenu": {
 		"menuFile": "menu.js",
-		"active": ""
+		"active": "/about/"
 	},
-	"leftMenu": [{
-		"title": "More. More... More! ",
-		"type": "link",
-		"link": "/more/",
-		"active": false,
-		"menu": [{
-			"title": "Screenshots",
-			"link": "/screenshots/",
-			"type": "link"
-		}, {
-			"title": "Fork",
-			"link": "/forkus/",
-			"type": "link"
-		}]
-	}, {
-		"title": "Wow! Support!",
-		"type": "link",
-		"link": "/support/",
-		"active": false
-	}, {
-		"title": "Back to Main",
-		"type": "link",
-		"link": "/",
-		"active": true
-	}]
+	"leftMenu": {
+		"menuFile": "left.js",
+		"active": ""
+	}
 }

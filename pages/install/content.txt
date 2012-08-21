@@ -1,12 +1,13 @@
-<ol>
-<li><a href="/download/" target="_blank">Download</a><br /><br />
-</li>
-<li>UnPack to your website folder, or any folder inside, code is directory relative.<br /><br />
-</li>
-<li><strong>Check!</strong> <pre>/_adm/settings.php</pre> for Your installation dir and settings.<br /><br />
-</li>
-<li><strong>Protect!</strong> <pre>/_adm/</pre> with <pre>.htpasswd</pre>
-<p>sample of code is inside <pre>/_adm/.htaccess</pre></p></li>
-<li><strong>Enjoy!</strong><br /><br />
-</li>
-</ol>
+<p>Fincut is bundled as an archive.</p>
+<br />
+
+<p>It don't use any DB, therefore installation process is extremely simple.<br />
+<strong>Just unpack Fincut Archive to web-root folder or any folder inside.</strong></p>
+<br />
+
+<p>Then, if all done simple You could go to http://YourSite/YourInstallDir/_adm.</p>
+<p>This is admin panel.</p>
+<p>One only thing, if you will not use sub directory {YourInstallDir}, then you'll to move inside settings and put working directory preference there: $prepath. There You'll find examples how to do this.</p>
+<br />
+
+<p>Please read more <a href="/documentation/installation/">inside documentatoin</a>.</p>

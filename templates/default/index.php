@@ -23,8 +23,7 @@
 
 		<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $success['deep']; ?>/units/style.css" charset="utf-8">
 
-
-		<?php echo $success['header']->additional; ?>
+		<?php include( $success["components"]["head_additional"] ); ?>
 
 	</head>
 	<body>
@@ -85,22 +84,14 @@
 				<div class = "span3">
 					<div class = "well white" >
 						<ul class = "left_menu">
-						<?php include ( $success['components']['menu_left'] ); ?>
+						<?php include ( $success['components']['menu_left_json'] ); ?>
 						</ul>
 					</div>
 				</div>
 				<div class = "span7">
 					<div class = "well white">
 
-						<?php include ( $success['components']['nav_chain'] ); ?>
-						
-						<?php
-							if($success['header']->pageIsCode){
-								include $success['content'];
-							}else{
-								$size = readfile($success['content']);
-							}
-						?>
+<?php include( $success["components"]["content_parser"] ); ?>
 
 						<br>
 

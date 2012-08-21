@@ -6,6 +6,6 @@
 	},
 	"leftMenu": {
 		"menuFile": "menu.js",
-		"active": "/support/"
+		"active": "/documentation/"
 	}
 }

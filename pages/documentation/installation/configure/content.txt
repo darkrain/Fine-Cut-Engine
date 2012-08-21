@@ -1,0 +1,3 @@
+- manage settings
+-- to server root folder
+-- to server sub folder

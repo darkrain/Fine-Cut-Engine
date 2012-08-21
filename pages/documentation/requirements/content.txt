@@ -1,0 +1,10 @@
+- System Requirements
+	Apache Modules:
+		deflate_module
+		env_module
+		expires_module
+		filter_module
+		headers_module
+		mime_module
+		rewrite_module
+		setenvif_module

@@ -4,12 +4,14 @@
 
 AddDefaultCharset utf-8
 
-AddType image/x-icon .ico
-AddType application/x-xpinstall xul
+AddType image/x-icon	.ico
+AddType application/x-xpinstall	xul
+AddType application/javascript	js
 
 Options +Includes +FollowSymLinks -Indexes
 
 #AddHandler server-parsed .html .shtml .js .css
+AddHandler server-parsed *.js
 
 <IfModule mod_headers.c>
 	Header append Cache-Control "no-store, no-cache, must-revalidate"

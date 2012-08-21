@@ -1,6 +1,6 @@
 [
 	{
-		"title": "About Us",
+		"title": "About",
 		"type": "link",
 		"link": "/about/"
 	}, {

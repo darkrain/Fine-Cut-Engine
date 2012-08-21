@@ -8,6 +8,9 @@
 	if( isset( $_POST['template'] ) ){ $template = $_POST['template']; }
 	if( isset( $_POST['source'] ) ){ $source = $_POST['source']; }
 	if( isset( $_POST['snippet'] ) ){ $snippet = $_POST['snippet']; }
+	if( isset( $_POST['header'] ) ){ $header = $_POST['header']; }else{
+		
+	}
 
 	function nameU( $str ){
 		include dirname(__FILE__).DIRECTORY_SEPARATOR.'settings.php';
@@ -53,10 +56,35 @@
 				if(file_exists($snippetPath)){
 					$sucess['snippet'] = getfiles( $snippetPath );
 				}
+				$sucess['header'] = '';
+				$snippetPath = $path.DIRECTORY_SEPARATOR.'header.txt';
+				if(file_exists($snippetPath)){
+					$sucess['header'] = getfiles( $snippetPath );
+				}
 				echo json_encode ($sucess);
 			}
 		}
 
+		if( $action == 'getInfo' ){
+			if(file_exists($path) && is_dir($path)){
+				$sucess = array();
+				$templatePath = $path.DIRECTORY_SEPARATOR.'index.php';
+				if(file_exists($templatePath)){
+					$sucess['snippet'] = '';
+					$snippetPath = $path.DIRECTORY_SEPARATOR.'snippet.txt';
+					if(file_exists($snippetPath)){
+						$sucess['snippet'] = getfiles( $snippetPath );
+					}
+					$sucess['header'] = '';
+					$headerPath = $path.DIRECTORY_SEPARATOR.'header.txt';
+					if(file_exists($snippetPath)){
+						$sucess['header'] = getfiles( $headerPath );
+					}
+					echo json_encode ($sucess);
+				}
+			}
+		}
+		
 		if( $action == 'add' ){
 			if(file_exists($path) && is_dir($path)){
 				echo '{"error":"Template with the same name already exists."}';
@@ -66,6 +94,7 @@
 
 				setfiles( $path.DIRECTORY_SEPARATOR.'index.php' , $source );
 				setfiles( $path.DIRECTORY_SEPARATOR.'snippet.txt' , $snippet );
+				setfiles( $path.DIRECTORY_SEPARATOR.'header.txt' , $header );
 				
 				echo 'success';
 				
@@ -78,6 +107,7 @@
 
 				setfiles( $path.DIRECTORY_SEPARATOR.'index.php' , $source );
 				setfiles( $path.DIRECTORY_SEPARATOR.'snippet.txt' , $snippet );
+				setfiles( $path.DIRECTORY_SEPARATOR.'header.txt' , $header );
 				
 				echo 'success';
 				

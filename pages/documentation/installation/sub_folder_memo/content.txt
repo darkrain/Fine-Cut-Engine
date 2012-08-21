@@ -1,0 +1,1 @@
+- core links management: keep in mind about menu, template, links inside JS\CSS

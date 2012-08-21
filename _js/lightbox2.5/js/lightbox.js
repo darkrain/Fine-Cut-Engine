@@ -1,6 +1,6 @@
 
 /*
-Lightbox v2.5
+Lightbox v2.51
 by Lokesh Dhakar - http://www.lokeshdhakar.com
 
 For more information, visit:
@@ -41,15 +41,17 @@ lightbox = new Lightbox options
 */
 
 (function() {
-  var Lightbox, LightboxOptions;
+  var $, Lightbox, LightboxOptions;
+
+  $ = jQuery;
 
   LightboxOptions = (function() {
 
     function LightboxOptions() {
-      this.fileLoadingImage = '/_js/lightbox2.5/images/loading.gif';
-      this.fileCloseImage = '/_js/lightbox2.5/images/close.png';
-      this.resizeDuration = 500;
-      this.fadeDuration = 357;
+      // this.fileLoadingImage = '/_js/lightbox2.5/images/loading.gif';
+      // this.fileCloseImage = '/_js/lightbox2.5/images/close.png';
+      this.resizeDuration = 700;
+      this.fadeDuration = 500;
       this.labelImage = "Image";
       this.labelOf = "of";
     }
@@ -74,7 +76,7 @@ lightbox = new Lightbox options
 
     Lightbox.prototype.enable = function() {
       var _this = this;
-      return $('a[rel^=lightbox], area[rel^=lightbox]').on('click', function(e) {
+      return $('body').on('click', 'a[rel^=lightbox], area[rel^=lightbox]', function(e) {
         _this.start($(e.currentTarget));
         return false;
       });
@@ -103,9 +105,13 @@ lightbox = new Lightbox options
         "class": 'lb-loader'
       }).append($('<a/>', {
         "class": 'lb-cancel'
-      }).append($('<img/>', {
-        src: this.options.fileLoadingImage
-      }))))), $('<div/>', {
+      })
+	  
+	  // .append($('<img/>', {
+        // src: this.options.fileLoadingImage
+      // }))
+	  
+	  ))), $('<div/>', {
         "class": 'lb-dataContainer'
       }).append($('<div/>', {
         "class": 'lb-data'
@@ -119,9 +125,13 @@ lightbox = new Lightbox options
         "class": 'lb-closeContainer'
       }).append($('<a/>', {
         "class": 'lb-close'
-      }).append($('<img/>', {
-        src: this.options.fileCloseImage
-      }))))))).appendTo($('body'));
+      })
+	  
+	  // .append($('<img/>', {
+        // src: this.options.fileCloseImage
+      // }))
+	  
+	  ))))).appendTo($('body'));
       $('#lightboxOverlay').hide().on('click', function(e) {
         _this.end();
         return false;
@@ -198,7 +208,7 @@ lightbox = new Lightbox options
       $lightbox.find('.lb-outerContainer').addClass('animating');
       preloader = new Image;
       preloader.onload = function() {
-        $image.attr('src', _this.album[_this.currentImageIndex].link);
+        $image.attr('src', _this.album[imageNumber].link);
         $image.width = preloader.width;
         $image.height = preloader.height;
         return _this.sizeContainer(preloader.width, preloader.height);
@@ -223,8 +233,11 @@ lightbox = new Lightbox options
       containerRightPadding = parseInt($container.css('padding-right'), 10);
       containerBottomPadding = parseInt($container.css('padding-bottom'), 10);
       containerLeftPadding = parseInt($container.css('padding-left'), 10);
-      newWidth = imageWidth + containerLeftPadding + containerRightPadding;
-      newHeight = imageHeight + containerTopPadding + containerBottomPadding;
+      // newWidth = imageWidth + containerLeftPadding + containerRightPadding;
+      newWidth = 720;
+      newHeight = 492;
+      // newHeight = imageHeight + containerTopPadding + containerBottomPadding;
+	  
       if (newWidth !== oldWidth && newHeight !== oldHeight) {
         $outerContainer.animate({
           width: newWidth,
@@ -251,7 +264,7 @@ lightbox = new Lightbox options
       var $lightbox;
       $lightbox = $('#lightbox');
       $lightbox.find('.lb-loader').hide();
-      $lightbox.find('.lb-image').fadeIn('slow');
+      $lightbox.find('.lb-image').fadeIn('slow').width(700).height(472);
       this.updateNav();
       this.updateDetails();
       this.preloadNeighboringImages();
@@ -272,8 +285,6 @@ lightbox = new Lightbox options
       var $lightbox,
         _this = this;
       $lightbox = $('#lightbox');
-      console.log(this.album[this.currentImageIndex].title !== "");
-      console.log(typeof this.album[this.currentImageIndex].title !== 'undefined');
       if (typeof this.album[this.currentImageIndex].title !== 'undefined' && this.album[this.currentImageIndex].title !== "") {
         $lightbox.find('.lb-caption').html(this.album[this.currentImageIndex].title).fadeIn('fast');
       }

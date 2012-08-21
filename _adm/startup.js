@@ -1,30 +1,49 @@
 ( function( undefined ) { $(document).ready(function() {
 	var e;
 	try{
-		
+
 		var ServerPaths = {
 			  pages		: './tree_pages.php'
 			, templates	: './template_action.php'
 			, api		: './api.php'
 		};
 
+		var settings_path = '';
+		
+		var load_settings_path = function(){
+			$.ajax( {
+				  type: "POST"
+				, async: false
+				, data : { action: 'settings_path' }
+				, dataType : 'text'
+				, url: ServerPaths.api
+				, success: function( data ){ settings_path = data; }
+			} ) ;
+		}
+
+		
 		$( '#tabsContent' ).tabs();
 
 		// for saving changes: copy/paste;
 		var _emptyleaf = function(){
+			/*
+			!!! order of properties in this object must be the same everywhere !!!
+			therefore, each time You are creating new one, do copy of this, but not
+			creation properties in unpredicted order!!!
+			*/
 			return {
 				  header : {
 					  title			: ''
-					, template		: 'default' 
+					, template		: 'default'
 					, pageIsCode	: false
 					, keywords		: ''
 					, description	: ''
-					, additional	: '' 
+					, additional	: ''
 				}
 				, content : ''
-				, info : '' 
+				, info : ''
 				, blocks		: [ { value : '' } ]
-			}; 
+			};
 		};
 		var emptyleaf = _emptyleaf();
 		var buffer = _emptyleaf();
@@ -45,10 +64,10 @@
 						helpers.growl( 'Leaf Loaded...' , 800 );
 					} );
 				}
-				, blur		: function( currentLeaf , result ){
+				, blur		: function( currentLeaf , blurCallback ){
 					if( helpers.checkValues( currentLeaf.obj.page ) ){
 						helpers.clearValues();
-						result();
+						blurCallback();
 					}else{
 						helpers.confirm( 'What happens?', 'You have unsaved changes.\nDo You whant to save?'
 						, function() {
@@ -58,7 +77,7 @@
 						}
 						, function() {
 							helpers.clearValues();
-							result();
+							blurCallback();
 						} );
 					}
 					return true;
@@ -90,11 +109,11 @@
 
 		var BlocksModel = function( blocks ) {
 			var self = this;
-			
+
 			// self.blocks = ko.observableArray( ko.utils.arrayMap( blocks, function( block ) {
 				// return { value : blocks.value || '' };
 			// } ) );
-			
+
 			self.blocks = ko.mapping.fromJS( [ { value : '' } ] );
 
 			self.addBlock = function() { self.blocks.push( { value: '' } ); };
@@ -103,14 +122,14 @@
 				if( self.blocks().length > 1 ){
 					self.blocks.remove( block );
 				}else{
-					helpers.message( 'Keep in Mind', 'You can\'t delete last block.' )
+					helpers.message( 'Keep in Mind', 'You can\'t delete last block.' );
 				}
 			};
 
 			self.save = function() {
 				return ko.toJS( self.blocks );
 			};
-			
+
 			self.visibl = function(){
 				return !( self.blocks().length > 0 );
 			}
@@ -122,13 +141,10 @@
 				// if( tf === undefined){ self.blocks.push({ value: '' }); }
 				ko.mapping.fromJS( [ { value : '' } ] , self.blocks );
 			};
-			
+
 			self.load = function( blks ){
-				
 				// self.clear( true );
-				
 				ko.mapping.fromJS( blks , self.blocks );
-				// alert(111)
 				// ko.utils.arrayMap( blks , function( block ) {
 					// self.blocks.push( { value: block.value } );
 				// } ) ;
@@ -163,20 +179,6 @@
 			if( $('#settings-trees-expand').attr('checked') ){
 				$('#treePagesEditor-info-snippet').toggleClass('expanded');
 			} } );
-
-
-		// var controlCodeType = function(){
-			// if( $('#treePagesEditor-pageIsCode').attr('checked') ){
-				// $('#pages-editor-wrapper').hide();
-				// $('#pages-editor-codearea').show();
-			// }else{
-				// $('#pages-editor-wrapper').show();
-				// $('#pages-editor-codearea').hide();
-			// }
-		// }
-		// controlCodeType();
-
-		// $('#treePagesEditor-pageIsCode').on( 'click', controlCodeType );
 
 		var helpers = {
 			  growl : function( message , delay , opts ){
@@ -232,7 +234,7 @@
 					}
 				}catch(e){ alert(e); }
 			}
-			
+
 			, clearValues : function(){
 				for( var i in emptyleaf.header ){
 					$( '#treePagesEditor-' + i ).val( '' );
@@ -245,60 +247,50 @@
 
 				$('#treePagesEditor-pageIsCode').attr('checked', false);
 
-				// controlCodeType();
-				// $('#pages-editor-codearea').val( '' );
-
 				$( '#pages-editor' ).val( '' );
 
 				// $( '#pages-editor' ).elrte('val', '   ' )
 				// $( '#pages-editor' ).elrte('updateSource');
-				
-				// alert( 111 );
-				blocks.clear();
 
+				blocks.clear();
 
 				$("#treePagesEditor-template").trigger("liszt:updated");
 			}
 			, getValues : function(){
+
 				var obj = {
 					  header 	: {}
 					, content	: $( '#pages-editor' ).val()
 					// , content	: $( '#pages-editor' ).elrte('val')
 					, info		: $( '#treePagesEditor-info' ).val()
 				};
+
 				for( var i in emptyleaf.header ){
 					if( $( '#treePagesEditor-' + i )[0] ){
 						obj.header[i] = $( '#treePagesEditor-' + i ).val();
 					}
 				}
 
-
 				var chkd = ( $('#treePagesEditor-pageIsCode').attr('checked') == 'checked' ) ? true : false;
-
-				// if(chkd){
-					// obj.content = $('#pages-editor-codearea').val( );
-				// }else{
-					// obj.content = $( '#pages-editor' ).elrte('val');
-				// }
-
 
 				obj.header.pageIsCode = chkd;
 				obj.blocks = blocks.save();
-
+				
 				return obj;
+
 			}
-			
+
 			, setValues : function( obj ){
 				try{
-					
+
 					// helpers.clearValues();
 					
 					if( obj.header !== undefined ){
 						for( var i in emptyleaf.header ){
 							if( obj.header[i] !== undefined ){
-								$( '#treePagesEditor-' + i ).val( obj.header[i] ); 
+								$( '#treePagesEditor-' + i ).val( obj.header[i] );
 							}else{
-								$( '#treePagesEditor-' + i ).val( emptyleaf.header[i] ); 
+								$( '#treePagesEditor-' + i ).val( emptyleaf.header[i] );
 							}
 						}
 					}
@@ -323,42 +315,35 @@
 
 					$('#treePagesEditor-pageIsCode').attr( 'checked', obj.header.pageIsCode );
 
-					// if(obj.header.pageIsCode){
-						// $('#treePagesEditor-pageIsCode').attr('checked', true);
-						// $('#pages-editor-codearea').val( obj.content );
-					// }else{
-						// if( obj.content !== undefined ){ $( '#pages-editor' ).elrte('val', '  '+obj.content ); }
-						// else{ $( '#pages-editor' ).elrte('val', '   ' ); }
-						// $( '#pages-editor' ).elrte('updateSource');
-					// }
-
 					$( '#pages-editor' ).val( obj.content );
-					// controlCodeType();
 					$("#treePagesEditor-template").trigger("liszt:updated");
 
 				}catch(e){ alert(e); }
 			}
 			, checkValues : function( compare ){
-				var compare = compare || emptyleaf;
-				var compare = JSON.stringify( compare );
-				var values = JSON.stringify( helpers.getValues() );
-				
-				// alert(compare + '\n\n' + values);
+				var compareObj = compare || emptyleaf;
+				var valuesObj = helpers.getValues();
+				var compare = JSON.stringify( compareObj );
+				var values = JSON.stringify( valuesObj );
+
+				// debugger;
+				// !!! keep in mind about ORDER of properties in string !!!
 				
 				if( compare ==  values ) {
 					return true;
 				}else{
 					return false;
 				}
-				// if( $( '#treePagesEditor-title' ).val() != compare.header.title )  return false;
-				// if( $( '#treePagesEditor-keywords' ).val() != compare.header.keywords )  return false;
-				// if( $( '#treePagesEditor-description' ).val() != compare.header.description )  return false;
-				// return true;
-				// if( _.isEqual( compare, values ) ){ return false; }else{ return true; }
+
 			}
 			, saveLeaf : function(){
 				try{
-		
+
+					var ed = $('#pages-editor');
+					var editor = ed[0];
+					var scrollTop = editor.scrollTop;
+					var carretPosition = editor.selectionStart;
+
 					var tree = $('#treePages').prop( 'tree' );
 					var path = tree.currentPath();
 					if( path.arr.length > 1 ){
@@ -373,6 +358,10 @@
 							helpers.clearValues();
 							helpers.response( data , path.leaf );
 							tree.shLoader( path.leaf, false );
+							
+							editor.scrollTop = scrollTop;
+							editor.setSelectionRange( carretPosition, carretPosition);
+							
 							helpers.growl( 'Leaf Saved...', 2000 );
 						} );
 					}else{
@@ -390,6 +379,7 @@
 							helpers.message('Notification!', 'You need to Select some page before trying to Save it!');
 						}
 					}
+					
 				}catch(e){ alert(e); }
 			}
 		}
@@ -397,21 +387,12 @@
 
 
 		$('#elfinder').elfinder({
-			//  url: './elfinder-1.2/connectors/php/connector.php'  // connector URL (REQUIRED)
 			  url: './elfinder-1.2/connectors/php/connector_server.php'  // connector URL (REQUIRED)
-			, lang: 'ru'
 			, height: '530px'
 			, disableShortcuts: true
 		}).elfinder('instance');
 
 
-
-		// $('#full_server_elfinder').elfinder({
-			  // url: './elfinder-1.2/connectors/php/connector_server.php'  // connector URL (REQUIRED)
-			// , lang: 'ru'
-			// , height: '455px'
-			// , disableShortcuts: true
-		// }).elfinder('instance');
 
 		// $('#pages-editor').elrte({
 				  // cssClass : 'el-rte'
@@ -429,31 +410,74 @@
 		$('#pages-editor').markItUp( mySettings );
 		$('#markItUpPages-editor, .markItUpContainer').addClass('ui-corner-all');
 
-		$( '#leaf_copy_path' ).button({ text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-e' }
-			, label: ' Copy this Leaf Path '  }).click(	function(){ 
+
+		var markitupHelper = {
+			get: function () {
+				var textarea = $('#pages-editor');
+				var selection, caretPosition;
+				if (document.selection) {
+					selection = document.selection.createRange().text;
+					if ($.browser.msie) { // ie
+						var range = document.selection.createRange(),
+						rangeCopy = range.duplicate();
+						
+						rangeCopy.moveToElementText(textarea);
+						caretPosition = -1;
+						while(rangeCopy.inRange(range)) {
+							rangeCopy.moveStart('character');
+							caretPosition ++;
+						}
+					} else { // opera
+						selection = textarea.selectionStart;
+					}
+				} else { // gecko & webkit
+					selection = textarea.value.substring(textarea.selectionStart, textarea.selectionEnd);
+				} 
+				return  textarea.selectionStart; // gecko & webkit & opera
+			}		
+		};
+		
+		
+
+		var rid_index = function( path ) {
+
+			// menu generation code for current leaf, used for documentation!
+			/*
+			var leafTree = tree.getTreeCurrent({type: 'link'}, function(leaf){
+				return {
+					title : '' + leaf.name,
+					link: '' + leaf.path.strp,
+					type: '' + leaf.type
+				};
+			});
+			console.log(js_beautify(JSON.stringify(leafTree)));
+			*/
+
 			var tree = $('#treePages').prop( 'tree' );
-			var path = tree.currentPath( );
-			window.prompt ( "Copy to clipboard: Ctrl+C, Enter", path.strp );
+			var path = tree.currentPath();
+			var strp = '';
+			if( path.strp ){ strp = path.strp; }
+			if( strp === '/_index/' ){ strp = '/'; }
+			return settings_path + strp;
+		}
+
+		$( '#leaf_copy_path' ).button({ text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-e' }
+			, label: ' Copy this Leaf Path '  }).click(	function(){
+			window.prompt ( "Copy to clipboard: Ctrl+C, Enter", rid_index() );
 		} );
 
 		$( '#leaf_copy_url' ).button({ text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-s' }
-			, label: ' Copy this Leaf URL '  }).click(	function(){ 
-			var tree = $('#treePages').prop( 'tree' );
-			var path = tree.currentPath( );
-			
-			window.prompt ( "Copy to clipboard: Ctrl+C, Enter", window.location.href.split( window.location.pathname )[0] + path.strp );
-
+			, label: ' Copy this Leaf URL '  }).click(	function(){
+			window.prompt ( "Copy to clipboard: Ctrl+C, Enter", window.location.href.split( window.location.pathname )[0] + rid_index() );
 		} );
 		$( '#leaf_go_url' ).button({ text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-n' }
-			, label: ' Go this Leaf URL '  }).click(	function(){ 
-			var tree = $('#treePages').prop( 'tree' );
-			var path = tree.currentPath( );
-			
-			window.open ( window.location.href.split( window.location.pathname )[0] + path.strp );
-		
+			, label: ' Go this Leaf URL '  }).click(	function(){
+
+			window.open ( window.location.href.split( window.location.pathname )[0] + rid_index() );
+
 		} );
 
-		
+
 		$( '#leaf_save' ).button({ text: false, icons: { primary: 'ui-icon-disk' }
 			, label: '   Save Current Leaf \n( Ctrl + S also works )' }).click(	function(){ helpers.saveLeaf(); } );
 
@@ -484,6 +508,7 @@
 						tree.ws( obj , function( data ){
 							tree.leaf( pathParent.leaf );
 							if( data == 'success' ){
+								// helper.clearValues();
 							}else{ helpers.message('Notification!', data); }
 						} );
 					} );
@@ -528,8 +553,8 @@
 
 		$( '#tree-dialog-leaf-add-form' ).dialog({
 			  autoOpen: false
-			, width: 420
-			, height:270
+			, width: 430
+			, height:280
 			, modal: true
 			, buttons: {
 				  'Create Leaf': function() {
@@ -542,47 +567,50 @@
 							var tree = $('#treePages').prop( 'tree' );
 							var path = tree.currentPath();
 							var leafData = emptyleaf;
-							if( path.arr.length > 1 ){
+							
+							if( path.arr.length > 1 ){ // if there is selected leaf
 								var chk = $( '#tree-dialog-leaf-add-form-checkbox' ).attr('checked') == 'checked';
 								path = tree.currentPath( chk );
-								// alert( path.str );
 								path.leaf.obj.folder = true;
 								path.leaf.obj.open = true;
 							}else{
 								if( !helpers.checkValues( emptyleaf ) ){ var leafData = helpers.getValues(); }
 								path = path;
 							}
+							
 							leafData.header.template = $( '#tree-dialog-leaf-add-form-template' ).val();
 
 
+							// debugger;
 							tree.ws( { leaf : path.str , action : 'set' , path : text , data : JSON.stringify( leafData ) }
-							, function( data ){
-							if( data !== '' ){
-								var obj = $.parseJSON( data );
-								if( typeof( obj.error ) == 'string'){
-									helpers.message( 'Error Occures' , obj.error );
-								}else{
-									// helpers.clearValues();
-									var cb = function( leaf , controlObject ){
-										try{
-											$.map( leaf.children, function( el, idx ){
-												el.obj.page = emptyleaf;
-												if( el.name == text ){ el.elem.heading.click(); }
-												// do not uncomment, it forces 'You have unsaved changes!
-												// helpers.setValues( el.obj.page );
-											} );
-										}catch(e){ alert(e); }
-									};
-									if(path.leaf.obj.open){
-										tree.leaf( path.leaf , cb );
-									}else{
-										tree.leafControl( path.leaf , cb );
+								, function( data ){
+									// debugger;
+									if( data !== '' ){
+										var obj = $.parseJSON( data );
+										if( typeof( obj.error ) == 'string'){
+											helpers.message( 'Error Occures' , obj.error );
+										}else{
+											// helpers.clearValues();
+											var cb = function( leaf , controlObject ){
+												try{
+													$.map( leaf.children, function( el, idx ){
+														el.obj.page = emptyleaf;
+														if( el.name == text ){ el.elem.heading.click(); }
+														// do not uncomment, it forces 'You have unsaved changes!
+														// helpers.setValues( el.obj.page );
+													} );
+												}catch(e){ alert(e); }
+											};
+											if(path.leaf.obj.open){
+												tree.leaf( path.leaf , cb );
+											}else{
+												tree.leafControl( path.leaf , cb );
+											}
+										}
 									}
+
 								}
-							}
-
-							} );
-
+							);
 
 							$( this ).dialog( 'close' );
 						}else{ helpers.message('Notification!', '"Leaf Name" is required field!'); }
@@ -615,13 +643,58 @@
 			  $( '#tree-dialog-leaf-add-form-checkbox ' )[0].checked;
 		} );
 
-		$( '#treePagesEditor-template' ).chosen();
-
-
 
 
 		// templates
 
+		
+		var applyTemplateDataToPage = function( obj ){
+
+			$('#treePagesEditor-info').val( obj.snippet );
+			window.setTimeout( function(){
+				// forcing jsoneditor
+				$('#treePagesEditor-info').click();
+			}, 300 );
+			
+			var header = emptyleaf.header;
+			try{
+				header = JSON.parse( obj.header );
+			}catch(e){ }
+			
+			for( var i in emptyleaf.header ){
+				if( $( '#treePagesEditor-' + i )[0] ){
+					var val = header[i] || emptyleaf.header[i];
+					$( '#treePagesEditor-' + i ).val( val );
+				}
+			}
+			
+			$("#treePagesEditor-template").trigger("liszt:updated");
+			
+		}
+		
+		$( '#treePagesEditor-template' ).chosen().change( function(){
+			var val = $( '#treePagesEditor-template' ).val();
+			templateAction( 'getInfo', val,
+				function( data ){
+					var obj = $.parseJSON( data );
+					helpers.growl( 'Template "' + val + '" data Received.' , 1000 );
+					
+					var tree = $('#treePages').prop( 'tree' );
+					var path = tree.currentPath();
+					
+					if( path.arr.length > 1 ){ // if there is selected leaf
+						helpers.confirm( 'Need confirmation', 'Apply Template data to page?' , function(){
+							applyTemplateDataToPage( obj );
+						} );	
+					}else{
+						applyTemplateDataToPage( obj );
+					}
+				}
+			);
+
+		} );
+
+		
 		$('#templ-snippet-editor').on( 'click change', function(){
 			var snippetjson = {};
 			var val = $(this).val();
@@ -639,52 +712,124 @@
 					// $('#templ-snippet-editor').val( JSON.stringify( snippetjson , null , 2 ) );
 				}catch(e){ alert(e); }
 			} } ); //.addClass('expanded');
-		} ).on('dblclick', function(){
+		} )
+		.on( 'dblclick', function(){
 			if( $('#settings-trees-expand').attr('checked') ){
 				$('#snippeteditor').toggleClass('expanded');
-			} } );
+			} }
+		);
 
 		var currentTemplate = 'default' || $( '#templManager-template' ).val();
+
 		var configTemplateButtons = function(){
 			currentTemplate = $( '#templManager-template' ).val();
 			$( '#del_template' ).removeClass('disabled');
 			if( currentTemplate == 'default' ){ $( '#del_template').addClass('disabled'); }
-		}
+		};
 
-		var templateAction = function( action , tplname ){ // get add dell save
+		var collectTemplateHeader = function( templateName ){
+			var header = emptyleaf.header;
+			for( var i in emptyleaf.header ){
+				if( $( '#templHeader-' + i )[0] ){
+					header[i] = $( '#templHeader-' + i ).val();
+				}
+			}
+			header.template = $( '#templManager-template' ).val();
+		
+			var chkd = ( $('#templHeader-pageIsCode').attr('checked') == 'checked' ) ? true : false;
+
+			header.pageIsCode = chkd;
+			
+			return JSON.stringify( header );
+		};
+
+		var templateAction = function( action, tplname, callbackFn ){ // get add dell save
+
 			var callback = '';
+
 			var obj = { action : action , template : tplname || currentTemplate }
+
 			helpers.growl( 'Template action ' + action + ' initialised...' );
+
 			if( action == 'get' ){
 				callback = function( data ){
 					var obj = $.parseJSON( data );
 					$('#templ-source-editor').val( obj.source );
 					$('#templ-snippet-editor').val( obj.snippet );
+
+					
+					var header = emptyleaf.header;
+					try{
+						header = JSON.parse( obj.header );
+					}catch(e){ }
+					
+					for( var i in emptyleaf.header ){
+						if( $( '#templHeader-' + i )[0] ){
+							var val = header[i] || emptyleaf.header[i];
+							$( '#templHeader-' + i ).val( val );
+						}
+					}
+
 					helpers.growl( 'Template was Successfully Received.' , 1000 );
 					window.setTimeout( function(){ // forcing jsoneditor
 						$('#templ-snippet-editor').click();
 					}, 300 );
+					
+					callbackFn && callbackFn(data)
 				}
 			}
 
+			if( action == 'getInfo' ){
+				callback = callbackFn;
+			}
+
 			if( action == 'save' ){
-				$.extend( obj , { source : $('#templ-source-editor').val() , snippet : $('#templ-snippet-editor').val() } );
+
+				$.extend( obj , {
+					source : $('#templ-source-editor').val(),
+					snippet : $('#templ-snippet-editor').val(),
+					header: collectTemplateHeader( obj.template )
+				});
+
 				callback = function( data ){
 					if( data == 'success' ){
 						helpers.growl( 'Template was Successfully Saved.' );
 						templateAction( 'get' );
 					}else{ alert(data); }
 				};
+
 			}
+
 			if(  action == 'add' ){
-				$.extend( obj , { source : $('#templ-source-editor').val() , snippet : $('#templ-snippet-editor').val() } );
+
+				$.extend( obj , {
+					source : $('#templ-source-editor').val(),
+					snippet : $('#templ-snippet-editor').val(),
+					header: collectTemplateHeader( obj.template )
+				});
+
 				callback = function( data ){
 					if( data == 'success' ){
 						helpers.growl( 'Template was Successfully Added.' );
+
+						$( '#tree-dialog-leaf-add-form-template option[value="'+currentTemplate+'"]' ).removeAttr('selected');
+						$( '#tree-dialog-leaf-add-form-template' ).append('<option value = "'+tplname+'">'+tplname);
+						$( '#tree-dialog-leaf-add-form-template' ).trigger("liszt:updated");
+
+						$( '#treePagesEditor-template option[value="'+currentTemplate+'"]' ).removeAttr('selected');
+						$( '#treePagesEditor-template' ).append('<option value = "'+tplname+'">'+tplname);
+						$( '#treePagesEditor-template' ).trigger("liszt:updated");
+
+						$( '#templManager-template option[value="'+currentTemplate+'"]' ).removeAttr('selected');
+						$( '#templManager-template' ).append('<option value = "'+tplname+'" selected = "selected">'+tplname);
+						$( '#templManager-template' ).trigger("liszt:updated");
+
+						configTemplateButtons();
 						templateAction( 'get' );
 					}else{ alert(data); }
 				};
 			}
+
 			if( action == 'del' ){
 				// alert( $( '#templManager-template option[value="'+currentTemplate+'"]' ).attr('value') );
 				callback = function( data ){
@@ -701,6 +846,7 @@
 					}else{ alert(data); }
 				};
 			}
+
 			$.ajax( {
 				  type: "POST"
 				, async: true
@@ -717,56 +863,39 @@
 			configTemplateButtons();
 			templateAction( 'get' );
 		} );
-		$( '#add_template' ).click( function(){
-			configTemplateButtons();
-		} );
+
 		$( '#del_template' ).click( function(){ configTemplateButtons(); if( currentTemplate !== 'default' ){ templateAction( 'del' ); } } );
+
 		$( '#add_template' ).click( function(){
 			configTemplateButtons();
 			var val = prompt('Plase Fill Name!');
 			if(val){
 				templateAction( 'add' , val );
-
-				$( '#tree-dialog-leaf-add-form-template option[value="'+currentTemplate+'"]' ).removeAttr('selected');
-				$( '#tree-dialog-leaf-add-form-template' ).append('<option value = "'+val+'">'+val);
-				$( '#tree-dialog-leaf-add-form-template' ).trigger("liszt:updated");
-
-				$( '#treePagesEditor-template option[value="'+currentTemplate+'"]' ).removeAttr('selected');
-				$( '#treePagesEditor-template' ).append('<option value = "'+val+'">'+val);
-				$( '#treePagesEditor-template' ).trigger("liszt:updated");
-
-				$( '#templManager-template option[value="'+currentTemplate+'"]' ).removeAttr('selected');
-				$( '#templManager-template' ).append('<option value = "'+val+'" selected = "selected">'+val);
-				$( '#templManager-template' ).trigger("liszt:updated");
-
-				configTemplateButtons();
-
 			}
 		} );
 
 		$( '#save_template' ).click( function(){
-			configTemplateButtons(); templateAction( 'save' );
+			configTemplateButtons();
+			templateAction( 'save' );
 		} );
 
-		// $('#templ-units-elfinder').elfinder({
-			  // url: './elfinder-1.2/connectors/php/connector_units.php'  // connector URL (REQUIRED)
-			// , lang: 'ru'
-			// , height: '445px'
-			// , disableShortcuts: true
-		// }).elfinder('instance');
-
 		configTemplateButtons();
-		templateAction( 'get' );
+
+		// setting default template to emtpy page
+		templateAction( 'get', false, function(data){
+			var obj = $.parseJSON( data );
+			// applyTemplateDataToPage( obj );
+		});
 
 		// templates
 
 
-		
-		
-		
-		
+
+
+
+
 		// settings
-		
+
 		var saveSettingsAction = function(){ // used for keydown Ctrl + S reaction
 			helpers.growl( 'Saving Settings.' );
 			var val = $('#settings-editor-text').val();
@@ -778,16 +907,17 @@
 				, url: ServerPaths.api
 				, success: function( data ){
 					$('#settings-editor-text').val(data);
+					load_settings_path();
 					if( $('#settings-growl-notify').attr('checked') ){
 						helpers.growl( 'Settings Saved.' );
 					}else{
-						alert( 'Settings Saved.' );
+						helpers.message( 'Info', 'Settings Saved.' );
 					}
 				}
 			} );
 		};
-		
-		( function(){
+
+		window.setTimeout( function(){
 			if( $.cookie ){
 				var val = $.cookie( 'settings_growl_control_cookie_name' ) || false;
 				$('#settings-growl-notify').attr('checked' ,  val );
@@ -807,7 +937,7 @@
 				$.cookie( opts.name , $('#settings-trees-expand').attr('checked'), opts.opts );
 			} );
 
-			
+
 			$('#saveSettingsButton').click( function(){ saveSettingsAction(); } );
 
 			$('#clearCacheButton').click( function(){
@@ -818,41 +948,42 @@
 					, data : { action: 'clear_cache' }
 					, dataType : 'text'
 					, url: ServerPaths.api
-					, success: function( data ){ alert(data); }
+					, success: function( data ){ helpers.message( 'Info', data ); }
 				} ) ;
 			} );
 
 
-		} )();
-		
+		}, 300 );
+
 		// settings
 
-		
+
 		// resizer
-		
+
 		window.setTimeout(function(){
 
 
 			var initialHeightsConfig = ['tabsContent', 'treePages', 'treePagesEditor', 'pages-editor',
 				'treePagesEditor-description', 'treePagesEditor-additional', 'treePagesEditor-info-snippet',
+				'templHeader-description', 'templHeader-additional',
 				'templ-source-editor', 'snippeteditor', 'fileManager', 'settings-editor-text'];
-			
+
 			var initialHeights = {};
-			
+
 			$.map(initialHeightsConfig, function(val, i){
 				initialHeights[val] = $('#' + val).height();
 			});
-			
+
 			var starter = initialHeights.tabsContent;
-			
+
 			var resizerTrack = 0;
-			
+
 			var resizer = function(){
 				var wh = $(window).height();
 				if( wh > starter + 7 ){
 					for(var i in initialHeights){
 						var diff = starter - initialHeights[i];
-						console.log(i + ' ' + diff + ' ' + $('#' + i).height());
+						// console.log(i + ' ' + diff + ' ' + $('#' + i).height());
 						$('#' + i).height( wh - 27 - diff );
 					};
 
@@ -867,8 +998,8 @@
 						.height( 530 );
 				}
 			};
-			
-			$(window).on('resize', function(){ 
+
+			$(window).on('resize', function(){
 				resizerTrack++;
 				(function(track){
 					window.setTimeout(function(){
@@ -876,17 +1007,17 @@
 					}, 500);
 				})(resizerTrack);
 			});
-			
+
 			resizer();
-			
+
 		}, 1000);
-		
+
 		// resizer
-		
-		
-		
-		
-		
+
+
+
+
+
 		$(window).on( 'keydown' , function(evt) {
 			try{
 				// Ctrl + S
@@ -946,7 +1077,8 @@
 		}else{
 			$(document.body).fadeIn( 500 );
 		}
-
+		
+		load_settings_path();
 
 	}catch(e){ alert(e); }
 

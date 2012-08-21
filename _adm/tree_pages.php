@@ -121,14 +121,18 @@
 		if(file_exists($pagePath) && is_dir($pagePath)){
 			// echo "setPage2$pagePath \n";
 			$data = json_decode( $data );
-			setfiles( 'header.txt' , $pagePath , serialize( $data->header ) );
+
+			setfiles( 'header.txt' , $pagePath , serialize( $data->header ) );					
 			setfiles( 'content.txt' , $pagePath , $data->content );
 			setfiles( 'blocks.txt' , $pagePath , $data->blocks );
 			// setfiles( 'info.txt' , $pagePath , $data->info );
 			
 			$contents = $data->info;
-			$snippetPath = dirname( dirname(__FILE__) ).DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.$data->header->template.DIRECTORY_SEPARATOR.'snippet.txt';
-			if( file_exists ($snippetPath ) && $contents == '' ){
+			$isEmpty = ''.$contents;
+			
+			$templatePath = dirname( dirname(__FILE__) ).DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.$data->header->template.DIRECTORY_SEPARATOR;
+			$snippetPath = $templatePath.'snippet.txt';
+			if( file_exists ($snippetPath ) && $isEmpty == '' ){
 				$handle = fopen($snippetPath, 'r');
 				if( filesize($snippetPath) > 0 ){
 					$contents = fread($handle, filesize($snippetPath));
@@ -136,7 +140,19 @@
 				fclose($handle);
 			}
 			setfiles( 'info.txt' , $pagePath , $contents );
-			
+
+
+
+			$headerPath = $templatePath.'header.txt';
+			if( file_exists ($headerPath ) && $isEmpty == '' ){
+				$handle = fopen($headerPath, 'r');
+				if( filesize($headerPath) > 0 ){
+					$headerCt = fread($handle, filesize($headerPath));
+				}
+				fclose($handle);
+				setfiles( 'header.txt' , $pagePath , serialize( json_decode( $headerCt ) ) );			
+			}
+						
 			getPage( $pagePath );
 			
 		}else{

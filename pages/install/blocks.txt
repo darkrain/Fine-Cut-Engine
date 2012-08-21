@@ -1,1 +1,1 @@
-[{"value":"installation process."}]
+[{"value":"simple description of installation process."}]

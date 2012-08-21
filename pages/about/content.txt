@@ -1,6 +1,13 @@
-<h1>Ho We Are?</h1>
+<p>Except of some core features Fine Cut engine completely built by using blocks of code, made by somebody else.</p>
+<p>This point we wish to introduce that free web keeps better each day.</p>
 <br />
-<p>We are small group of coders. <br />
-<strong>JavaScript frontend</strong> coders.</p>
-<p>We do like web. We are trying to keep it simple for us.</p>
+
+<p>And, as for us, this was main example how free people could help each other.</p>
+<br />
+
+<p>Building Fine Cut was experiment, 5 day experiment.</p>
+<p>Most parts of its own code was made this 5 days.</p>
+<p>And, however, there was a lot of changes after, but, we could say &mdash; Finecut was built in 5 days.</p>
+<p>So, we are proud to live in such a wonderfull time when technologies are fast and thinking is relevant.</p>
+<br />
 <br />

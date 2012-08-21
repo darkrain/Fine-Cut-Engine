@@ -23,84 +23,80 @@
 
 		<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $success['deep']; ?>/units/style.css" charset="utf-8">
 
-
-		<?php echo $success['header']->additional; ?>
+		<?php include( $success["components"]["head_additional"] ); ?>
 
 	</head>
 	<body>
 
 		<div class = "container well">
 
-			<div class = "hero-unit white logo">
-				<table border = "0">
-				<tr>
-				<td>
-					<?php if( !$success['isMain'] ) { echo '<a href = "http://'.$_SERVER['HTTP_HOST'].$success['deep'].'">'; } ?>
-					<image border = "0" src = "<?php echo $success['deep']; ?>/units/img/logo.png" width = "100" height = "100"
-						alt = "FineCut Logo" class = "logo">
-					<?php if( !$success['isMain'] ) { echo '</a>'; } ?>
-				</td>
-				<td>
-					<h1 >
-						&nbsp;&nbsp;&nbsp;Sites are Simple again!
-					</h1>
-				</td>
-				</tr>
-				</table>
 
-			</div>
-			<hr>
-			<div class = "navbar" id = "navigation">
-				<div class = "navbar-inner">
-					<div class = "container" >
-							
-							
-							<ul class="nav">
-								<?php if( $success['isMain'] ){ ?>
-								<li style = "padding: 12px 9px 0px 0px"><span class = "icon-home"></span></li>
-								<?php } ?>
-								<li class="divider-vertical"></li>
-								<?php include ( $success['components']['menu_main_json'] ); ?>
-							</ul>
-							
-							<ul class = "nav pull-right">
-								<?php if( !$success['isMain'] ){ 
-									echo '<li><a href="'.$success['deep'].'/" > <span class = "icon-home"></span> </a></li>';
-									echo '<li class="divider-vertical"></li>';
-								 } ?>
-								<li>
-									<form class = "navbar-search" action = "/search/"  method = "POST">
-										<input type="text" class="search-query span2" placeholder="Search" name = "q">
-										<span class = "icon-search" id = "searchButton"></span>
-									</form>
-								</li>
-							</ul>
-					</div>
-				</div>
-			</div>
-			
-			<hr>
 			
 			<div class = "row-fluid">
+
 				<div class = "span3">
 					<div class = "well white" >
-						<ul class = "left_menu">
+						<ul class = "left_menu documents">
 						<?php include ( $success['components']['menu_left_json'] ); ?>
 						</ul>
 					</div>
 				</div>
-				<div class = "span7">
+				
+				
+				<div class = "span9">
+				
+					<div class = "well documentationHeader white">
+						<table border = "0">
+						<tr>
+						<td>
+							<?php if( !$success['isMain'] ) { echo '<a href = "http://'.$_SERVER['HTTP_HOST'].$success['deep'].'">'; } ?>
+							<image border = "0" src = "<?php echo $success['deep']; ?>/units/img/logo.png" width = "25" height = "25"
+								alt = "FineCut Logo" class = "logo">
+							<?php if( !$success['isMain'] ) { echo '</a>'; } ?>
+						</td>
+						<td>
+							<h1 >
+								&nbsp;&nbsp;&nbsp;Fine Cut Engine Documentation
+							</h1>
+						</td>
+						</tr>
+						</table>
+
+					</div>
+					<div class = "navbar" id = "navigation">
+						<div class = "navbar-inner">
+							<div class = "container" >
+									
+									
+									<ul class="nav">
+										<?php if( $success['isMain'] ){ ?>
+										<li style = "padding: 12px 9px 0px 0px"><span class = "icon-home"></span></li>
+										<?php } ?>
+										<li class="divider-vertical"></li>
+										<?php include ( $success['components']['menu_main_json'] ); ?>
+									</ul>
+									
+									<ul class = "nav pull-right">
+										<?php if( !$success['isMain'] ){ 
+											echo '<li><a href="'.$success['deep'].'/" > <span class = "icon-home"></span> </a></li>';
+											echo '<li class="divider-vertical"></li>';
+										 } ?>
+										<li>
+											<form class = "navbar-search" action = "/search/"  method = "POST">
+												<input type="text" class="search-query span2" placeholder="Search" name = "q">
+												<span class = "icon-search" id = "searchButton"></span>
+											</form>
+										</li>
+									</ul>
+							</div>
+						</div>
+					</div>
+					
+				
+				
 					<div class = "well white">
 
-						<?php include ( $success['components']['nav_chain'] ); ?>
-						
-						<?php
-							if($success['header']->pageIsCode){
-								include $success['content'];
-							}else{
-								$size = readfile($success['content']);
-							}
-						?>
+<?php include( $success["components"]["content_parser"] ); ?>
 
 						<br>
 
@@ -113,18 +109,7 @@ So, this is all about <?php echo  $success['blocks'][0]->value; ?>
  <?php } ?>
 					</div>
 				</div>
-				<div class = "span2">
-					<div class = "well white">
-						Features:<br>
-						- Keep it Simple<br>
-						- No Database<br>
-						- Free from Fat<br>
-						- Free to Use<br>
-						- Integrate Well<br>
-						- No Pop Corn<br>
-						- No Spoon<br>
-					</div>
-				</div>
+
 			</div>
 			
 			<hr>

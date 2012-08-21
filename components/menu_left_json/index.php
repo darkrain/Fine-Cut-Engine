@@ -27,7 +27,7 @@ foreach ($menu as &$value) {
 
 					if( isset ($sub->type) ){
 						if( $sub->type == 'link' ){
-							if( $value->link == $menuActiveLink ){
+							if( $sub->link == $menuActiveLink ){
 								echo '<li><a href = "'.$success['deep'].$sub->link.'" class = "active">'.$sub->title.'</a></li>';
 							}else{
 								echo '<li><a href = "'.$success['deep'].$sub->link.'" >'.$sub->title.'</a></li>';
