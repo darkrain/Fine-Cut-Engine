@@ -439,7 +439,7 @@
 		
 		
 
-		var rid_index = function( path ) {
+		var rid_index = function( direct ) {
 
 			// menu generation code for current leaf, used for documentation!
 			/*
@@ -458,12 +458,16 @@
 			var strp = '';
 			if( path.strp ){ strp = path.strp; }
 			if( strp === '/_index/' ){ strp = '/'; }
-			return settings_path + strp;
+			if(direct){
+				return strp;
+			}else{
+				return settings_path + strp;
+			}
 		}
 
 		$( '#leaf_copy_path' ).button({ text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-e' }
 			, label: ' Copy this Leaf Path '  }).click(	function(){
-			window.prompt ( "Copy to clipboard: Ctrl+C, Enter", rid_index() );
+			window.prompt ( "Copy to clipboard: Ctrl+C, Enter", rid_index(true) );
 		} );
 
 		$( '#leaf_copy_url' ).button({ text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-s' }
