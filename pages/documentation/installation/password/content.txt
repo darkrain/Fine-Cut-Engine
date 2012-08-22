@@ -1,0 +1,19 @@
+<p>By default Fine Cut Admin Panel have no protecton...</p>
+<p>And there is no user management, because we suppose Fine Cut will be mostly used by one person who creates small website.</p>
+<br />
+<p>Then, we prefere to use Apache Authentification to protect our Admin Panel.</p>
+<p>You could find that last four lines of &laquo;_adm/.htacces&raquo; are commented:</p>
+<br />
+
+<pre>
+#AuthType basic
+#AuthName "auth requred"
+#AuthUserFile /home/www/your_site_directory/.htpasswd
+#Require valid-user
+</pre>
+<br />
+
+<p>So, you need to create your own &laquo;.htpasswd&raquo; file throug &laquo;htpasswd&raquo; utility. And, you can't place relative path to &laquo;.htpasswd&raquo; file...</p>
+<br />
+
+<p>Use your favorite search engine to find more informatoin about this.</p>

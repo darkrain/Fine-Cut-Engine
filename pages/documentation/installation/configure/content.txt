@@ -1,3 +1,31 @@
-- manage settings
--- to server root folder
--- to server sub folder
+<p>Usually everything goes well after installation.</p>
+<p>But, sometimes you'll need to make preferences for Fine Cut Engine.</p>
+<br />
+<p>So, here are things that could be configured directly:</p>
+<ul>
+<li>Path to folder where site contents will be stored.</li>
+<li>To use cache or not, default is &laquo;to use&raquo;.</li>
+<li>Path to folder where cache will be stored.</li>
+<li>Permission for files and folders creation.</li>
+<li>File name encoding inside of webserver, default is UTF-8.</li>
+<li>To use microtime echo of generated page, default is &laquo;to use&raquo;.</li>
+</ul>
+<br />
+
+<p>This settings could be found inside of &laquo;_adm&raquo; paned at &laquo;Settings&raquo; tab.</p>
+<p>There you could also find buttons to save re-configured settings, to clean cache, and checkboxes used to work with admin panel.</p>
+<p>
+<a href="/files/images/settings.png" rel="lightbox[screenshost]" target="_blank">
+<img border = "0"  src="/files/tumbs/settings.png" alt="Settings" width = "132" height = "89"></a>
+</p>
+
+<br />
+<br />
+<p>Last thing we wish to say about setting is that you could move Admin panell to other path.<br />
+At first you'll need to rename &laquo;<strong>_adm</strong>&raquo; <br />
+inside of &laquo;<strong>_engine\index.php</strong>&raquo; code.
+This key strng is at line 3 there.<br />
+Then you should simply rename folder.<br />
+All this could be done inside Admin panel.
+After doing this go to panel new path <strong>immediately</strong>, because all browser scripts right now are looking to wrong folder.
+</p>

@@ -19,8 +19,6 @@
 			<br><br>
 			<div class = "hero-unit" style = "text-align: center">
 				<h1>404 &ndash; page not found</h1>
-				<br>
-				<p>Go to <u><a href = "http://<?php echo $_SERVER['HTTP_HOST']; ?>/">Mainpage</a></u>.</p>
 			</div>
 		</div>
 		<br>

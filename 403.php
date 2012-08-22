@@ -19,8 +19,6 @@
 			<br><br>
 			<div class = "hero-unit" style = "text-align: center">
 				<h1>403 &ndash; page is forbidden</h1>
-				<br>
-				<p>Go to <u><a href = "http://<?php echo $_SERVER['HTTP_HOST']; ?>/">Mainpage</a></u>.</p>
 			</div>
 		</div>
 		<br>

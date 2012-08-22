@@ -1,14 +1,32 @@
 <?php
-	// phpinfo();
+
+	$settingsPrepath = '_adm/settings.php';
+	
 	$time_start = microtime(true);
 	
-	$root = dirname( dirname(__FILE__) ).DIRECTORY_SEPARATOR;
-	$settings_path = $root.'_adm'.DIRECTORY_SEPARATOR.'settings.php';
+	// phpinfo();
+	
+	$drt = $_SERVER["DOCUMENT_ROOT"];
+	$sfn = $_SERVER["SCRIPT_FILENAME"];
+	$dsfn = dirname(dirname( $sfn ));
+	
+	$prepath = '';
+	$root = $dsfn;
+	
+	if($drt !== $dsfn.'/'){
+		$drt = '/'.preg_replace( '/\//' , '\\/' , $drt ).'/';
+		$prepath = preg_replace( $drt, '', $root );
+	}
+	
+	$root = $root.'/';
+	
+	$deep = '/'.preg_replace( '/\//' , '\\/' , $prepath ).'/';
+	
+	$settings_path = $root.$settingsPrepath;
+	
 	include_once $settings_path;
 	
 	// echo '000 '.$_SERVER["REQUEST_URI"].'<br>';
-	
-	// echo $deep;
 	
 	$uri = preg_replace( $deep , '' , rawurldecode( $_SERVER["REQUEST_URI"] ), 1 );
 	$uri = preg_replace( '/index.php/' , '' , $uri , 1 );
@@ -22,8 +40,7 @@
 	
 	$path = $root.$pages.DIRECTORY_SEPARATOR.$uri;
 	$static_path = $root.$static.DIRECTORY_SEPARATOR.$uri;
-	
-	
+
 	// echo '0 '.$path.'<br>';
 	
 	// echo '1 '.$root.$pages.DIRECTORY_SEPARATOR.'index.html<br>';
