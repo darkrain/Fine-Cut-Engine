@@ -1,5 +1,5 @@
 <h1>Concept</h1>
-<p>The main objective was to create very the simple content management system for web sites, the simple web sites.</p>
+<p>The main objective was to create very the simple content management engine for web sites, the simple web sites.</p>
 <p>In fact, it was not to be even similar to CMS.</p>
 <p>Performance and usability: that's all what we thought at the time of creation.</p>
 <br>
