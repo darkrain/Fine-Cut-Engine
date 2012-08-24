@@ -1,0 +1,21 @@
+<p>You could use Fine Cut engine with both, <a href="http://en.wikipedia.org/wiki/MIT_License" target="_blank">MIT</a> and <a href="http://en.wikipedia.org/wiki/GNU_General_Public_License" target="_blank">GPL</a> license.</p>
+<br />
+
+<p>Here is some copy paste from jQuery license notes:</p><br />
+
+<p>The MIT License is recommended for most projects.<br />
+It is simple and easy to understand and it places almost no restrictions on what you can do with a Fine Cut Engine.</p>
+<p>If the GPL suits your project better you are also free to use under that license.</p>
+<p>You don’t have to do anything special to choose one license or the other and you don’t have to notify anyone which license you are using.<br />
+You are free to use a Fine Cut Engine in commercial projects as long as the copyright header is left intact.</p>
+<br />
+
+<p><strong>Therefore here is our MIT License data:</strong></p><br />
+<p>Copyright (c) 2012 <em>wentout</em> and other contributors</p>
+<p><a href="http://finecut.info" target="_blank">http://finecut.info</a></p><br />
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>

@@ -1,0 +1,14 @@
+planning urls
+-- articles year by year
+-- news pages inside blocks
+
+
+
+<strong>URL Agreement!</strong>
+tree panel and it's usage
+
+--- Tree URL model: leafs
+--- Site Index Page Agreement: _index !!!!! INDEX
+--- Buttons panel
+
+how to use buttons

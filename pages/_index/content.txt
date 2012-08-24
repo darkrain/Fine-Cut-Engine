@@ -1,0 +1,20 @@
+<p>One only proposal or preposition - to create pages, but do it well enough.</p>
+
+<h1>Concept</h1>
+<p>The main objective was to create very the simple content management engine for web sites, the simple web sites.</p>
+<p>In fact, it was not to be even similar to CMS.</p>
+<p>Performance and usability: that's all what we thought at the time of creation.</p>
+<br>
+<p><strong>Imagine...</strong></p>
+<h4>For about 90% of websites actually don't even need any DB !</h4>
+<br>
+<p>All these sites made for only the mission &ndash; to tell about something or someone.</p>
+<p>Yes, they have a lot of dynamic content, like: news, photos, product line data and so on... Dynamic... yepp...</p>
+<p>But, please, ask Youself, how much of this content is entierly necessity to be in such dynamic way?</p>
+<br>
+<p>Please. We are well remembered about personal pages or organization promo sites with almost static news pages.</p>
+<p>So, do we really need News management in DB?</p>
+<p>Or do we really need Photo Album with odd storage and extremely hard management?</p>
+<p>Or do we really need goods promo with diversed settings but which is not as well as complicated?</p>
+<br>
+<strong>Then, may be we need to <a href="/about/screenshots/">get deeper?</a></strong>

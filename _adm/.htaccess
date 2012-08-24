@@ -1,0 +1,45 @@
+# Deny from All
+
+# php_flag display_errors On
+
+AddDefaultCharset utf-8
+
+AddType image/x-icon	.ico
+AddType application/x-xpinstall	xul
+AddType application/javascript	js
+
+Options +Includes +FollowSymLinks -Indexes
+
+#AddHandler server-parsed .html .shtml .js .css
+AddHandler server-parsed *.js
+
+<IfModule mod_headers.c>
+	Header append Cache-Control "no-store, no-cache, must-revalidate"
+</IfModule>
+
+<IfModule mod_dir.c>
+	DirectoryIndex index.html _index.html index.shtml index.php
+</IfModule>
+
+<IfModule mod_expires.c>
+	ExpiresActive on
+	ExpiresByType image/jpeg "access plus 3 day"
+	ExpiresByType image/gif "access plus 3 day"
+</IfModule>
+
+<IfModule mod_rewrite.c>
+	RewriteEngine off
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-UA-Compatible "IE=Edge,chrome=1"
+  # mod_headers can't match by content-type, but we don't want to send this header on *everything*...
+  <FilesMatch "\.(js|css|gif|png|jpe?g|pdf|xml|oga|ogg|m4a|ogv|mp4|m4v|webm|svg|svgz|eot|ttf|otf|woff|ico|webp|appcache|manifest|htc|crx|oex|xpi|safariextz|vcf)$" >
+    Header unset X-UA-Compatible
+  </FilesMatch>
+</IfModule>
+
+#AuthType basic
+#AuthName "auth requred"
+#AuthUserFile /home/www/your_site_directory/.htpasswd
+#Require valid-user
