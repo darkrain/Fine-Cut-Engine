@@ -1,5 +1,0 @@
--- Cache reaction on changes: page, template, settings
--- Forced Clearing cache
--- Disabling cache
--- Server Side Code Instruction dependency
--- Speed

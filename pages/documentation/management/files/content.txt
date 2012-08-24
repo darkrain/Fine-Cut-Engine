@@ -1,4 +1,0 @@
--- Short el-Finder documentation
->> Changes in standard elfinder with link to docu
->> Toolbar panel
->> Editing with Tab and hotkeys

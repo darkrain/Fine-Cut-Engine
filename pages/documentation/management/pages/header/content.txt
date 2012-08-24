@@ -1,3 +1,0 @@
---- Title etc.
---- Server Side Code Instruction
---- Additional Head data

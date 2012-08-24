@@ -1,5 +1,0 @@
-O:8:"stdClass":6:{s:5:"title";s:36:"Fine Cut Engine: License Information";s:8:"template";s:7:"default";s:10:"pageIsCode";b:0;s:8:"keywords";s:36:"Fine Cut Engine: License Information";s:11:"description";s:36:"Fine Cut Engine: License Information";s:10:"additional";s:44:"<style>
-p {
-	text-align: justify;
-}
-</style>";}

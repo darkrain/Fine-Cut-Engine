@@ -1,6 +1,0 @@
-<p>We are using GitHub for development.<br />
-So, there is no relevant version number.<br /></p>
-
-<p>And, we are using version information, produced directly.</p>
-
-Current working version of Fine Cut Engine is <strong id="version">1.0</strong>.
