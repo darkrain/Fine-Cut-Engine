@@ -1,0 +1,3 @@
+-- Growl notifications
+-- Double Click on JSON text
+-- Global site settings

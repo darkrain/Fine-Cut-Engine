@@ -1,0 +1,11 @@
+{
+	"title": "Title",
+	"mainMenu": {
+		"menuFile": "menu.js",
+		"active": ""
+	},
+	"leftMenu": {
+		"menuFile": "left.js",
+		"active": "copy_link_from_tree"
+	}
+}

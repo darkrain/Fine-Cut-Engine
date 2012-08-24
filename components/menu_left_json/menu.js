@@ -1,0 +1,107 @@
+[
+	{
+		"title": "Brief",
+		"link": "/documentation/brief/",
+		"type": "link"
+	}, {
+		"title": "Requirements",
+		"link": "/documentation/requirements/",
+		"type": "link"
+	}, {
+		"title": "Installation",
+		"link": "/documentation/installation/",
+		"type": "link",
+		"menu": [{
+			"title": "Configure",
+			"link": "/documentation/installation/configure/",
+			"type": "link"
+		}, {
+			"title": "Sub Folder",
+			"link": "/documentation/installation/sub_folder_memo/",
+			"type": "link"
+		}, {
+			"title": "Password",
+			"link": "/documentation/installation/password/",
+			"type": "link"
+		}]
+	}, {
+		"title": "Pages",
+		"link": "/documentation/management/pages/",
+		"type": "link",
+		"menu": [{
+			"title": "Header",
+			"link": "/documentation/management/pages/header/",
+			"type": "link"
+		}, {
+			"title": "Content",
+			"link": "/documentation/management/pages/content/",
+			"type": "link"
+		}, {
+			"title": "Properties",
+			"link": "/documentation/management/pages/properties/",
+			"type": "link"
+		}, {
+			"title": "Blocks",
+			"link": "/documentation/management/pages/blocks/",
+			"type": "link"
+		}]
+	}, {
+		"title": "Files",
+		"link": "/documentation/management/files/",
+		"type": "link"
+	}, {
+		"title": "Cache",
+		"link": "/documentation/management/cache/",
+		"type": "link"
+	}, {
+		"title": "Templates",
+		"link": "/documentation/templates/",
+		"type": "link",
+		"menu": [{
+			"title": "Structure",
+			"link": "/documentation/templates/structure/",
+			"type": "link"
+		}, {
+			"title": "Variables",
+			"link": "/documentation/templates/variables/",
+			"type": "link"
+		}, {
+			"title": "Components",
+			"link": "/documentation/templates/components/",
+			"type": "link"
+		}]
+	}, {
+		"title": "Advanced",
+		"link": "/documentation/advanced/",
+		"type": "link",
+		"menu": [{
+			"title": "Resources",
+			"link": "/documentation/advanced/resources/",
+			"type": "link"
+		}, {
+			"title": "Integration",
+			"link": "/documentation/advanced/integration/",
+			"type": "link"
+		}, {
+			"title": "API",
+			"link": "/documentation/advanced/api/",
+			"type": "link"
+		}, {
+			"title": "Backups",
+			"link": "/documentation/advanced/backups/",
+			"type": "link"
+		}, {
+			"title": "Components",
+			"link": "/documentation/advanced/components/",
+			"type": "link"
+		}, {
+			"title": "Engine",
+			"link": "/documentation/advanced/engine/",
+			"type": "link"
+		}, {
+			"title": "Settings",
+			"link": "/documentation/advanced/settings/",
+			"type": "link"
+		}]
+	}
+]

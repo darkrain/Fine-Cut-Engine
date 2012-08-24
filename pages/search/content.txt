@@ -1,0 +1,21 @@
+<div id="cse-search-form" style="width: 100%;"><br />
+Google Custom Search Egine <br />
+<strong>This is demonstration page about how, for example, Google CSE Search could be used in this page!</strong><br />
+<br />
+<p>You need to place You Google CSE code to this page.</p>
+<pre>
+and uncomment following inside 
+this page Template.
+// window.setTimeout( placeSearch, 300 );
+</pre>
+<br />
+<!--
+<strong>Search keyord was:</strong> &laquo; <?php echo $_POST["q"]; ?> &raquo;.
+//-->
+</div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+	// You need to place CSE code here
+</script>
+<div id="cse" style="width:100%;"></div>
+

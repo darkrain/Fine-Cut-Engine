@@ -1,0 +1,10 @@
+<div class = "well white">
+	Features:<br>
+	- Keep it Simple<br>
+	- No Database<br>
+	- Free from Fat<br>
+	- Free to Use<br>
+	- Integrate Well<br>
+	- No Pop Corn<br>
+	- No Spoon<br>
+</div>

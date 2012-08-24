@@ -1,0 +1,46 @@
+.custom-tree-root {
+}
+.preloader{
+	background-image: url("loader-circle.gif");
+    background-repeat: no-repeat;
+}
+
+.custom-tree-root ul{
+	margin: 0px;
+	padding: 1px 2px 0px 11px;
+}
+.custom-tree-root ul li{
+	list-style-type: none;
+	display: block;
+	margin: 0px;
+	padding: 2px 1px 2px 3px;
+}
+.custom-tree-root ul.custom-tree-root li span.status{
+}
+.custom-tree-root ul.custom-tree-root li span.control{
+	cursor: pointer;
+	margin: 0px 7px 0px 3px;
+	padding: 0px 1px 0px 1px;
+	display: inline-block;
+}
+.custom-tree-root ul.custom-tree-root li span.heading{
+	cursor: pointer;
+	padding: 2px 8px 2px 8px;
+	-moz-border-radius: 4px; 
+	-webkit-border-radius: 4px; 
+	-khtml-border-radius: 4px; 
+	border-radius: 4px;
+}
+.custom-tree-root ul.custom-tree-root li span.heading.loader{
+    padding: 0px 1px 0px 28px;
+	background-image: url("loader-slider.gif");
+    background-repeat: no-repeat;
+}
+.custom-tree-root ul.custom-tree-root li span.selected{
+	background: #C0C0C0;
+	border: 1px dotted gray;
+	padding: 1px 8px 1px 8px;
+}
+.custom-tree-root ul.custom-tree-root li span.hover, ul.custom-tree-root li span.selected.hover{
+	background: #ECECEC;
+}

@@ -1,0 +1,11 @@
+{
+	"title": "Title",
+	"mainMenu": {
+		"menuFile": "menu.js",
+		"active": "/install/"
+	},
+	"leftMenu": {
+		"menuFile": "left.js",
+		"active": ""
+	}
+}

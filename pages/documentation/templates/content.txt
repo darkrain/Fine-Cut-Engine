@@ -1,0 +1,8 @@
+where is template folder
+what is template
+
+add or change or remove
+
+- Changing template
+- Adding new template
+- Removing template and page dependency

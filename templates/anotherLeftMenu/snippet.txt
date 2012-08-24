@@ -1,0 +1,35 @@
+{
+	"title": "Title",
+	"mainMenu": {
+		"menuFile": "menu.js",
+		"active": "/about/"
+	},
+	"leftMenu": [{
+		"title": "Screenshots",
+		"link": "/about/screenshots/",
+		"type": "link",
+		"active": false
+	}, {
+		"title": "Examples",
+		"link": "/about/examples/",
+		"type": "link",
+		"active": true
+	}, {
+		"title": "Version",
+		"link": "/about/version/",
+		"type": "link",
+		"active": false
+	}, {
+		"type": "divider"
+	}, {
+		"title": "License",
+		"link": "/about/license/",
+		"type": "link",
+		"active": false
+	}, {
+		"title": "Donate",
+		"link": "/about/donate/",
+		"type": "link",
+		"active": false
+	}]
+}
