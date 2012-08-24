@@ -1,6 +1,0 @@
-<h1>Ho We Are?</h1>
-<br />
-<p>We are small group of coders. <br />
-<strong>JavaScript frontend</strong> coders.</p>
-<p>We do like web. We are trying to keep it simple for us.</p>
-<br />

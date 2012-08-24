@@ -1,4 +1,0 @@
-O:8:"stdClass":6:{s:5:"title";s:25:"Fine Cut CMS: Screenshots";s:8:"template";s:7:"default";s:10:"pageIsCode";b:0;s:8:"keywords";s:25:"Fine Cut CMS: Screenshots";s:11:"description";s:25:"Fine Cut CMS: Screenshots";s:10:"additional";s:318:"<link rel="stylesheet" type="text/css" media="screen" href="/_js/lightbox2.5/css/lightbox.css" charset="utf-8">
-<script type="text/javascript" src="/_js/lightbox2.5/js/jquery.smooth-scroll.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="/_js/lightbox2.5/js/lightbox.js" charset="utf-8"></script>
-";}
