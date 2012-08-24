@@ -1,3 +1,5 @@
+<p>One only proposal or preposition - to create pages, but do it well enough.</p>
+
 <h1>Concept</h1>
 <p>The main objective was to create very the simple content management engine for web sites, the simple web sites.</p>
 <p>In fact, it was not to be even similar to CMS.</p>

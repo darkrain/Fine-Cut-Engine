@@ -1,3 +1,14 @@
+First of all -- what does it mean Fine Cut<br />
+We got rid of everything we've found unnecessary to develop simple website<br />
+<br />
+Then, for complete understanding Fine Cut it is not enough to read this documentation.
+<br />
+However, we suppose that there will be a lot of people who don't ever need complete understanding.
+<br />
+But, if you wish, you need to investigate only one file: &laquo;_engine/index.php&raquo;
+
+
+
 <h3>Are You Serious?</h3>
 <br />
 <strong>OK, then small FAQ:</strong><br /><br />
