@@ -162,7 +162,7 @@
 			var snippetjson = {};
 			var val = $(this).val();
 			if (val) {
-				try { snippetjson = $.parseJSON( val ); }
+				try { snippetjson = JSON.parse( val ); }
 				catch (e) { alert('Error in parsing json. ' + e); }
 			} else { snippetjson = {}; }
 
@@ -225,7 +225,12 @@
 			, response	: function( data , leaf , callback ){
 				try{
 					if( data !== '' ){
-						var obj = $.parseJSON( data );
+						var obj = JSON.parse( data );
+
+						if(typeof(obj.page.header) === 'string'){
+							obj.page.header = JSON.parse( obj.page.header );
+						}
+						
 						if( obj.status ){
 							leaf.obj.page = obj.page;
 							helpers.setValues( obj.page );
@@ -259,7 +264,7 @@
 			, getValues : function(){
 
 				var obj = {
-					  header 	: {}
+					  header 	: emptyleaf.header
 					, content	: $( '#pages-editor' ).val()
 					// , content	: $( '#pages-editor' ).elrte('val')
 					, info		: $( '#treePagesEditor-info' ).val()
@@ -308,7 +313,7 @@
 							obj.blocks = [{value:''}];
 						}
 					}else{
-						obj.blocks = $.parseJSON( obj.blocks );
+						obj.blocks = JSON.parse( obj.blocks );
 					}
 
 					blocks.load( obj.blocks );
@@ -352,6 +357,7 @@
 						// var enc = function(str){ return encodeURIComponent(str); }
 						var data = helpers.getValues();
 						data.blocks = JSON.stringify( data.blocks );
+						data.header = JSON.stringify( data.header );
 
 						var obj = { leaf : path.str , action : 'content_set' , data : JSON.stringify( data ) };
 						tree.ws( obj , function( data ){
@@ -590,7 +596,7 @@
 								, function( data ){
 									// debugger;
 									if( data !== '' ){
-										var obj = $.parseJSON( data );
+										var obj = JSON.parse( data );
 										if( typeof( obj.error ) == 'string'){
 											helpers.message( 'Error Occures' , obj.error );
 										}else{
@@ -680,7 +686,7 @@
 			var val = $( '#treePagesEditor-template' ).val();
 			templateAction( 'getInfo', val,
 				function( data ){
-					var obj = $.parseJSON( data );
+					var obj = JSON.parse( data );
 					helpers.growl( 'Template "' + val + '" data Received.' , 1000 );
 					
 					var tree = $('#treePages').prop( 'tree' );
@@ -703,7 +709,7 @@
 			var snippetjson = {};
 			var val = $(this).val();
 			if (val) {
-				try { snippetjson = $.parseJSON( val ); }
+				try { snippetjson = JSON.parse( val ); }
 				catch (e) { alert('Error in parsing json. ' + e); }
 			} else { snippetjson = {}; }
 
@@ -757,7 +763,7 @@
 
 			if( action == 'get' ){
 				callback = function( data ){
-					var obj = $.parseJSON( data );
+					var obj = JSON.parse( data );
 					$('#templ-source-editor').val( obj.source );
 					$('#templ-snippet-editor').val( obj.snippet );
 
@@ -887,7 +893,7 @@
 
 		// setting default template to emtpy page
 		templateAction( 'get', false, function(data){
-			var obj = $.parseJSON( data );
+			var obj = JSON.parse( data );
 			// applyTemplateDataToPage( obj );
 		});
 

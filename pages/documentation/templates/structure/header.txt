@@ -1,1 +1,1 @@
-O:8:"stdClass":6:{s:5:"title";s:49:"Fine Cut Engine Documentation: Template Structure";s:8:"template";s:9:"documents";s:10:"pageIsCode";b:0;s:8:"keywords";s:49:"Fine Cut Engine Documentation: Template Structure";s:11:"description";s:49:"Fine Cut Engine Documentation: Template Structure";s:10:"additional";s:0:"";}
+{"title":"Fine Cut Engine Documentation: Template Structure","template":"documents","pageIsCode":false,"keywords":"Fine Cut Engine Documentation: Template Structure","description":"Fine Cut Engine Documentation: Template Structure","additional":""}

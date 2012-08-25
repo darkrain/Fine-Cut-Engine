@@ -1,1 +1,1 @@
-O:8:"stdClass":6:{s:5:"title";s:43:"Fine Cut Engine Documentation: Installation";s:8:"template";s:9:"documents";s:10:"pageIsCode";b:0;s:8:"keywords";s:43:"Fine Cut Engine Documentation: Installation";s:11:"description";s:43:"Fine Cut Engine Documentation: Installation";s:10:"additional";s:0:"";}
+{"title":"Fine Cut Engine Documentation: Installation","template":"documents","pageIsCode":false,"keywords":"Fine Cut Engine Documentation: Installation","description":"Fine Cut Engine Documentation: Installation","additional":""}
