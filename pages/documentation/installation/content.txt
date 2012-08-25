@@ -5,8 +5,8 @@
 
 <p>So, again, step by step:</p>
 <ol>
-<li>Download relevant version of Fine Cut: <a href="https://github.com/wentout/Fine-Cut-CMS/zipball/master" target="_blank">ZIP</a> or
-<a href="https://github.com/wentout/Fine-Cut-CMS/tarball/master" target="_blank">TAR.BZ</a></li>
+<li>Download relevant version of Fine Cut: <a href="https://github.com/wentout/Fine-Cut-Engine/zipball/master" target="_blank">ZIP</a> or
+<a href="https://github.com/wentout/Fine-Cut-Engine/tarball/master" target="_blank">TAR.BZ</a></li>
 
 <li>Choose folder where you wish to install it.</li>
 <li>Unpack downloaded archive there.<strong>Please, note that there is folder inside that bundles. One folder deep inside ZIP, and two folder deep inside TAR.BZ. You need to copy files from there to choosed folder after unpacking.</strong></li>
