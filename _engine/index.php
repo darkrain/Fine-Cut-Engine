@@ -114,12 +114,12 @@
 						// if(pageIsCodeOrNot()){
 							$get_static = false;
 						}else{
-							$get_static = true;
-							// $templPath = dirname( dirname(__FILE__) ).DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.$header->template.DIRECTORY_SEPARATOR.'index.php';
-							// $templ_time = @filemtime($templPath);
-							// if( $static_file_time > $templ_time ){
-								// $get_static = true;
-							// }
+							// $get_static = true;
+							$templPath = dirname( dirname(__FILE__) ).DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.$header->template.DIRECTORY_SEPARATOR.'index.php';
+							$templ_time = @filemtime($templPath);
+							if( $static_file_time > $templ_time ){
+								$get_static = true;
+							}
 						}
 					}
 				}
