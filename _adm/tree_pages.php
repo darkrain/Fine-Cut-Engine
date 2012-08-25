@@ -106,10 +106,18 @@
 		if(file_exists($pagePath) && is_dir($pagePath)){
 			$success = array();
 			$success['page'] = array();
-			$success['page']['header'] = unserialize( getfiles('header.txt', $pagePath ) );
-			$success['page']['content'] = ''.getfiles('content.txt', $pagePath );
-			$success['page']['info'] = ''.getfiles('info.txt', $pagePath );
-			$success['page']['blocks'] = ''.getfiles('blocks.txt', $pagePath );
+			$headerContent = getfiles( 'header.txt', $pagePath );
+			try{
+				$headerContentUNS = unserialize( $headerContent );
+			} catch (Exception $e) {
+				$headerContentUNS = false;
+			}
+			if($headerContentUNS){ $headerContent = $headerContentUNS; }
+			
+			$success['page']['header'] = $headerContent;
+			$success['page']['content'] = ''.getfiles( 'content.txt', $pagePath );
+			$success['page']['info'] = ''.getfiles( 'info.txt', $pagePath );
+			$success['page']['blocks'] = ''.getfiles( 'blocks.txt', $pagePath );
 			$success['status'] = true;
 			echo json_encode ($success);			
 		}
@@ -122,7 +130,7 @@
 			// echo "setPage2$pagePath \n";
 			$data = json_decode( $data );
 
-			setfiles( 'header.txt' , $pagePath , serialize( $data->header ) );					
+			setfiles( 'header.txt' , $pagePath , $data->header );					
 			setfiles( 'content.txt' , $pagePath , $data->content );
 			setfiles( 'blocks.txt' , $pagePath , $data->blocks );
 			// setfiles( 'info.txt' , $pagePath , $data->info );
@@ -150,7 +158,7 @@
 					$headerCt = fread($handle, filesize($headerPath));
 				}
 				fclose($handle);
-				setfiles( 'header.txt' , $pagePath , serialize( json_decode( $headerCt ) ) );			
+				setfiles( 'header.txt' , $pagePath , json_decode( $headerCt ) );			
 			}
 						
 			getPage( $pagePath );

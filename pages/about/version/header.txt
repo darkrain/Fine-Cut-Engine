@@ -1,1 +1,1 @@
-O:8:"stdClass":6:{s:5:"title";s:24:"Fine Cut Engine: Version";s:8:"template";s:7:"default";s:10:"pageIsCode";b:0;s:8:"keywords";s:24:"Fine Cut Engine: Version";s:11:"description";s:24:"Fine Cut Engine: Version";s:10:"additional";s:0:"";}
+{"title":"Fine Cut Engine: Version","template":"default","pageIsCode":false,"keywords":"Fine Cut Engine: Version","description":"Fine Cut Engine: Version","additional":""}

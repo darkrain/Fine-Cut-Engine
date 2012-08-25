@@ -84,6 +84,28 @@
 			} catch (Exception $e) {}
 			return '';
 		}
+		
+		function parseHeader( $path ){
+			
+			$headerContent1 = $headerContent2 = getfilescontent('header.txt', $path );
+			
+			// echo $headerContent;
+			
+			try{
+				$headerContentUNS = unserialize( $headerContent1 );
+			} catch (Exception $e) { echo $e; }
+
+			try{
+				$headerContentJSON = json_decode( $headerContent2 );
+			} catch (Exception $e) { echo $e; }
+			
+			if($headerContentUNS){ return $headerContentUNS; }
+			if($headerContentJSON){ return $headerContentJSON; }
+			
+			$header = array();
+			$header['pageIsCode'] = false;
+			return $header;
+		}
 
 		$static_file_path = $static_path.DIRECTORY_SEPARATOR.'index.html';
 		$dynamic_path = $path.DIRECTORY_SEPARATOR.'header.txt';
@@ -103,7 +125,9 @@
 					
 					if( ($static_file_time > $dynamic_file_time) && ($static_file_time > $settings_time)
 					&& ($static_file_time > $engine_time) ){
-						$header = unserialize( getfilescontent('header.txt', $path ) );
+					
+						$header = parseHeader($path);
+
 						if($header->pageIsCode){
 							$get_static = false;
 						}else{
@@ -129,7 +153,7 @@
 
 		   
 			$success = array();
-			$success['header'] = unserialize( getfilescontent('header.txt', $path ) );
+			$success['header'] = parseHeader($path);
 			// $success['contentText'] = ''.getfilescontent('content.txt', $path );
 			$success['content'] = $path.DIRECTORY_SEPARATOR.'content.txt';
 			$success['info'] = ''.getfilescontent( 'info.txt', $path );

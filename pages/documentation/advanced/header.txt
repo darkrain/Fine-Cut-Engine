@@ -1,1 +1,1 @@
-O:8:"stdClass":6:{s:5:"title";s:29:"Fine Cut Engine Documentation";s:8:"template";s:9:"documents";s:10:"pageIsCode";b:0;s:8:"keywords";s:29:"Fine Cut Engine Documentation";s:11:"description";s:29:"Fine Cut Engine Documentation";s:10:"additional";s:0:"";}
+{"title":"Fine Cut Engine Documentation","template":"documents","pageIsCode":false,"keywords":"Fine Cut Engine Documentation","description":"Fine Cut Engine Documentation","additional":""}
