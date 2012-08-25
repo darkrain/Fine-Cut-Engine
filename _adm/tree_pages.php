@@ -47,6 +47,7 @@
 		// echo "writing2$name \n";
 	}
 
+
 	// to get entire tree
 	if( $action == 'get' ){
 		$pagesPath = paths( $leaf );
@@ -75,24 +76,25 @@
 		}
 	}
 
+		
 	// delete leaf
 	if( $action == 'del' ){
 		$pagePath = paths( $leaf );
 		// * Great thanks to Elfinder for this _remove()!
-		function _remove($path){
-			if (!is_dir($path)) {
-				if (!@unlink($path)) {
-					die('Unable to remove file '.$path);
+		function _remove($rempath){
+			if (!is_dir($rempath)) {
+				if (!@unlink($rempath)) {
+					die('Unable to remove file '.$rempath);
 				}
 			} else {
-				$ls = scandir($path);
+				$ls = scandir($rempath);
 				for ($i=0; $i < count($ls); $i++) {
 					if ('.' != $ls[$i] && '..' != $ls[$i]) {
-						_remove($path.DIRECTORY_SEPARATOR.$ls[$i]);
+						_remove($rempath.DIRECTORY_SEPARATOR.$ls[$i]);
 					}
 				}
-				if (!@rmdir($path)) {
-					die('Unable to remove file '.$path);
+				if (!@rmdir($rempath)) {
+					die('Unable to remove file '.$rempath);
 				}
 			}
 			return true;
@@ -130,6 +132,8 @@
 			// echo "setPage2$pagePath \n";
 			$data = json_decode( $data );
 
+			$header = $data->header;
+			
 			setfiles( 'header.txt' , $pagePath , $data->header );					
 			setfiles( 'content.txt' , $pagePath , $data->content );
 			setfiles( 'blocks.txt' , $pagePath , $data->blocks );
@@ -155,11 +159,21 @@
 			if( file_exists ($headerPath ) && $isEmpty == '' ){
 				$handle = fopen($headerPath, 'r');
 				if( filesize($headerPath) > 0 ){
-					$headerCt = fread($handle, filesize($headerPath));
+					$header = $headerCt = fread($handle, filesize($headerPath));
 				}
 				fclose($handle);
-				setfiles( 'header.txt' , $pagePath , json_decode( $headerCt ) );			
+				setfiles( 'header.txt' , $pagePath , $headerCt );			
 			}
+			
+			// $header = json_decode($header);
+			// if($header->pageIsCode){
+				// setfiles( 'pageIsCode.txt' , $pagePath , '' );
+			// }else{
+				// $pageIsCodePath = $path.DIRECTORY_SEPARATOR.'pageIsCode.txt';
+				// if( file_exists ($pageIsCodePath) ){
+					// _remove($pageIsCodePath);
+				// }
+			// }
 						
 			getPage( $pagePath );
 			

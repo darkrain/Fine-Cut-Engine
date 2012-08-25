@@ -69,51 +69,28 @@
 		
 
 		function getfilescontent( $name , $path ){
-			try{
-				$ppath = $path.DIRECTORY_SEPARATOR.$name;
-				// echo $ppath;
-				$contents = '';
-				$handle = fopen($ppath, 'r'); // or die("can't open file");
-				if( filesize($ppath) > 0 ){
-					$contents = fread($handle, filesize($ppath));
-					fclose($handle);
-				}else{
-					return '';
-				}
-				return $contents;
-			} catch (Exception $e) {}
-			return '';
+			return file_get_contents($path.DIRECTORY_SEPARATOR.$name);
 		}
 		
 		function parseHeader( $path ){
-			
-			$headerContent1 = $headerContent2 = getfilescontent('header.txt', $path );
-			
-			// echo $headerContent;
-			
-			try{
-				$headerContentUNS = unserialize( $headerContent1 );
-			} catch (Exception $e) { echo $e; }
-
-			try{
-				$headerContentJSON = json_decode( $headerContent2 );
-			} catch (Exception $e) { echo $e; }
-			
-			if($headerContentUNS){ return $headerContentUNS; }
-			if($headerContentJSON){ return $headerContentJSON; }
-			
-			$header = array();
-			$header['pageIsCode'] = false;
-			return $header;
+			return json_decode(getfilescontent('header.txt', $path ));
 		}
+		
+		// function pageIsCodeOrNot( $path ){
+			// return (strpos(getfilescontent('header.txt', $path ),'"pageIsCode":false') > 0)?true:false;
+		// }
 
 		$static_file_path = $static_path.DIRECTORY_SEPARATOR.'index.html';
 		$dynamic_path = $path.DIRECTORY_SEPARATOR.'header.txt';
+		$pageIsCodePath = $path.DIRECTORY_SEPARATOR.'pageIsCode.txt';
+		
 		
 		$static_file_time = @filemtime($static_file_path);
 		$settings_time = @filemtime($settings_path);
 		$dynamic_file_time = @filemtime($dynamic_path);
 		$engine_time = @filemtime(__FILE__);
+		
+		$header = false;
 		
 		if($use_static){ // from settings
 			if(file_exists($static_file_path)){
@@ -126,16 +103,23 @@
 					if( ($static_file_time > $dynamic_file_time) && ($static_file_time > $settings_time)
 					&& ($static_file_time > $engine_time) ){
 					
-						$header = parseHeader($path);
+						// if( file_exists ($pageIsCodePath) ){
+							// $get_static = false;
+						// } else {
+							// $get_static = true;
+						// }
 
+						$header = parseHeader($path);
 						if($header->pageIsCode){
+						// if(pageIsCodeOrNot()){
 							$get_static = false;
 						}else{
-							$templPath = dirname( dirname(__FILE__) ).DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.$header->template.DIRECTORY_SEPARATOR.'index.php';
-							$templ_time = @filemtime($templPath);
-							if( $static_file_time > $templ_time ){
-								$get_static = true;
-							}
+							$get_static = true;
+							// $templPath = dirname( dirname(__FILE__) ).DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.$header->template.DIRECTORY_SEPARATOR.'index.php';
+							// $templ_time = @filemtime($templPath);
+							// if( $static_file_time > $templ_time ){
+								// $get_static = true;
+							// }
 						}
 					}
 				}
@@ -153,7 +137,10 @@
 
 		   
 			$success = array();
-			$success['header'] = parseHeader($path);
+			
+			if(!$header){ $header = parseHeader($path); }
+			
+			$success['header'] = $header;
 			// $success['contentText'] = ''.getfilescontent('content.txt', $path );
 			$success['content'] = $path.DIRECTORY_SEPARATOR.'content.txt';
 			$success['info'] = ''.getfilescontent( 'info.txt', $path );
