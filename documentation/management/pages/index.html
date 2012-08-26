@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>Fine Cut Engine Documentation: Pages Management</title>
+
+		<meta name="keywords" content="Fine Cut Engine Documentation: Pages Management">
+		<meta name ="description" content="Fine Cut Engine Documentation: Pages Management">
+
+		<script type="text/javascript" src="/_jquery/jquery-1.7.2.min.js" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" media="screen" 
+			href="/_js/stanlemon-jgrowl-463438153435/jquery.jgrowl.css" charset="utf-8">
+		<script type="text/javascript" src="/_js/stanlemon-jgrowl-463438153435/jquery.jgrowl_minimized.js" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" media="screen" href="/_tmps/bootstrap/css/bootstrap.css" charset="utf-8">
+		<script type="text/javascript" src="/_tmps/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" media="screen" href="/units/style.css" charset="utf-8">
+
+		<link rel="stylesheet" type="text/css" media="screen" href="/_js/lightbox2.5/css/lightbox.css" charset="utf-8">
+<script type="text/javascript" src="/_js/lightbox2.5/js/jquery.smooth-scroll.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/_js/lightbox2.5/js/lightbox.js" charset="utf-8"></script>
+<style>
+	a.scrImage{ padding: 10px 20px 0px 20px; }
+</style>
+
+	</head>
+	<body>
+
+		<div class = "container well">
+
+
+			
+			<div class = "row-fluid">
+
+				<div class = "span3">
+					<div class = "well white" >
+						<ul class = "left_menu documents">
+						<li><a href="/documentation/brief/">Brief</a></li><li><a href="/documentation/requirements/">Requirements</a></li><li><a href = "/documentation/installation/" >Installation</a><ul><li><a href = "/documentation/installation/configure/" >Configure</a></li><li><a href = "/documentation/installation/sub_folder_memo/" >Sub Folder</a></li><li><a href = "/documentation/installation/password/" >Password</a></li></ul></li><li><a href = "/documentation/management/pages/" class = "active">Pages</a><ul><li><a href = "/documentation/management/pages/header/" >Header</a></li><li><a href = "/documentation/management/pages/content/" >Content</a></li><li><a href = "/documentation/management/pages/properties/" >Properties</a></li><li><a href = "/documentation/management/pages/blocks/" >Blocks</a></li></ul></li><li><a href="/documentation/management/files/">Files</a></li><li><a href="/documentation/management/cache/">Cache</a></li><li><a href = "/documentation/templates/" >Templates</a><ul><li><a href = "/documentation/templates/structure/" >Structure</a></li><li><a href = "/documentation/templates/variables/" >Variables</a></li><li><a href = "/documentation/templates/components/" >Components</a></li></ul></li><li><a href="/documentation/resources/">Resources</a></li>						</ul>
+					</div>
+				</div>
+				
+				
+				<div class = "span9">
+				
+					<div class = "well documentationHeader white">
+						<table border = "0">
+						<tr>
+						<td>
+							<a href = "http://finecut-fork">							<image border = "0" src = "/units/img/logo.png" width = "25" height = "25"
+								alt = "FineCut Logo" class = "logo">
+							</a>						</td>
+						<td>
+							<h1 >
+								&nbsp;&nbsp;&nbsp;Fine Cut Engine Documentation
+							</h1>
+						</td>
+						</tr>
+						</table>
+
+					</div>
+					<div class = "navbar" id = "navigation">
+						<div class = "navbar-inner">
+							<div class = "container" >
+									
+									
+									<ul class="nav">
+																				<li class="divider-vertical"></li>
+										<li><a href="/about/">About</a></li><li><a href="/install/">How to Install</a></li><li class = "active"><a href="/documentation/">Documentation</a></li><li><a href="/download/">Download</a></li>									</ul>
+									
+									<ul class = "nav pull-right">
+										<li><a href="/" > <span class = "icon-home"></span> </a></li><li class="divider-vertical"></li>										<li>
+											<form class = "navbar-search" action = "/search/"  method = "POST">
+												<input type="text" class="search-query span2" placeholder="Search" name = "q">
+												<span class = "icon-search" id = "searchButton"></span>
+											</form>
+										</li>
+									</ul>
+							</div>
+						</div>
+					</div>
+					
+				
+				
+					<div class = "well white">
+
+<p>As you could see in following screenshot:</p>
+<p>
+<a href = "/files/images/pm_editor.png" target = "_blank">
+<img border = "0"  src="/files/images/pm_editor.png" alt="Pages Manager : Page Editor" width = "660" border = "0">
+</a>
+</p>
+
+<p>there is a Tree Structure at the left side of [Pages Manager][Page Editor] tab.</p><br />
+
+<p>Explanation of this tree is in that this is URLs or Paths inside of Fine Cut website: when somebody will browse it, words, used in this tree, are exact url paths with this tree hierarchy.</p>
+
+<p>So, of the first level of that tree are: &laquo;about&raquo;, &laquo;documentation&raquo; ... &laquo;_index&raquo;.</p>
+<p>Then, when somebody will browse site, he will find an &laquo;<strong>about</strong>&raquo; page with path:<br />
+<br />
+<nobr>http://YourWebSite.url/YourFineCutDir/<strong>about</strong></nobr></p>
+<br />
+
+<p>And inside of &laquo;about&raquo; there was &laquo;<strong>forkus</strong>&raquo; and &laquo;<strong>screenshots</strong>&raquo;, therefore these pages will be availiable through:<br />
+<br />
+<nobr>http://YourWebSite.url/YourFineCutDir/<strong>about/forkus</strong></nobr><br />
+<nobr>http://YourWebSite.url/YourFineCutDir/<strong>about/screenshots</strong></nobr></p>
+<br />
+
+<p><em>And here we need to note, that if you will create folder with name &laquo;<strong>about</strong>&raquo; direcly inside of Fine Cut insallation dir, you wouldn't be able to get page with name &laquo;<strong>about</strong>&raquo; from Fine Cut itself, because of real URL for this page will exist in this situation. Therefore URL planning is a very important thing, you need to think of.</em></p>
+
+<p>Last, but <strong>very important agreement</strong> about URLs is in that <strong>root index page</strong> is named as <strong>&laquo;_index&raquo;</strong> at the first level of that tree. However, if you need, you could change this through code of &laquo;_engine/index.php&raquo;</p>
+<hr>
+<p>Then, how do Fine Cut store pages, or &laquo;leafs&raquo;</p>
+<p>This moment each page created from four files: <br />
+
+<p>&mdash; 
+<a href="/files/images/pm_editor.png" rel="lightbox[screenshost]" target="_blank" class = "scrImage">
+<img border = "0"  src="/files/tumbs/pm_editor.png" alt="Pages Manager : Page Editor" width = "33" ></a>
+&laquo;page primary <a href="/documentation/management/pages/content/">content</a>&raquo;,
+</p>
+
+<p>&mdash; 
+<a href="/files/images/pm_settings.png" rel="lightbox[screenshost]" target="_blank" class = "scrImage">
+<img border = "0"  src="/files/tumbs/pm_settings.png" alt="Pages Manager : Page Settings" width = "33" ></a>
+&laquo;<a href="/documentation/management/pages/header/">header</a> data and settings&raquo;,
+</p>
+
+<p>&mdash; 
+<a href="/files/images/pm_props.png" rel="lightbox[screenshost]" target="_blank" class = "scrImage">
+<img border = "0"  src="/files/tumbs/pm_props.png" alt="Pages Manager : Page Properties" width = "33" ></a>
+&laquo;page additional <a href="/documentation/management/pages/properties/">properties</a>&raquo;,
+</p>
+
+<p>&mdash;
+<a href="/files/images/pm_blocks.png" rel="lightbox[screenshost]" target="_blank" class = "scrImage">
+<img border = "0"  src="/files/tumbs/pm_blocks.png" alt="Pages Manager : Page Blocks" width = "33" ></a>
+&laquo;page <a href="/documentation/management/pages/blocks/">blocks</a>&raquo;
+</p>
+
+<p>You could reach exact File System Structure Path to stored page through:
+<pre>
+/ YourFineCutInstallationDir / <a href="/documentation/installation/configure/" target = "_blank">[$pages=]</a> / PagePathInTheTree
+</pre></p>
+						<br>
+
+ 					</div>
+				</div>
+
+			</div>
+			
+			<hr>
+			<div class = "content well well-small white">
+				<div>
+				</div>
+				<div class = "pull-right">
+					<span style = "font-size: 9px"> 2012 ,</span>
+					Fine Cut is dual GPL and MIT Licensed
+				</div>
+			</div>
+		</div>
+		<br>
+
+	</body>
+</html><!-- -->

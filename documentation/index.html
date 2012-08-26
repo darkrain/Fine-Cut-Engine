@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>Fine Cut Engine Documentation</title>
+
+		<meta name="keywords" content="Fine Cut Engine Documentation">
+		<meta name ="description" content="Fine Cut Engine Documentation">
+
+		<script type="text/javascript" src="/_jquery/jquery-1.7.2.min.js" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" media="screen" 
+			href="/_js/stanlemon-jgrowl-463438153435/jquery.jgrowl.css" charset="utf-8">
+		<script type="text/javascript" src="/_js/stanlemon-jgrowl-463438153435/jquery.jgrowl_minimized.js" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" media="screen" href="/_tmps/bootstrap/css/bootstrap.css" charset="utf-8">
+		<script type="text/javascript" src="/_tmps/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" media="screen" href="/units/style.css" charset="utf-8">
+
+		
+	</head>
+	<body>
+
+		<div class = "container well">
+
+
+			
+			<div class = "row-fluid">
+
+				<div class = "span3">
+					<div class = "well white" >
+						<ul class = "left_menu documents">
+						<li><a href="/documentation/brief/">Brief</a></li><li><a href="/documentation/requirements/">Requirements</a></li><li><a href = "/documentation/installation/" >Installation</a><ul><li><a href = "/documentation/installation/configure/" >Configure</a></li><li><a href = "/documentation/installation/sub_folder_memo/" >Sub Folder</a></li><li><a href = "/documentation/installation/password/" >Password</a></li></ul></li><li><a href = "/documentation/management/pages/" >Pages</a><ul><li><a href = "/documentation/management/pages/header/" >Header</a></li><li><a href = "/documentation/management/pages/content/" >Content</a></li><li><a href = "/documentation/management/pages/properties/" >Properties</a></li><li><a href = "/documentation/management/pages/blocks/" >Blocks</a></li></ul></li><li><a href="/documentation/management/files/">Files</a></li><li><a href="/documentation/management/cache/">Cache</a></li><li><a href = "/documentation/templates/" >Templates</a><ul><li><a href = "/documentation/templates/structure/" >Structure</a></li><li><a href = "/documentation/templates/variables/" >Variables</a></li><li><a href = "/documentation/templates/components/" >Components</a></li></ul></li><li><a href="/documentation/resources/">Resources</a></li>						</ul>
+					</div>
+				</div>
+				
+				
+				<div class = "span9">
+				
+					<div class = "well documentationHeader white">
+						<table border = "0">
+						<tr>
+						<td>
+							<a href = "http://finecut-fork">							<image border = "0" src = "/units/img/logo.png" width = "25" height = "25"
+								alt = "FineCut Logo" class = "logo">
+							</a>						</td>
+						<td>
+							<h1 >
+								&nbsp;&nbsp;&nbsp;Fine Cut Engine Documentation
+							</h1>
+						</td>
+						</tr>
+						</table>
+
+					</div>
+					<div class = "navbar" id = "navigation">
+						<div class = "navbar-inner">
+							<div class = "container" >
+									
+									
+									<ul class="nav">
+																				<li class="divider-vertical"></li>
+										<li><a href="/about/">About</a></li><li><a href="/install/">How to Install</a></li><li class = "active"><a href="/documentation/">Documentation</a></li><li><a href="/download/">Download</a></li>									</ul>
+									
+									<ul class = "nav pull-right">
+										<li><a href="/" > <span class = "icon-home"></span> </a></li><li class="divider-vertical"></li>										<li>
+											<form class = "navbar-search" action = "/search/"  method = "POST">
+												<input type="text" class="search-query span2" placeholder="Search" name = "q">
+												<span class = "icon-search" id = "searchButton"></span>
+											</form>
+										</li>
+									</ul>
+							</div>
+						</div>
+					</div>
+					
+				
+				
+					<div class = "well white">
+
+<p>First of all &ndash; what does it mean &laquo;Fine Cut&raquo;?<br /></p>
+<p>We got rid of everything we've found unnecessary to develop simple website.</p>
+<p>John Lennon tald: &laquo;All You Need is Love&raquo;.<br />
+We say: &laquo;all we need is UI&raquo;.</p>
+
+<p>Then, for complete understanding Fine Cut it is not enough to read this documentation.</p>
+<br />
+<p>However, we suppose that there will be a lot of people who don't ever need complete understanding.</p>
+<br />
+<p>But, if you wish, you need to investigate only one file: &laquo;_engine/index.php&raquo;</p>
+
+<p>Sombody will tell: "Are You Serious?"</p>
+<br />
+<strong>OK, here is small FAQ:</strong><br /><br />
+
+<li><strong>What are pages if there is no DB?</strong><br />
+PHP file of Page and TXT files of its Properties.<br />
+If You need anything else -- Use Your Favorite Framework!
+<br />
+<br />
+</li>
+
+<li><strong>What with other content? I need e-mail, rss, geoIP, maps, web-services...</strong>
+<p>As for webservices, any page could be marked as <strong>&laquo;non cacheable&raquo;</strong><br />
+ at Pages Manager => Settings tab.</p><br />
+
+<p>As for the rest &ndash; write your own code.<br />
+Please, lookup for <a href="/about/examples/">examples page</a>, if not yet.</p>
+</li>
+
+<li><strong>You told about perfomance, did you?</strong>
+<p>I could tell that on my nettop with  AMD C-60 CPU inside, exactly this page generation process passthrough in ~0.05 sec. And while that generation, page stores in static. Therefore, when i will request page again, i will get it after ~0.007 sec. I use standard HDD 5400 rpm, and didn't any software optimisatoins.</p>
+</li>
+
+
+
+</ul>
+						<br>
+
+ 						<hr>
+						<pre>
+So, this is all about FAQ, and: go on, use other parts of documentation.
+						</pre>
+ 					</div>
+				</div>
+
+			</div>
+			
+			<hr>
+			<div class = "content well well-small white">
+				<div>
+				</div>
+				<div class = "pull-right">
+					<span style = "font-size: 9px"> 2012 ,</span>
+					Fine Cut is dual GPL and MIT Licensed
+				</div>
+			</div>
+		</div>
+		<br>
+
+	</body>
+</html><!-- -->
