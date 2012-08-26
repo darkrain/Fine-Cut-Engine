@@ -1,4 +1,4 @@
-<p>Single way to download Fine Cut Engine is just get it from GitHub.</p>
+<p>Single way for download Fine Cut Engine is to just get it from GitHub.</p>
 
 <p>There are at least:</p>
 <br />

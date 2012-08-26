@@ -3,9 +3,9 @@
 <p>John Lennon tald: &laquo;All You Need is Love&raquo;.<br />
 We say: &laquo;all we need is UI&raquo;.</p>
 
-<p>Then, for complete understanding Fine Cut it is not enough to read this documentation.</p>
+<p>Then, for complete understanding Fine Cut, it is not enough to read this documentation.</p>
 <br />
-<p>However, we suppose that there will be a lot of people who don't ever need complete understanding.</p>
+<p>However, we suppose, that there will be a lot of people, who don't ever need complete understanding.</p>
 <br />
 <p>But, if you wish, you need to investigate only one file: &laquo;_engine/index.php&raquo;</p>
 
@@ -25,7 +25,8 @@ If You need anything else -- Use Your Favorite Framework!
  at Pages Manager => Settings tab.</p><br />
 
 <p>As for the rest &ndash; write your own code.<br />
-Please, lookup for <a href="/about/examples/">examples page</a>, if not yet.</p>
+Please, lookup for <a href="/about/examples/">examples page</a>, if not yet.</p><br />
+
 </li>
 
 <li><strong>You told about perfomance, did you?</strong>

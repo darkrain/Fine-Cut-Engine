@@ -6,7 +6,7 @@
 
 <p>It was very nesessary to manage files.</p>
 <p>There is a lot of file managers done for the Web.</p>
-<p>But we Love this one: than You a lot, men from <a href="http://elfinder.org/">elfinder</a> team!</p>
+<p>But we Love this one: Thank You a lot, men from <a href="http://elfinder.org/">elfinder</a> team!</p>
 <br />
 
 <p>However, we've made some changes.</p>

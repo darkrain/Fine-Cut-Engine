@@ -1,9 +1,9 @@
 <p>If you'll work with Fine Cut inside of &laquo;sub folder&raquo; of &laquo;document root&raquo; folder you shoud keep in mid that you are working inside.</p>
-<p>By defauld everything in Fine Cut is independent, components and default templates made irrelevant to any filesystem path.</p>
-<p>Please, learn how we did this before creatin own.</p>
+<p>By defauld, everything in Fine Cut is independent, components and default templates made relevant to any filesystem path.</p>
+<p>Please, learn how we did this before creating own one.</p>
 <p>And, here are some advices:</p>
 <ul>
-<li>Do not use direct links (with http://), when linking between one Fine Cut site pages. Use relative ones. Relative links are paths that you see at Pages Manager tab Tree (in the left side):
+<li>Do not use direct links (with http://), when linking between site pages. Use relative ones. Relative links are paths that you could see at Pages Manager tab Tree (in the left side):
 <p style = "margin: 10px"><a href="/files/images/pm_editor.png" rel="lightbox[screenshost]" target="_blank">
 <img border = "0"  src="/files/tumbs/pm_editor.png" alt="Pages Manager : Page Editor" width = "132" ></a></p>
 There is also a button, with hint &laquo;Copy this Leaf Path&raquo; to be sure you are using quite well link.<br />
@@ -12,6 +12,6 @@ And, yes, you could open such as many &laquo;_adm&raquo; pages as it necessary.<
 </li>
 <li>Exactly the same as for [Pages Manager][Page Editor], correct path means for every own resource inside of the Fine Cut based website: each URL must be done without path to directory where Fine Cut is installed. Just look how we did it.<br /><br />
 </li>
-<li>If you wish complete explanation: we use simple pre-processor based on regular expressions to rename every link or source attribute inside page content or page header additional data. That pre-processors are two components named as &laquo;content_parser&raquo; and &laquo;head_additional&raquo;. These components are extremely simple, they just replaces everything with &laquo;http="/&raquo; or &laquo;src="/&raquo; by adding sub folder path before link. So, when your link or resource is inside of Fine Cut, just be sure it starts from fine cut installation dir. And, yes, if you will get to create own template &ndash; use these pre-processors for compatibility.
+<li>If you wish complete explanation: we use simple pre-processor based on regular expressions to rename every link or source attribute inside of page content or page header additional data. That pre-processors are two components named as &laquo;content_parser&raquo; and &laquo;head_additional&raquo;. These components just replaces everything with &laquo;http="/&raquo; or &laquo;src="/&raquo; by adding sub folder path before link. So, when your link or resource is inside of Fine Cut, just be sure it starts from fine cut installation dir. And, yes, if you will get to create own template &ndash; use these pre-processors for compatibility.
 </li>
 </ul>

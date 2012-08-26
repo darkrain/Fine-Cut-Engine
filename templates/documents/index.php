@@ -45,7 +45,7 @@
 						<table border = "0">
 						<tr>
 						<td>
-							<?php if( !$success['isMain'] ) { echo '<a href = "http://'.$_SERVER['HTTP_HOST'].$success['deep'].'">'; } ?>
+							<?php if( !$success['isMain'] ) { echo '<a href = "/">'; } ?>
 							<image border = "0" src = "<?php echo $success['deep']; ?>/stylesheets/img/logo.png" width = "25" height = "25"
 								alt = "FineCut Logo" class = "logo">
 							<?php if( !$success['isMain'] ) { echo '</a>'; } ?>
@@ -79,7 +79,7 @@
 											echo '<li class="divider-vertical"></li>';
 										 } ?>
 										<li>
-											<form class = "navbar-search" action = "<?php echo $success['deep']; ?>/search/"  method = "POST">
+											<form class = "navbar-search" action = "<?php echo $success['deep']; ?>/search/"  method = "GET">
 												<input type="text" class="search-query span2" placeholder="Search" name = "q">
 												<span class = "icon-search" id = "searchButton"></span>
 											</form>
@@ -122,4 +122,4 @@ So, this is all about <?php echo  $success['blocks'][0]->value; ?>
 		<br>
 
 	</body>
-</html><!-- -->
+</html>

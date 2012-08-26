@@ -1,7 +1,7 @@
 <p>Fin Cut is bundled as an archive.</p>
 <br />
 
-<p>It don't use any DB, therefore installation process is extremely simple.<br /><br />
+<p>It don't need any DB, therefore installation process is extremely simple.<br /><br />
 
 <strong>Just unpack Fincut Archive to web-root folder or any folder inside.</strong></p>
 <br />
