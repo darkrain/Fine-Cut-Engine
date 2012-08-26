@@ -3,16 +3,17 @@
 <p>Fine Cut was developed with:</p>
 <ul>
 <li>
-	We were using PHP 5.3.6 for development.
+	PHP 5.3.6.
 </li>
 <li>
 	Apache HTTP Server 2.x version.<br />
-	And, seems you could use another web server.<br />
-	Just look inside .htaccess files of root dir
-	and sub dirs to make same settings.
 </li>
 </ul>
-<br />
+<p>
+And, seems you could use another web server.<br />
+Just look inside .htaccess files of root dir
+and sub dirs to make same settings.
+</p>
 <p>However, as for Apache, we need to use modules:</p>
 <ul>
 <li><strong>rewrite_module: strong dependency</strong></li>

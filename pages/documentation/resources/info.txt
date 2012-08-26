@@ -6,6 +6,6 @@
 	},
 	"leftMenu": {
 		"menuFile": "menu.js",
-		"active": "/documentation/advanced/backups/"
+		"active": "/documentation/resources/"
 	}
 }

@@ -71,37 +71,8 @@
 			"type": "link"
 		}]
 	}, {
-		"title": "Advanced",
-		"link": "/documentation/advanced/",
-		"type": "link",
-		"menu": [{
-			"title": "Resources",
-			"link": "/documentation/advanced/resources/",
-			"type": "link"
-		}, {
-			"title": "Integration",
-			"link": "/documentation/advanced/integration/",
-			"type": "link"
-		}, {
-			"title": "API",
-			"link": "/documentation/advanced/api/",
-			"type": "link"
-		}, {
-			"title": "Backups",
-			"link": "/documentation/advanced/backups/",
-			"type": "link"
-		}, {
-			"title": "Components",
-			"link": "/documentation/advanced/components/",
-			"type": "link"
-		}, {
-			"title": "Engine",
-			"link": "/documentation/advanced/engine/",
-			"type": "link"
-		}, {
-			"title": "Settings",
-			"link": "/documentation/advanced/settings/",
-			"type": "link"
-		}]
+		"title": "Resources",
+		"link": "/documentation/resources/",
+		"type": "link"
 	}
 ]

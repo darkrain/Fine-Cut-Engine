@@ -1,20 +1,12 @@
-<p>One only proposal or preposition - to create pages, but do it well enough.</p>
+<p><strong>Proposal or preposition of Fine Cut is very simple &ndash; to create pages, but do it well enough for us: we wish be happy to create pages with it.</strong></p>
+<p>We do like Unix way, one utility for one direction. Pages creation process must be very the simple, then we could tell our stories with the easies way.</p>
 
-<h1>Concept</h1>
-<p>The main objective was to create very the simple content management engine for web sites, the simple web sites.</p>
-<p>In fact, it was not to be even similar to CMS.</p>
-<p>Performance and usability: that's all what we thought at the time of creation.</p>
-<br>
-<p><strong>Imagine...</strong></p>
-<h4>For about 90% of websites actually don't even need any DB !</h4>
-<br>
-<p>All these sites made for only the mission &ndash; to tell about something or someone.</p>
-<p>Yes, they have a lot of dynamic content, like: news, photos, product line data and so on... Dynamic... yepp...</p>
-<p>But, please, ask Youself, how much of this content is entierly necessity to be in such dynamic way?</p>
-<br>
-<p>Please. We are well remembered about personal pages or organization promo sites with almost static news pages.</p>
-<p>So, do we really need News management in DB?</p>
-<p>Or do we really need Photo Album with odd storage and extremely hard management?</p>
-<p>Or do we really need goods promo with diversed settings but which is not as well as complicated?</p>
-<br>
-<strong>Then, may be we need to <a href="/about/screenshots/">get deeper?</a></strong>
+<p>And we don't like to manage compexity thing, we don't like to participate in: installation process, settings understanding or any work with database storage. Because each additional step is just tediousness.</p>
+
+<p>From the other side, yes, we have a lot of advanced friends, who tald that we are stupid and narrow-minded. Therefore especially for them we decided to passthrough ability to engage in complicatedness, and it was done easy too.</p>
+
+<p>One of the first step was UI. We do like JS, we do like JQuery, therefore our choice was obvious. And we do like bootstrap, and it is only template availiable after installation. So, everyone who would like our choice is able to investigate everything was made simple.</p>
+
+<p>Finally, we wish to say &laquo;Good Luck!&raquo; to everyone.</p>
+
+<p>PS: &laquo;Easy way &ndash; easy go&raquo;... take it easy, be happy ;^)</p>

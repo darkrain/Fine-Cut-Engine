@@ -92,15 +92,11 @@
 
 <?php include( $success["components"]["content_parser"] ); ?>
 
-						<br>
-
- <?php if( $success['blocks'][0]->value !== '' ){ ?>
-						<hr>
-						<pre>
-So, this is all about <?php echo  $success['blocks'][0]->value; ?>
-
-						</pre>
- <?php } ?>
+ <?php
+	if( $success['blocks'][0]->value !== '' ){
+		echo  '<hr><em>'.$success['blocks'][0]->value.'</em>';
+	}
+?>
 					</div>
 				</div>
 				<div class = "span2">

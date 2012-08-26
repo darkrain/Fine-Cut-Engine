@@ -1,5 +1,5 @@
 <p>Fine Cut is an archive bundle. And it have no any installation script, becaue it made simple to use.</p>
-<p>Only thing you need to install finecut is to unpack it to any directory of the webserver.</p>
+<p>Only thing you need to install and use Fine Cut is to unpack bundle to any directory of the website, which is availiable for browsing.</p>
 <p>We suppose it will be Apache webserver, however, we also suppose it could be used in another sever, but there is no config for other servers now. So, if you'll use another type of webserver, you'll need to look inside .htaccess file to make proper setup for using Fine Cut.</p>
 <br />
 
@@ -10,8 +10,8 @@
 
 <li>Choose folder where you wish to install it.</li>
 <li>Unpack downloaded archive there.<strong>Please, note that there is folder inside that bundles. One folder deep inside ZIP, and two folder deep inside TAR.BZ. You need to copy files from there to choosed folder after unpacking.</strong></li>
-<li>Go to that directory URL through browser after unpacking and copying, you shoud look at index page, if not, then, something wrong, may be mod_rewrite is switched off for your Apache.</li>
-<li>Go inside &laquo;<strong>_adm</strong>&raquo; dir through browser.</li>
+<li>Go to that directory URL through browser after unpacking and copying, you shoud look at index page, if not, then, something gone wrong, may be mod_rewrite is switched off for your Apache.</li>
+<li>Go inside &laquo;<strong>_adm</strong>&raquo; dir. This is an Admin Panel.</li>
 </ol>
 
 <p>That is all, Fine Cut is independent of where it is installed in.</p>

@@ -1,14 +1,58 @@
-planning urls
--- articles year by year
--- news pages inside blocks
+<p>As you could see in following screenshot:</p>
+<p>
+<a href = "/files/images/pm_editor.png" target = "_blank">
+<img border = "0"  src="/files/images/pm_editor.png" alt="Pages Manager : Page Editor" width = "660" border = "0">
+</a>
+</p>
 
+<p>there is a Tree Structure at the left side of [Pages Manager][Page Editor] tab.</p><br />
 
+<p>Explanation of this tree is in that this is URLs or Paths inside of Fine Cut website: when somebody will browse it, words, used in this tree, are exact url paths with this tree hierarchy.</p>
 
-<strong>URL Agreement!</strong>
-tree panel and it's usage
+<p>So, of the first level of that tree are: &laquo;about&raquo;, &laquo;documentation&raquo; ... &laquo;_index&raquo;.</p>
+<p>Then, when somebody will browse site, he will find an &laquo;<strong>about</strong>&raquo; page with path:<br />
+<br />
+<nobr>http://YourWebSite.url/YourFineCutDir/<strong>about</strong></nobr></p>
+<br />
 
---- Tree URL model: leafs
---- Site Index Page Agreement: _index !!!!! INDEX
---- Buttons panel
+<p>And inside of &laquo;about&raquo; there was &laquo;<strong>forkus</strong>&raquo; and &laquo;<strong>screenshots</strong>&raquo;, therefore these pages will be availiable through:<br />
+<br />
+<nobr>http://YourWebSite.url/YourFineCutDir/<strong>about/forkus</strong></nobr><br />
+<nobr>http://YourWebSite.url/YourFineCutDir/<strong>about/screenshots</strong></nobr></p>
+<br />
 
-how to use buttons
+<p><em>And here we need to note, that if you will create folder with name &laquo;<strong>about</strong>&raquo; direcly inside of Fine Cut insallation dir, you wouldn't be able to get page with name &laquo;<strong>about</strong>&raquo; from Fine Cut itself, because of real URL for this page will exist in this situation. Therefore URL planning is a very important thing, you need to think of.</em></p>
+
+<p>Last, but <strong>very important agreement</strong> about URLs is in that <strong>root index page</strong> is named as <strong>&laquo;_index&raquo;</strong> at the first level of that tree. However, if you need, you could change this through code of &laquo;_engine/index.php&raquo;</p>
+<hr>
+<p>Then, how do Fine Cut store pages, or &laquo;leafs&raquo;</p>
+<p>This moment each page created from four files: <br />
+
+<p>&mdash; 
+<a href="/files/images/pm_editor.png" rel="lightbox[screenshost]" target="_blank" class = "scrImage">
+<img border = "0"  src="/files/tumbs/pm_editor.png" alt="Pages Manager : Page Editor" width = "33" ></a>
+&laquo;page primary <a href="/documentation/management/pages/content/">content</a>&raquo;,
+</p>
+
+<p>&mdash; 
+<a href="/files/images/pm_settings.png" rel="lightbox[screenshost]" target="_blank" class = "scrImage">
+<img border = "0"  src="/files/tumbs/pm_settings.png" alt="Pages Manager : Page Settings" width = "33" ></a>
+&laquo;<a href="/documentation/management/pages/header/">header</a> data and settings&raquo;,
+</p>
+
+<p>&mdash; 
+<a href="/files/images/pm_props.png" rel="lightbox[screenshost]" target="_blank" class = "scrImage">
+<img border = "0"  src="/files/tumbs/pm_props.png" alt="Pages Manager : Page Properties" width = "33" ></a>
+&laquo;page additional <a href="/documentation/management/pages/properties/">properties</a>&raquo;,
+</p>
+
+<p>&mdash;
+<a href="/files/images/pm_blocks.png" rel="lightbox[screenshost]" target="_blank" class = "scrImage">
+<img border = "0"  src="/files/tumbs/pm_blocks.png" alt="Pages Manager : Page Blocks" width = "33" ></a>
+&laquo;page <a href="/documentation/management/pages/blocks/">blocks</a>&raquo;
+</p>
+
+<p>You could reach exact File System Structure Path to stored page through:
+<pre>
+/ YourFineCutInstallationDir / <a href="/documentation/installation/configure/" target = "_blank">[$pages=]</a> / PagePathInTheTree
+</pre></p>

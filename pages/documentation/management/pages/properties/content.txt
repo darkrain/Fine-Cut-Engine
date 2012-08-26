@@ -1,1 +1,16 @@
->> Step out from item to remember in model
+<p>
+<a href = "/files/images/pm_props.png" target = "_blank">
+<img border = "0"  src="/files/images/pm_props.png" alt="Pages Manager : Page Properties" width = "660" border = "0">
+</a>
+</p>
+
+<p>We use this page to create a hierarchy structure of page's necessary data.</p>
+<p>It could be used to store, for example, goods properties, or menu, or something else with hierarchical direction.</p>
+<br />
+<p><strong>Please, remember that here is strange behaviour.</strong></p>
+<p>When you will write something inside of a tree block, <strong>DO NOT SAVE PAGE IMMEDIATELY!</strong></p>
+<p>At first you need to <strong>STEP OUT</strong> of written chunk, because otherwise data will not be remembered inside of the hierarchy model.</p>
+<br />
+<p>For example, there is &laquo;Title&raquo; block exactly below textarea.</p>
+<p>This block contains keyword &laquo;"Title"&raquo;.</p>
+<p>If you will step inside of block with &laquo;"Title"&raquo; keyword, then edit it, then, before saving page you'll need to <strong>step out</strong> from editing mode, inspite of loosing data. Editing mode switches off only when you step out of it. To step out just click page to an empty space. And, while editing mode is not switched off, data will not be remembered.</p>

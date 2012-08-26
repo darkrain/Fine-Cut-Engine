@@ -1,6 +1,20 @@
-<h3>Just keep in mind that there is another way.</h3><br />
+<p><em>Just keep in mind: there is another way.</em></p><br />
 
-<p>And, we are going to tell some advices below, when building sites with Fine Cut:</p>
+<p><strong>Imagine: for about 90% websites don't even need any DB.</strong>
+<br /></p>
+<p>We hope, people ho made this sites just never thought about this.</p>
+
+<p>All these sites made for only the mission &ndash; to tell about something or someone.</p>
+<p>Yes, they have a lot of dynamic content, like: news, photos, product line data and so on... Dynamic... yepp...</p>
+<p>But, please, ask Youself, how much of this content is entirely necessary to be in such a dynamic way?</p>
+<br>
+<p>Please. We all are well remembered about personal pages or organization promo sites with almost static news, ads, rss, product lines, etc.</p>
+<p>So, do we really need News management in DB?</p>
+<p>Or do we really need Photo Album with odd storage and extremely hard management?</p>
+<p>Or do we really need goods promo with diversed usability but which is not as well sell as complicated to manage?</p>
+<br>
+
+<p>So, we are going to tell some advices below, when building sites with Fine Cut:</p>
 
 <ul>
 <li>Thing could be made with just non standard way of thinking...</li>
@@ -15,9 +29,15 @@ You could make it with at least three ways:</p>
 <p><a href="/files/images/pm_blocks.png" rel="lightbox[screenshost]" target="_blank">
 <img border="0" src="/files/tumbs/pm_blocks.png" alt="Pages Manager : block parts" width="132" height="89"></a><br /></p>
 
-<p>So, if You will use page blocks for storing data, You'll easy find data iside of template.</p>
+<p>So, if You will use page blocks for storing data, You'll easy find this blocks data collection inside of template.</p>
+<p>Then, You could easy make such as much news pages as You need: weekly page, monthly page, yearly page.</p>
+<p>Just with using directory based structure</p>
+<pre> /pages/news/YYYY/MM/DD/Number </pre>
+<p>You could simply bring all this &laquo;dynamics&raquo; vision with just links and landings.</p>
 <br />
-<p>Then, You could make as much news pages as You need: weekly page, monthly page, yearly page.</p>
+<p>Here somebody &laquo;professional&raquo; could ask: <br />
+"And what if i wish to change something?"</p>
+<p>The answer is simple: &laquo;When&raquo;?</p><br />
 
 </li>
 
@@ -34,8 +54,8 @@ You could make it with at least three ways:</p>
 </li>
 
 <li>
-<p>OR You could <a href="/documentation/advanced/integration/">integrate</a> Fine Cut with Your favorite PHP framework and use DB for storing data.</p>
-<p>It integrates very well because there is no engine in template at all, just pure PHP, You could use as You wish.</p>
+<p>OR, finally, for our advanced folks: you could <a href="/documentation/advanced/integration/">integrate</a> Fine Cut with Your favorite PHP framework and use DB for storing data.</p>
+<p>It integrates very well because there is no engine in template at all, just pure PHP, You could it use as You wish.</p>
 </li>
 </ol>
 
@@ -50,6 +70,7 @@ We have draft component that generates left side menu for it.<br />
 <br />
 <br />
 <p>And exactly this page is example that Fine Cut Engine was built very &laquo;Agile&raquo;: </p>
-<p>If You'll install Fine Cut and look inside Admin Panel.<br />
+<p>If You'll &laquo;install&raquo; Fine Cut and look inside Admin Panel.<br />
 You'll find this page was built with another template and another components inside.<br />
-The left menu component, if You don't mind.</p>
+The left menu component, if You don't mind.<br />
+</p>

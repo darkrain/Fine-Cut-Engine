@@ -1,5 +1,23 @@
--- Cache reaction on changes: page, template, settings
--- Forced Clearing cache
--- Disabling cache
--- Server Side Code Instruction dependency
--- Speed
+<p>There you could look at &laquo;Clear Cache&raquo; button.</p>
+<p>
+<a href = "/files/images/settings.png" target = "_blank">
+<img border = "0"  src="/files/images/settings.png" alt="elFinder File Manager" width = "660" border = "0">
+</a>
+</p>
+
+<p>It is obvious that this button made for shorthand to cache cleanup.</p>
+<p>Our cache is just a simple HTML files, that was created while page generation process at it's first request.</p>
+<br />
+<p>But, here is small features, because cache is smart:</p>
+<ul>
+<li>First of all, you could disable it at all via settings, exatly below this button you could look at engine settings file where <strong>$use_static </strong> preference, if set to <em>false</em> will disable cache at all. </li>
+
+<li>And as you knew you could disable cache per exact page by clicking very special checkbox at <a href="/documentation/management/pages/header/"><nobr>[Pages Manager][Settings]</nobr></a> tab.</li>
+
+<li>When you are saving page, date of saving will be higher than cached page, therefore page will be re-generated per the following first request after saving.</li>
+
+<li>When you are saving template, used for page generation, date of &laquo;page template&raquo; will be higher than cached page, therefore page will be re-generated per the following first request after template saving.</li>
+
+<li>When you are saving settings, date of setting file will be higher than cached page, therefore page will be re-generated ... bla bla bla ... , however, this is the same as to push &laquo;Clear Cache&raquo; button.</li>
+
+</ul>

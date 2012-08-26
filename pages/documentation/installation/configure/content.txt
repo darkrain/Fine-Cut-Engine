@@ -8,7 +8,7 @@
 <li>Path to folder where cache will be stored.</li>
 <li>Permission for files and folders creation.</li>
 <li>File name encoding inside of webserver, default is UTF-8.</li>
-<li>To use microtime echo of generated page, default is &laquo;to use&raquo;.</li>
+<li>To use microtime echo while responding pages or not, default is &laquo;to use&raquo;.</li>
 </ul>
 <br />
 

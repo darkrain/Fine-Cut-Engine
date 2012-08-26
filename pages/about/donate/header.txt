@@ -1,1 +1,1 @@
-{"title":"Fine Cut Engine: Donation","template":"default","pageIsCode":false,"keywords":"Fine Cut Engine: Donation","description":"Fine Cut Engine: Donation","additional":""}
+{"title":"Fine Cut Engine: Donation","template":"Sincerely","pageIsCode":false,"keywords":"Fine Cut Engine: Donation","description":"Fine Cut Engine: Donation","additional":""}

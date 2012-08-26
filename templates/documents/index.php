@@ -100,8 +100,8 @@
 
 						<br>
 
-						<hr>
  <?php if( $success['blocks'][0]->value !== '' ){ ?>
+						<hr>
 						<pre>
 So, this is all about <?php echo  $success['blocks'][0]->value; ?>
 
