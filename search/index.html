@@ -52,7 +52,7 @@
 							
 							<ul class = "nav pull-right">
 								<li><a href="/" > <span class = "icon-home"></span> </a></li><li class="divider-vertical"></li>								<li>
-									<form class = "navbar-search" action = "/search/"  method = "POST">
+									<form class = "navbar-search" action = "/search/"  method = "GET">
 										<input type="text" class="search-query span2" placeholder="Search" name = "q">
 										<span class = "icon-search" id = "searchButton"></span>
 									</form>
@@ -93,6 +93,17 @@ this page Template.
 <script src="http://www.google.com/jsapi" type="text/javascript"></script>
 <script type="text/javascript"> 
 	// You need to place CSE code here
+  google.load('search', '1', {language : 'en', style : google.loader.themes.MINIMALIST});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};
+    customSearchOptions['adoptions'] = {'layout': 'noTop'};
+    var customSearchControl = new google.search.CustomSearchControl(
+      '013884696304891199817:momkaf17t7m', customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.setSearchFormRoot('cse-search-form');
+    customSearchControl.draw('cse', options);
+  }, true);
 </script>
 <div id="cse" style="width:100%;"></div>
 
@@ -116,9 +127,9 @@ this page Template.
 				window.setTimeout( placeSearch, 300 );
 			}
 		}
-		// window.setTimeout( placeSearch, 300 );
+		window.setTimeout( placeSearch, 300 );
 	}
-})('');
+})(document.location.href.split('/search/?q=')[1]);
 </script>
 
 						<br>
