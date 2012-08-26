@@ -28,7 +28,7 @@ var jQuery = function( selector, context ) {
 	},
 
 	// Map over jQuery in case of overwrite
-	javascripts = window.jQuery,
+	_jQuery = window.jQuery,
 
 	// Map over the $ in case of overwrite
 	_$ = window.$,
@@ -392,7 +392,7 @@ jQuery.extend({
 		}
 
 		if ( deep && window.jQuery === jQuery ) {
-			window.jQuery = javascripts;
+			window.jQuery = _jQuery;
 		}
 
 		return jQuery;

@@ -616,11 +616,11 @@
   //     unit(2, 'px')          //=> "2px"
   //     unit("30deg", 'rad')   //=> "30deg"
   //
-  function unit(i, stylesheets) {
+  function unit(i, units) {
     if ((typeof i === "string") && (!i.match(/^[\-0-9\.]+$/))) {
       return i;
     } else {
-      return "" + i + stylesheets;
+      return "" + i + units;
     }
   }
 
