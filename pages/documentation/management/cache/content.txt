@@ -10,7 +10,7 @@
 <br />
 <p>But, here is small features, because cache is smart:</p>
 <ul>
-<li>First of all, you could disable it at all via settings, exatly below this button you could look at engine settings file where <strong>$use_static </strong> preference, if set to <em>false</em> will disable cache at all. </li>
+<li>First of all, you could disable it at all via settings, exatly below this button you could look at engine settings file where <strong>$use_static </strong> preference, if set to <em>&laquo;false&raquo;</em>, will disable cache at all. </li>
 
 <li>And as you knew you could disable cache per exact page by clicking very special checkbox at <a href="/documentation/management/pages/header/"><nobr>[Pages Manager][Settings]</nobr></a> tab.</li>
 

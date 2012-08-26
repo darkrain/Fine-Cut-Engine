@@ -1,5 +1,3 @@
-<p>First of all, we suppose you'll use computers to work with Fine Cut Engine, at least one.</p>
-
 <p>Fine Cut was developed with:</p>
 <ul>
 <li>
@@ -11,19 +9,19 @@
 </ul>
 <p>
 And, seems you could use another web server.<br />
-Just look inside .htaccess files of root dir
+Just look inside &laquo;.htaccess&raquo; files of root dir
 and sub dirs to make same settings.
 </p>
 <p>However, as for Apache, we need to use modules:</p>
 <ul>
-<li><strong>rewrite_module: strong dependency</strong></li>
-<li>deflate_module: will work without, but with no gzip</li>
-<li>env_module: will work without look in .htaccess</li>
-<li>expires_module: will work without look in .htaccess</li>
-<li>filter_module: will work without look in .htaccess</li>
-<li>headers_module: will work withouts look in .htaccess</li>
-<li>mime_module: will work without look in .htaccess</li>
-<li>setenvif_module: will work without look in .htaccess</li>
+<li><strong>&laquo;rewrite_module&raquo;: strong dependency</strong></li>
+<li>&laquo;deflate_module&raquo;: will work without, but with no gzip</li>
+<li>&laquo;env_module&raquo;: will work without look in .htaccess</li>
+<li>&laquo;expires_module&raquo;: will work without look in .htaccess</li>
+<li>&laquo;filter_module&raquo;: will work without look in .htaccess</li>
+<li>&laquo;headers_module&raquo;: will work withouts look in .htaccess</li>
+<li>&laquo;mime_module&raquo;: will work without look in .htaccess</li>
+<li>&laquo;setenvif_module&raquo;: will work without look in .htaccess</li>
 </ul>
 <br />
 <br />
@@ -37,7 +35,7 @@ and sub dirs to make same settings.
 <li>Firefox 3.6+</li>
 <li>Google Chrome</li>
 <li>Opera 12 (or, may be older, we didn't make tests)</li>
-<li>Safari</li>
+<li>Safari 5</li>
 </ul>
 <br />
 <p>In common we could say: Latest WebKit or Gecko engine is fully supported.</p>

@@ -4,7 +4,7 @@
 
 <p>We hope it will help a lot of people to make simple things simplier.</p><br />
 
-<p>So, we will be glad if You'll appreciate our help to make such things...</p>
+<p>So, we will be glad if You'll appreciate our help with creation such things...</p>
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 	<input type="hidden" name="cmd" value="_s-xclick">

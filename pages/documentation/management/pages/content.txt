@@ -7,9 +7,9 @@
 
 <p>there is a Tree Structure at the left side of [Pages Manager][Page Editor] tab.</p><br />
 
-<p>Explanation of this tree is in that this is URLs or Paths inside of Fine Cut website: when somebody will browse it, words, used in this tree, are exact url paths with this tree hierarchy.</p>
+<p>Explanation of this tree is in that this is URLs or Paths inside of Fine Cut website: when somebody will browse it, words, used as names for tree leafs, are exact url paths with preservation of hierarchy.</p>
 
-<p>So, of the first level of that tree are: &laquo;about&raquo;, &laquo;documentation&raquo; ... &laquo;_index&raquo;.</p>
+<p>So, on the first level of that tree are: &laquo;about&raquo;, &laquo;documentation&raquo; ... &laquo;_index&raquo;.</p>
 <p>Then, when somebody will browse site, he will find an &laquo;<strong>about</strong>&raquo; page with path:<br />
 <br />
 <nobr>http://YourWebSite.url/YourFineCutDir/<strong>about</strong></nobr></p>
@@ -26,7 +26,7 @@
 <p>Last, but <strong>very important agreement</strong> about URLs is in that <strong>root index page</strong> is named as <strong>&laquo;_index&raquo;</strong> at the first level of that tree. However, if you need, you could change this through code of &laquo;_engine/index.php&raquo;</p>
 <hr>
 <p>Then, how do Fine Cut store pages, or &laquo;leafs&raquo;</p>
-<p>This moment each page created from four files: <br />
+<p>This moment each page generated from four files: <br />
 
 <p>&mdash; 
 <a href="/files/images/pm_editor.png" rel="lightbox[screenshost]" target="_blank" class = "scrImage">

@@ -20,4 +20,4 @@ Page Properties Snippet.
 <br />
 
 <br />
-<p>We usually editing template with our preferred PHP editor, without watching admin panel. Therefore ability to edit is done for situation when we need to make fast changes in something on production side.</p>
+<p>We usually editing template with our preferred PHP editor, without watching admin panel. Therefore ability to edit done for situation when we need to make fast changes in something on production side.</p>
