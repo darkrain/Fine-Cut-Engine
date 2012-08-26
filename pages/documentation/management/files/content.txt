@@ -1,4 +1,15 @@
--- Short el-Finder documentation
->> Changes in standard elfinder with link to docu
->> Toolbar panel
->> Editing with Tab and hotkeys
+<p>
+<a href = "/files/images/filemanager.png" target = "_blank">
+<img border = "0"  src="/files/images/filemanager.png" alt="elFinder File Manager" width = "660" border = "0">
+</a>
+</p>
+
+<p>It was very nesessary to manage files.</p>
+<p>There is a lot of file managers done for the Web.</p>
+<p>But we Love this one: than You a lot, men from <a href="http://elfinder.org/">elfinder</a> team!</p>
+<br />
+
+<p>However, we've made some changes.</p>
+<p>First of all, we need to use aged version, 1.3, because it integrates better.</p>
+<p>Then in file editor we've made embedding of Ctrl + S hotkey.</p>
+<p>And, the main thing was <a href="http://twitter.github.com/bootstrap/" target = "_blank">Twitter Bootstrap</a> CSS compatibility.</p>

@@ -1,10 +1,10 @@
 <div class = "well white">
 	Features:<br>
-	- Keep it Simple<br>
-	- No Database<br>
-	- Free from Fat<br>
-	- Free to Use<br>
-	- Integrate Well<br>
-	- No Pop Corn<br>
-	- No Spoon<br>
+	- Keep it Simple: such as it was possible<br>
+	- No Database: for engine itself<br>
+	- Free from Fat: actually, there is nothing at backside<br>
+	- Free to Use: MIT or GPL<br>
+	- Integrate Well: could include anything inside of pate or template<br>
+	- No Pop Corn: it is not a movie<br>
+	- No Spoon: we do remember &laquo;The Matrix&raquo; :)<br>
 </div>

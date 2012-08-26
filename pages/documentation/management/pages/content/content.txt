@@ -1,2 +1,65 @@
---- Tab button
---- Hot keys
+<p>
+<a href = "/files/images/pm_editor.png" target = "_blank">
+<img border = "0"  src="/files/images/pm_editor.png" alt="Pages Manager : Page Editor" width = "660" border = "0">
+</a>
+</p>
+
+<p>Here you could see we use a brilliant <a href="http://markitup.jaysalvat.com/home/" target="_blank">MarkitUp! Editor</a>.</p>
+<br />
+
+<p>Only small addition we made are hotkeys preset:</p>
+<ul>
+<li>
+<p>Ctrl + 1, Ctrl + 2 ... Ctrl + 6 : for Headings &lt;H1&gt;, &lt;H2&gt; ... &lt;H6&gt; </p>
+</li>
+
+<li>
+<p>
+Ctrl + P : for new paragraph &lt;P&gt;
+</p>
+</li>
+
+<li>
+<p>
+Ctrl + B, Ctrl + I : &lt;STRONG&gt; <strong>bold</strong> and &lt;EM&gt; <em>italic</em>
+</p>
+</li>
+
+<li>
+<p>
+Ctrl + L : for new <a href="/">link</a> &lt;A HREF="&gt;
+</p>
+</li>
+
+<li>
+<p>
+Ctrl + Q : for <strong>&amp;laquo;|&amp;raquo;</strong> &ndash; &laquo;|&raquo;
+</p>
+</li>
+
+<li>
+<p>
+Ctrl + 7 : for the dash <strong>&amp;ndash;</strong> <strong>&ndash; </strong>
+</p>
+</li>
+
+<li>
+<p>
+Ctrl + 8 : for the long dash <strong>&amp;mdash;</strong> <strong>&mdash; </strong>
+</p>
+</li>
+
+<li>
+<p>
+Ctrl + Space : for new &amp;nbsp; &ndash; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; *here we are with using it.
+</p>
+</li>
+
+<li>
+<p>
+<strong>Ctrl + S</strong> : for saving page without mouse usage... <br />
+</p>
+<p>And You could use Ctrl + S on every tab of &laquo;Pages Manager&raquo; also...</p>
+</li>
+
+</ul>

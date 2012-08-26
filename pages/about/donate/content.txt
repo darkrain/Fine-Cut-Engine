@@ -3,7 +3,6 @@
 <br />
 
 <p>We hope it will help a lot of people to make simple things simplier.</p><br />
-<br />
 
 <p>So, we will be glad if You'll appreciate our help to make such things...</p>
 
@@ -12,7 +11,3 @@
 	<input type="hidden" name="hosted_button_id" value="4X6HHDKV7HX98">
 	<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 </form>
-
-<hr />
-<p><nobr>Sincerely Yours! <br />
-Fine Cut Team</nobr></p>

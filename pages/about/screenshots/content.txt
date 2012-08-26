@@ -7,7 +7,7 @@
 		<div class="thumbnail">
 	 	 	 <a href="/files/images/pm_settings.png" rel="lightbox[screenshost]" target="_blank">
 <img border = "0"  src="/files/tumbs/pm_settings.png" alt="Pages Manager : Page Settings " width = "132" height = "89"></a>
-			<h5>Page &lt;Head&gt;</h5>
+			<h5>Page &lt;head&gt;</h5>
 			<p>Settings: keywords, description, title etc...</p>
 		</div>
 	</li>

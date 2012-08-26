@@ -1,3 +1,23 @@
--- Source Code
--- Snippet
--- Header
+<p>Each template is just three files:</p>
+
+<p>&mdash;
+<a href="/files/images/templates_ed.png" rel="lightbox[screenshost]" target="_blank" class = "scrImage">
+<img border = "0"  src="/files/tumbs/templates_ed.png" alt="Templates Manager : Template" width = "45" ></a>
+Template itself.
+</p>
+
+<p>&mdash;
+<a href="/files/images/templates_header.png" rel="lightbox[screenshost]" target="_blank" class = "scrImage">
+<img border = "0"  src="/files/tumbs/templates_header.png" alt="Templates Manager : Page Settings Snippet" width = "45" ></a>
+Page Settings Snippet.
+</p>
+
+<p>&mdash;
+<a href="/files/images/templates_snipp.png" rel="lightbox[screenshost]" target="_blank" class = "scrImage">
+<img border = "0"  src="/files/tumbs/templates_snipp.png" alt="Templates Manager : Page Properties Snippet" width = "45" ></a>
+Page Properties Snippet.
+</p>
+<br />
+
+<br />
+<p>We usually editing template with our preferred PHP editor, without watching admin panel. Therefore ability to edit is done for situation when we need to make fast changes in something on production side.</p>

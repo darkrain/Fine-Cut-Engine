@@ -1,8 +1,11 @@
-where is template folder
-what is template
+<p>We are using <pre>/templates/</pre>for storing &laquo;templates&raquo;.</p>
+<p>First of all we need to aware of using this folder for storing other data. Because each template except of default could be deleted from Admin panel. And, yes, you could &laquo;shoot your leg&raquo; with deleting even &laquo;default&raquo; template from <a href="/documentation/management/files/">file manager</a>.</p>
 
-add or change or remove
+<p>Each folder inside of &laquo;/templates/&raquo; is a name of template.</p>
 
-- Changing template
-- Adding new template
-- Removing template and page dependency
+
+<p><strong>Changing template</strong>: simpy edit it's code, settings or properties snippet and push &laquo;Save&raquo; button.</p>
+<p><strong>Adding new template</strong>: is little bit more complicated, because when you are pressing &laquo;Add&raquo; it justs makes a copy of selected template. And it is very usefull, You don't need to create a markup structure or make unnesessary editing.
+</p>
+
+<p><strong>Removing template</strong>: is a very simple too. It just deletes it's folder. But, we hope you could understand, that if there was dependency of some page from deleted template, then engine will break down on this page...</p>

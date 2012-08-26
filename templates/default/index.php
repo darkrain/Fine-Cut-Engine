@@ -48,7 +48,6 @@
 				</table>
 
 			</div>
-			<hr>
 			<div class = "navbar" id = "navigation">
 				<div class = "navbar-inner">
 					<div class = "container" >
@@ -95,8 +94,8 @@
 
 						<br>
 
-						<hr>
  <?php if( $success['blocks'][0]->value !== '' ){ ?>
+						<hr>
 						<pre>
 So, this is all about <?php echo  $success['blocks'][0]->value; ?>
 

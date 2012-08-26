@@ -1,1 +1,12 @@
->> Step out from block to remember in model
+<p>
+<a href = "/files/images/pm_blocks.png" target = "_blank">
+<img border = "0"  src="/files/images/pm_blocks.png" alt="Pages Manager : Page Blocks" width = "660" border = "0">
+</a>
+</p>
+
+<p>We use this page to create a collection of page's necessary data structure in one level array structure.</p>
+<p>It could be used to store, for example, news line or something else, not very long, but each like to another.</p>
+<br />
+<p><strong>Please, remember that here is strange behaviour.</strong></p>
+<p>When you will write something inside of a block, <strong>DO NOT SAVE PAGE IMMEDIATELY!</strong></p>
+<p>At first you need to <strong>STEP OUT</strong> of written block, because otherwise data will not be remembered inside of the blocks model.</p>

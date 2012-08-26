@@ -1,1 +1,84 @@
-from engine
+<p>Each template receives variable named <strong>$success</strong> from &laquo;engine&raquo;.</p>
+<p>Inside of that variable you could find:</p>
+
+
+<ul>
+<li>
+<p><strong>$success [ ' header ' ]</strong> &mdash; array with page setting: <br />
+	'title', 'description', 'keywords', 'template', 'pageIsCode'and 'header addition'.</p>
+</li>
+<li>
+<p><strong>$success [ ' info ' ]</strong> &mdash; JSON string with page properties.<br />
+	Usually we use
+<pre>
+&lt;?php include( $success["components"]["json_info"] ); ?&gt;
+</pre>
+for conversion to PHP array(); 
+</p>
+</li>
+
+<li>
+<p>
+<strong>$success [ ' content ' ]</strong> &mdash; path to page's content file.
+</p>
+<p>
+Then we are using
+<pre>
+&lt;?php include( $success["components"]["content_parser"] ); ?&gt;
+</pre>
+for including content to page.
+</p>
+</li>
+
+
+<li>
+<p>
+<strong>$success [ ' blocks ' ]</strong> &mdash; an array() of &laquo;Page Blocks&raquo;.
+</p>
+</li>
+
+
+<li>
+<p>
+<strong>$success [ ' deep ' ]</strong> &mdash; &laquo;path&raquo; from &laquo;Document Root&raquo; to Fine Cut installation folder.
+</p>
+</li>
+
+
+<li>
+<p>
+<strong>$success [ ' path ' ]</strong> &mdash; &laquo;path&raquo; to page's directory.
+</p>
+</li>
+
+<li>
+<p>
+<strong>$success [ ' pagesPath ' ]</strong> &mdash; &laquo;path&raquo; to the directory where all pages are stored.
+</p>
+</li>
+
+<li>
+<p>
+<strong>$success [ ' pagesName ' ]</strong> &mdash; &laquo;name&raquo; of a directory where all pages are stored.
+</p>
+</li>
+
+<li>
+<p>
+<strong>$success [ ' isMain ' ]</strong> &mdash; criterion whether the page is an Root page os whole website or not.
+</p>
+</li>
+
+<li>
+<p>
+<strong>$success [ ' components ' ]</strong> &mdash; an array of links to availiable components.
+</p>
+</li>
+
+<li>
+<p>
+<strong>$success [ ' fileNameEncoding ' ]</strong> &mdash; if you will wish to create files from template, you will need this property to acheive task completition properly.
+</p>
+</li>
+
+</ul>
