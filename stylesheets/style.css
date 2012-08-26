@@ -1,0 +1,44 @@
+body {
+	margin: 10px 5px 0px 5px;
+	min-width: 950px;
+	overflow-y: scroll;
+}
+
+.white {
+	background: white;
+}
+div.logo {
+	min-width: 800px;
+	height: 110px;
+	padding: 20px 20px 20px 70px;
+	text-align: center;
+}
+
+ul.left_menu li a {
+	display: inline-block;
+	padding: 3px 19px 2px 17px;
+	margin: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;	
+}
+ul.left_menu li a.active {
+	background: #ddd;
+}
+
+ul.left_menu.documents li a {
+	margin: 0px;
+	padding: 2px 8px 1px 10px;
+}
+ul.left_menu li.divider {
+	margin: 7px 5px 5px -15px;
+	padding: 0px;
+	list-style: none;
+	border-bottom: 1px dotted gray;
+}
+
+
+
+div.documentationHeader {
+	padding: 11px 20px 11px 20px;
+}
