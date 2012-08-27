@@ -21,7 +21,7 @@
 <nobr>http://YourWebSite.url/YourFineCutDir/<strong>about/screenshots</strong></nobr></p>
 <br />
 
-<p><em>And here we need to note, that if you will create folder with name &laquo;<strong>about</strong>&raquo; direcly inside of Fine Cut insallation dir, you wouldn't be able to get page with name &laquo;<strong>about</strong>&raquo; from Fine Cut itself, because of real URL for this page will exist in this situation. Therefore URL planning is a very important thing, you need to think of.</em></p>
+<p><em>And here we need to note, that if you will create folder with name &laquo;<strong>about</strong>&raquo; directly inside of Fine Cut intsallation dir, you wouldn't be able to get page with name &laquo;<strong>about</strong>&raquo; from Fine Cut itself, because of real URL for this page will exist in this situation. Therefore URL planning is a very important thing, you need to think of.</em></p>
 
 <p>Last, but <strong>very important agreement</strong> about URLs is in that <strong>root index page</strong> is named as <strong>&laquo;_index&raquo;</strong> at the first level of that tree. However, if you need, you could change this through code of &laquo;_engine/index.php&raquo;</p>
 <hr>

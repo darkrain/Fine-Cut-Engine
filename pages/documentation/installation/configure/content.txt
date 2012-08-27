@@ -24,7 +24,7 @@
 <p>Last thing we wish to say about setting is that you could move Admin panell to other path.<br />
 At first you'll need to rename &laquo;<strong>_adm</strong>&raquo; <br />
 inside of &laquo;<strong>_engine\index.php</strong>&raquo; code.
-This key strng is at line 3 there.<br />
+This &laquo;key string&raquo; is at line 3 there.<br />
 Then you should simply rename folder.<br />
 All this could be done inside Admin panel.
 After doing this go to panel new path <strong>immediately</strong>, because all browser scripts right now are looking to wrong folder.
