@@ -15,17 +15,17 @@ and sub dirs to make same settings.
 <p>However, as for Apache, we need to use modules:</p>
 <ul>
 <li><strong>&laquo;rewrite_module&raquo;: strong dependency</strong></li>
-<li>&laquo;deflate_module&raquo;: will work without, but with no gzip</li>
-<li>&laquo;env_module&raquo;: will work without look in .htaccess</li>
-<li>&laquo;expires_module&raquo;: will work without look in .htaccess</li>
-<li>&laquo;filter_module&raquo;: will work without look in .htaccess</li>
-<li>&laquo;headers_module&raquo;: will work withouts look in .htaccess</li>
-<li>&laquo;mime_module&raquo;: will work without look in .htaccess</li>
-<li>&laquo;setenvif_module&raquo;: will work without look in .htaccess</li>
+<li>&laquo;deflate_module&raquo;: will work without, but with no <a href="http://en.wikipedia.org/wiki/Gzip" target = "_blank">gzip</a></li>
+<li>&laquo;env_module&raquo;: will work without look in &laquo;.htaccess&raquo;</li>
+<li>&laquo;expires_module&raquo;: will work without look in &laquo;.htaccess&raquo;</li>
+<li>&laquo;filter_module&raquo;: will work without look in &laquo;.htaccess&raquo;</li>
+<li>&laquo;headers_module&raquo;: will work withouts look in &laquo;.htaccess&raquo;</li>
+<li>&laquo;mime_module&raquo;: will work without look in &laquo;.htaccess&raquo;</li>
+<li>&laquo;setenvif_module&raquo;: will work without look in &laquo;.htaccess&raquo;</li>
 </ul>
 <br />
 <br />
-<p>Yes, you don't need database engine to run Fine Cut.</p>
+<p><strong>Yes, we don't need database engine to run Fine Cut</strong>.</p>
 <br />
 <br />
 

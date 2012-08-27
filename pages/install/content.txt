@@ -1,4 +1,4 @@
-<p>Fin Cut is bundled as an archive.</p>
+<p>Fine Cut is bundled as an archive.</p>
 <br />
 
 <p>It don't need any DB, therefore installation process is extremely simple.<br /><br />

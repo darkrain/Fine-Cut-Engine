@@ -6,20 +6,20 @@
 
 <ul>
 
-<li><strong>content_parser</strong> &mdash; for <a href="/documentation/installation/sub_folder_memo/">parsing links</a> inside of page content. </li>
+<li>&laquo;<strong>content_parser</strong>&raquo; &mdash; for <a href="/documentation/installation/sub_folder_memo/">parsing links</a> inside of page content. </li>
 
-<li><strong>head_additional</strong> &mdash; the same as &laquo;content_parser&raquo; but for page settings &laquo;header additional&raquo; data.</li>
+<li>&laquo;<strong>head_additional</strong>&raquo; &mdash; the same as &laquo;content_parser&raquo; but for page settings &laquo;header additional&raquo; data.</li>
 
-<li><strong>json_info</strong> &mdash; converter for <em>$success['header']['info']</em> JSON string to an array. </li>
+<li>&laquo;<strong>json_info</strong>&raquo; &mdash; converter for <em>$success['header']['info']</em> JSON string to an array. </li>
 
-<li><strong>menu_documents</strong> &mdash; generates HTML UL &gt; LI list structure from folder, currently just a draft.</li>
+<li>&laquo;<strong>menu_documents</strong>&raquo; &mdash; generates HTML UL &gt; LI list structure from folder, currently just a draft.</li>
 
-<li><strong>menu_left</strong> &mdash; generates left side menu from <em>$success['header']['info']</em> JSON array.</li>
+<li>&laquo;<strong>menu_left</strong>&raquo; &mdash; generates left side menu from <em>$success['header']['info']</em> JSON array.</li>
 
-<li><strong>menu_left_json</strong> &mdash; generates left side menu from stored file.</li>
+<li>&laquo;<strong>menu_left_json</strong>&raquo; &mdash; generates left side menu from stored file.</li>
 
-<li><strong>menu_main</strong> &mdash; generates page main menu from <em>$success['header']['info']</em> JSON array.</li>
+<li>&laquo;<strong>menu_main</strong>&raquo; &mdash; generates page main menu from <em>$success['header']['info']</em> JSON array.</li>
 
-<li><strong>menu_main_json</strong> &mdash; generates main menu from stored file.</li>
+<li>&laquo;<strong>menu_main_json</strong>&raquo; &mdash; generates main menu from stored file.</li>
 
 </ul>

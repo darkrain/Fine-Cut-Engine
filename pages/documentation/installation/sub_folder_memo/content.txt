@@ -1,5 +1,5 @@
 <p>If you'll work with Fine Cut inside of &laquo;sub folder&raquo; of &laquo;document root&raquo; folder you shoud keep in mid that you are working inside.</p>
-<p>By defauld, everything in Fine Cut is independent, components and default templates made relevant to any filesystem path.</p>
+<p>By default, everything in Fine Cut is independent, components and default templates made relevant to any filesystem path.</p>
 <p>Please, learn how we did this before creating own one.</p>
 <p>And, here are some advices:</p>
 <ul>
