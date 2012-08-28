@@ -16,7 +16,7 @@
 	 	 	 <a href="/files/images/pm_editor.png" rel="lightbox[screenshost]" target="_blank">
 <img border = "0"  src="/files/tumbs/pm_editor.png" alt="Pages Manager : Page Editor" width = "132" ></a>
 			<h5>Page Editor</h5>
-			<p>How it looks like to edit pages? <a href="http://markitup.jaysalvat.com/home/" target="_blank">MarkitUp!</a></p>
+			<p>It looks like to edit pages: <a href="http://ace.ajax.org/" target="_blank">ACE Editor!</a></p>
 		</div>
 	</li>
 	<li class="span2">
@@ -42,7 +42,7 @@
 	 	 	 <a href="/files/images/templates_ed.png" rel="lightbox[screenshost]" target="_blank">
 <img border = "0"  src="/files/tumbs/templates_ed.png" alt="Template Editor" width = "132" height = "89"></a>
 			<h5>Template Editor</h5>
-			<p>Simple Textarea with [Tab] key from US</p>
+			<p>Awsome <a href="http://ace.ajax.org/" target="_blank">ACE Editor!</a> again, again!!!</p>
 		</div>
 	</li>
 	<li class="span2">

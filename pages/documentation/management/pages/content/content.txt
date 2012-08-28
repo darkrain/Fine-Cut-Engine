@@ -4,7 +4,7 @@
 </a>
 </p>
 
-<p>Here you could see we use a brilliant <a href="http://markitup.jaysalvat.com/home/" target="_blank">MarkitUp! Editor</a>.</p>
+<p>Here you could see we use a brilliant <a href="http://ace.ajax.org/" target="_blank">ACE Editor</a>.</p>
 <br />
 
 <p>Only small addition we made are hotkeys preset:</p>
@@ -51,7 +51,7 @@ Ctrl + 8 : for the long dash <strong>&amp;mdash;</strong> <strong>&mdash; </stro
 
 <li>
 <p>
-Ctrl + Space : for new &amp;nbsp; &ndash; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; *here we are with using it.
+Ctrl + 9 : for new &amp;nbsp; &ndash; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; *here we are with using it.
 </p>
 </li>
 
