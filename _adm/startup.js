@@ -9,7 +9,7 @@
 		};
 
 		var settings_path = '';
-		
+
 		var load_settings_path = function(){
 			$.ajax( {
 				  type: "POST"
@@ -21,7 +21,7 @@
 			} ) ;
 		}
 
-		
+
 		$( '#tabsContent' ).tabs();
 
 		// for saving changes: copy/paste;
@@ -222,6 +222,12 @@
 				$( "#ui-dialog-confirm-dialog span.message" ).text( message );
 				$( "#ui-dialog-confirm-dialog" ).dialog( 'open' );
 			}
+			
+			, replaceInfoNR	: function(str){
+				str = str.replace(/\n/g, '').replace(/\t/g, '').replace(/\r/g, '');
+				return js_beautify( str );
+			}
+			
 			, response	: function( data , leaf , callback ){
 				try{
 					if( data !== '' ){
@@ -229,6 +235,10 @@
 
 						if(typeof(obj.page.header) === 'string'){
 							obj.page.header = JSON.parse( obj.page.header );
+						}
+						
+						if(typeof(obj.page.info) === 'string'){
+							obj.page.info = helpers.replaceInfoNR( obj.page.info );
 						}
 						
 						if( obj.status ){
@@ -252,7 +262,9 @@
 
 				$('#treePagesEditor-pageIsCode').attr('checked', false);
 
-				$( '#pages-editor' ).val( '' );
+				// $( '#pages-editor' ).val( '' );
+
+				ACEditors.pages.setValue( '', -1 );
 
 				// $( '#pages-editor' ).elrte('val', '   ' )
 				// $( '#pages-editor' ).elrte('updateSource');
@@ -265,10 +277,15 @@
 
 				var obj = {
 					  header 	: emptyleaf.header
-					, content	: $( '#pages-editor' ).val()
+
+					// , content	: $( '#pages-editor' ).val()
+					, content	: ACEditors.pages.getValue()
+
 					// , content	: $( '#pages-editor' ).elrte('val')
 					, info		: $( '#treePagesEditor-info' ).val()
 				};
+				
+				obj.info = helpers.replaceInfoNR( obj.info );
 
 				for( var i in emptyleaf.header ){
 					if( $( '#treePagesEditor-' + i )[0] ){
@@ -280,7 +297,7 @@
 
 				obj.header.pageIsCode = chkd;
 				obj.blocks = blocks.save();
-				
+
 				return obj;
 
 			}
@@ -289,7 +306,7 @@
 				try{
 
 					// helpers.clearValues();
-					
+
 					if( obj.header !== undefined ){
 						for( var i in emptyleaf.header ){
 							if( obj.header[i] !== undefined ){
@@ -300,6 +317,9 @@
 						}
 					}
 					if( obj.info !== undefined ){
+						
+						obj.info = helpers.replaceInfoNR( obj.info );
+						
 						$( '#treePagesEditor-info' ).val( obj.info );
 						window.setTimeout( function(){ // forcing jsoneditor
 							$('#treePagesEditor-info').click();
@@ -320,7 +340,9 @@
 
 					$('#treePagesEditor-pageIsCode').attr( 'checked', obj.header.pageIsCode );
 
-					$( '#pages-editor' ).val( obj.content );
+					// $( '#pages-editor' ).val( obj.content );
+					ACEditors.pages.setValue( obj.content, -1 );
+					
 					$("#treePagesEditor-template").trigger("liszt:updated");
 
 				}catch(e){ alert(e); }
@@ -333,7 +355,7 @@
 
 				// debugger;
 				// !!! keep in mind about ORDER of properties in string !!!
-				
+
 				if( compare ==  values ) {
 					return true;
 				}else{
@@ -344,14 +366,20 @@
 			, saveLeaf : function(){
 				try{
 
-					var ed = $('#pages-editor');
-					var editor = ed[0];
-					var scrollTop = editor.scrollTop;
-					var carretPosition = editor.selectionStart;
+					// var ed = $('#pages-editor');
+					// var editor = ed[0];
+					// var scrollTop = editor.scrollTop;
+					// var carretPosition = editor.selectionStart;
 
+					var cursorPosition = ACEditors.pages.getCursorPosition();
+					var session = ACEditors.pages.getSession();
+					var scrTop = session.getScrollTop();
+
+					
 					var tree = $('#treePages').prop( 'tree' );
 					var path = tree.currentPath();
 					if( path.arr.length > 1 ){
+						
 						helpers.growl( 'Saving Leaf Started...', 1000 );
 						tree.shLoader( path.leaf, true );
 						// var enc = function(str){ return encodeURIComponent(str); }
@@ -364,10 +392,18 @@
 							helpers.clearValues();
 							helpers.response( data , path.leaf );
 							tree.shLoader( path.leaf, false );
-							
-							editor.scrollTop = scrollTop;
-							editor.setSelectionRange( carretPosition, carretPosition);
-							
+
+							// editor.scrollTop = scrollTop;
+							// editor.setSelectionRange( carretPosition, carretPosition );
+
+							ACEditors.pages.moveCursorToPosition(cursorPosition);
+							window.setTimeout(function(){
+								// $('.ace_editor .ace_sb').scrollTop(scrTop);
+								var session = ACEditors.pages.getSession();
+								session.setScrollTop(scrTop);
+
+							}, 50);
+
 							helpers.growl( 'Leaf Saved...', 2000 );
 						} );
 					}else{
@@ -385,7 +421,7 @@
 							helpers.message('Notification!', 'You need to Select some page before trying to Save it!');
 						}
 					}
-					
+
 				}catch(e){ alert(e); }
 			}
 		}
@@ -413,38 +449,141 @@
 
 		// jQuery('#pages-editor').wymeditor();
 
-		$('#pages-editor').markItUp( mySettings );
-		$('#markItUpPages-editor, .markItUpContainer').addClass('ui-corner-all');
+		// $('#pages-editor').markItUp( mySettings );
+		// $('#markItUpPages-editor, .markItUpContainer').addClass('ui-corner-all');
+		
+		
+		var dom = ace.require("ace/lib/dom");
 
+		//add command to all new editor instaces
+		var defCommands = ace.require("ace/commands/default_commands");
+		defCommands.commands.push({
+			name: "Toggle Fullscreen",
+			bindKey: "F11",
+			exec: function(editor) {
+				dom.toggleCssClass(document.body, "fullScreen");
+				dom.toggleCssClass(editor.container, "fullScreen");
+				editor.resize();
+			}
+		});
 
-		var markitupHelper = {
-			get: function () {
-				var textarea = $('#pages-editor');
-				var selection, caretPosition;
-				if (document.selection) {
-					selection = document.selection.createRange().text;
-					if ($.browser.msie) { // ie
-						var range = document.selection.createRange(),
-						rangeCopy = range.duplicate();
-						
-						rangeCopy.moveToElementText(textarea);
-						caretPosition = -1;
-						while(rangeCopy.inRange(range)) {
-							rangeCopy.moveStart('character');
-							caretPosition ++;
-						}
-					} else { // opera
-						selection = textarea.selectionStart;
+		var bindAceKeys = function( bond ){
+			bond.commands.bindKeys( {
+				'ctrl-r': null,
+				'ctrl-shift-r': null
+			} );
+			var arr3 = {
+				'ctrl-q': ['&laquo;', '&raquo;'],
+				'ctrl-i': 'em',
+				'ctrl-b': 'strong',
+				'ctrl-p': 'p',
+				'ctrl-9': ['&nbsp; '],
+				'ctrl-8': ['&mdash; '],
+				'ctrl-7': ['&ndash; '],
+				'ctrl-6': 'h6',
+				'ctrl-5': 'h5',
+				'ctrl-4': 'h4',
+				'ctrl-3': 'h3',
+				'ctrl-2': 'h2',
+				'ctrl-1': 'h1',
+			};
+			for(var i in arr3){
+				var obj = {};
+				obj[i] = (function(str){
+					return function(){
+						bindAceKeys.variator( bond, str );
 					}
-				} else { // gecko & webkit
-					selection = textarea.value.substring(textarea.selectionStart, textarea.selectionEnd);
-				} 
-				return  textarea.selectionStart; // gecko & webkit & opera
-			}		
+				})(arr3[i], bond);
+				bond.commands.bindKeys( obj );
+			};
+		};
+		bindAceKeys.variator = function( bond, str ){
+			var cursorPosition = bond.getCursorPosition();
+			if(typeof(str) == 'string'){
+				cursorPosition.column += ( 2 + str.length );
+				bond.insert('<' + str + '></' + str + '>');
+			}else{
+				if($.isArray(str)){
+					cursorPosition.column += str[0].length;
+					var ins = str.join('');
+					bond.insert(ins);
+				}
+			}
+			bond.moveCursorToPosition(cursorPosition);
 		};
 		
+		var ACEditors = {
+			template : ace.edit('templ-source-editor'),
+			pages : ace.edit('pages-editor')
+		};
 		
+		bindAceKeys(ACEditors.pages);
+		
+		ACEditors.pages.setTheme('ace/theme/chrome');
+		var pagesSession = ACEditors.pages.session;
+		pagesSession.setMode('ace/mode/html');
+		$('#pages-editor, #pages-editor-tab, #pages-editor-tab-btn').on('click', function(){
+			ACEditors.pages.focus();
+		});
+		
+		pagesSession.setUseWrapMode( true );
+		ACEditors.pages.renderer.setShowGutter( false );
+		// ACEditors.pages.setFontSize('1.01em');
+		
+		
+		
+		var editorPagesBtns = [ ['h1','1'], ['h2','2'], ['h3','3'], ['h4','4'], 
+			['h5','5'], ['h6','6'], ['B','b'], ['P','p'], ['I','i'] ];
+		for( var i = 0; i < editorPagesBtns.length; i++ ){
+			(function(i){
+				var nm = editorPagesBtns[i];
+				$( '#pages-editor-buttons-' + nm[0] ).click( function(){ ACEditors.pages.commands.exec( 'ctrl-' + nm[1] ); } );
+			})(i);
+		};
 
+		$( '#pages-editor-buttons-Link' ).click( function(){
+			var val = prompt('Plase Fill Link!', 'http://');
+			if(val){
+				var str = '<a href = "'+val+'"';
+				confirm(' New Tab (OK) or This tab (Cancel)?') && ( str += ' target = "_blank" ');
+				str += '>';
+				bindAceKeys.variator( ACEditors.pages, [str, '</a>'] );
+			}
+		} );
+		
+		$( '#pages-editor-buttons-Image' ).click( function(){
+			var val = prompt('Plase Fill SRC!', 'http://');
+			if(val){
+				var str = '<image src = "'+val+'" border = "0" alt = "' ;
+				bindAceKeys.variator( ACEditors.pages, [str, '" />'] );
+			}
+		} );
+		
+		$( '#pages-editor-buttons-Help' ).click( function(){
+			var data = '\n\
+Hotkeys preset memo:\n\n\
+Ctrl + 1, Ctrl + 2 ... Ctrl + 6 : for Headings H1, H2 ... H6\n\
+Ctrl + P : for new paragraph <P>\n\
+Ctrl + B, Ctrl + I : <strong>bold</strong> and <em>italic</em>\n\
+Ctrl + L : <a href="/"> link </a> \n\
+Ctrl + Q : &laquo; | &raquo;\n\
+Ctrl + 7 : the dash - &ndash;\n\
+Ctrl + 8 : the long dash - &mdash;\n\
+Ctrl + 9 : &nbsp; \n\
+\n\
+Ctrl + Z : Undo\n\
+\n\
+Ctrl + S : Save Leaf\n\
+\n\
++ default ACE Editor preset\n\n';
+
+			bindAceKeys.variator( ACEditors.pages, [data] );
+		} );
+		
+		window.setTimeout( function(){ ACEditors.pages.focus(); }, 500);
+		
+		
+		
 		var rid_index = function( direct ) {
 
 			// menu generation code for current leaf, used for documentation!
@@ -493,7 +632,7 @@
 
 		$( '#leaf_copy' ).button({ text: false, icons: { primary: 'ui-icon-scissors' }
 			, label: 'Copy Leaf Contents to Internal Clipboard' }).click( function(){
-				buffer = helpers.getValues(); } );
+				buffer = helpers.getValues(); buffer.blocks = JSON.stringify( buffer.blocks ); } );
 
 		$( '#leaf_paste' ).button({ text: false, icons: { primary: 'ui-icon-clipboard' }
 			, label: 'Paste Leaf Contents from Internal Clipboard' }).click( function(){
@@ -549,7 +688,7 @@
 			} );
 
 		$( '#toggle_tree' ).button({ text: false, icons: { primary: 'ui-icon-circle-arrow-w' }
-			, label: ' Hide / Show Tree' }).click(
+			, label: ' Hide / Show Tree ( Alt + T )' }).click(
 				function(){
 					$('#treePages').toggle();
 					var elem = $(this).find('span').eq(0);
@@ -558,6 +697,7 @@
 					}else{
 						elem.removeClass('ui-icon-circle-arrow-e').addClass('ui-icon-circle-arrow-w');
 					}
+					ACEditors.pages.resize();
 				} );
 
 
@@ -577,7 +717,7 @@
 							var tree = $('#treePages').prop( 'tree' );
 							var path = tree.currentPath();
 							var leafData = emptyleaf;
-							
+
 							if( path.arr.length > 1 ){ // if there is selected leaf
 								var chk = $( '#tree-dialog-leaf-add-form-checkbox' ).attr('checked') == 'checked';
 								path = tree.currentPath( chk );
@@ -587,7 +727,7 @@
 								if( !helpers.checkValues( emptyleaf ) ){ var leafData = helpers.getValues(); }
 								path = path;
 							}
-							
+
 							leafData.header.template = $( '#tree-dialog-leaf-add-form-template' ).val();
 
 
@@ -657,7 +797,15 @@
 
 		// templates
 
+		bindAceKeys( ACEditors.template );
 		
+		ACEditors.template.setTheme('ace/theme/chrome');
+		ACEditors.template.session.setMode('ace/mode/php');
+		$('#templ-source-editor, #templ-source-tab, #templ-source-tab-btn').on('click', function(){
+			ACEditors.template.focus();
+		});
+
+
 		var applyTemplateDataToPage = function( obj ){
 
 			$('#treePagesEditor-info').val( obj.snippet );
@@ -665,37 +813,37 @@
 				// forcing jsoneditor
 				$('#treePagesEditor-info').click();
 			}, 300 );
-			
+
 			var header = emptyleaf.header;
 			try{
 				header = JSON.parse( obj.header );
 			}catch(e){ }
-			
+
 			for( var i in emptyleaf.header ){
 				if( $( '#treePagesEditor-' + i )[0] ){
 					var val = header[i] || emptyleaf.header[i];
 					$( '#treePagesEditor-' + i ).val( val );
 				}
 			}
-			
-			$("#treePagesEditor-template").trigger("liszt:updated");
-			
+
+			$("#treePagesEditor-template").trigger('liszt:updated');
+
 		}
-		
+
 		$( '#treePagesEditor-template' ).chosen().change( function(){
 			var val = $( '#treePagesEditor-template' ).val();
 			templateAction( 'getInfo', val,
 				function( data ){
 					var obj = JSON.parse( data );
 					helpers.growl( 'Template "' + val + '" data Received.' , 1000 );
-					
+
 					var tree = $('#treePages').prop( 'tree' );
 					var path = tree.currentPath();
-					
+
 					if( path.arr.length > 1 ){ // if there is selected leaf
 						helpers.confirm( 'Need confirmation', 'Apply Template data to page?' , function(){
 							applyTemplateDataToPage( obj );
-						} );	
+						} );
 					}else{
 						applyTemplateDataToPage( obj );
 					}
@@ -704,7 +852,7 @@
 
 		} );
 
-		
+
 		$('#templ-snippet-editor').on( 'click change', function(){
 			var snippetjson = {};
 			var val = $(this).val();
@@ -745,11 +893,11 @@
 				}
 			}
 			header.template = $( '#templManager-template' ).val();
-		
+
 			var chkd = ( $('#templHeader-pageIsCode').attr('checked') == 'checked' ) ? true : false;
 
 			header.pageIsCode = chkd;
-			
+
 			return JSON.stringify( header );
 		};
 
@@ -764,15 +912,17 @@
 			if( action == 'get' ){
 				callback = function( data ){
 					var obj = JSON.parse( data );
-					$('#templ-source-editor').val( obj.source );
+
+					ACEditors.template.setValue( obj.source, -1 );
+
 					$('#templ-snippet-editor').val( obj.snippet );
 
-					
+
 					var header = emptyleaf.header;
 					try{
 						header = JSON.parse( obj.header );
 					}catch(e){ }
-					
+
 					for( var i in emptyleaf.header ){
 						if( $( '#templHeader-' + i )[0] ){
 							var val = header[i] || emptyleaf.header[i];
@@ -784,7 +934,7 @@
 					window.setTimeout( function(){ // forcing jsoneditor
 						$('#templ-snippet-editor').click();
 					}, 300 );
-					
+
 					callbackFn && callbackFn(data)
 				}
 			}
@@ -796,24 +946,44 @@
 			if( action == 'save' ){
 
 				$.extend( obj , {
-					source : $('#templ-source-editor').val(),
+
+					// source : $('#templ-source-editor').val(),
+					source : ACEditors.template.getValue(),
+
 					snippet : $('#templ-snippet-editor').val(),
 					header: collectTemplateHeader( obj.template )
 				});
 
-				callback = function( data ){
-					if( data == 'success' ){
-						helpers.growl( 'Template was Successfully Saved.' );
-						templateAction( 'get' );
-					}else{ alert(data); }
-				};
+				var cursorPosition = ACEditors.template.getCursorPosition();
+				// var scrTop = $('.ace_editor .ace_sb ').scrollTop();
+				var session = ACEditors.template.getSession();
+				var scrTop = session.getScrollTop();
+				
+				callback = (function(cursorPosition, scrTop){
+					return function( data ){
+						if( data == 'success' ){
+							helpers.growl( 'Template was Successfully Saved.' );
+							templateAction( 'get', null, function(){
+								ACEditors.template.moveCursorToPosition(cursorPosition);
+								window.setTimeout(function(){
+									// $('.ace_editor .ace_sb').scrollTop(scrTop);
+									var session = ACEditors.template.getSession();
+									session.setScrollTop(scrTop);
+
+								}, 50);
+							} );
+						}else{ alert(data); }
+					};
+				})(cursorPosition, scrTop);
 
 			}
 
 			if(  action == 'add' ){
 
 				$.extend( obj , {
-					source : $('#templ-source-editor').val(),
+					// source : $('#templ-source-editor').val(),
+					source : ACEditors.template.getValue(),
+
 					snippet : $('#templ-snippet-editor').val(),
 					header: collectTemplateHeader( obj.template )
 				});
@@ -976,7 +1146,10 @@
 			var initialHeightsConfig = ['tabsContent', 'treePages', 'treePagesEditor', 'pages-editor',
 				'treePagesEditor-description', 'treePagesEditor-additional', 'treePagesEditor-info-snippet',
 				'templHeader-description', 'templHeader-additional',
-				'templ-source-editor', 'snippeteditor', 'fileManager', 'settings-editor-text'];
+
+				'templ-source-editor', 'templ-source-container',
+
+				'snippeteditor', 'fileManager', 'settings-editor-text'];
 
 			var initialHeights = {};
 
@@ -1007,6 +1180,9 @@
 					$('#elfinder').find('div.el-finder-nav, div.el-finder-cwd')
 						.height( 530 );
 				}
+
+				ACEditors.template.resize();
+
 			};
 
 			$(window).on('resize', function(){
@@ -1042,6 +1218,15 @@
 					}
 					if( !$( '#settingsManager' ).hasClass('ui-tabs-hide') ){
 						saveSettingsAction();
+					}
+				}
+				// Alt + T
+				if (evt.altKey && evt.keyCode == 84) {
+					evt.stopPropagation();
+					evt.preventDefault();
+					if( !$( '#pagesManager' ).hasClass('ui-tabs-hide') ){
+						$( '#toggle_tree' ).click();
+						ACEditors.pages.focus();
 					}
 				}
 			}catch(e){ alert(e); }
@@ -1087,7 +1272,7 @@
 		}else{
 			$(document.body).fadeIn( 500 );
 		}
-		
+
 		load_settings_path();
 
 	}catch(e){ alert(e); }
