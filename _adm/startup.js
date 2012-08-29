@@ -222,12 +222,12 @@
 				$( "#ui-dialog-confirm-dialog span.message" ).text( message );
 				$( "#ui-dialog-confirm-dialog" ).dialog( 'open' );
 			}
-			
+
 			, replaceInfoNR	: function(str){
 				str = str.replace(/\n/g, '').replace(/\t/g, '').replace(/\r/g, '');
 				return js_beautify( str );
 			}
-			
+
 			, response	: function( data , leaf , callback ){
 				try{
 					if( data !== '' ){
@@ -236,11 +236,11 @@
 						if(typeof(obj.page.header) === 'string'){
 							obj.page.header = JSON.parse( obj.page.header );
 						}
-						
+
 						if(typeof(obj.page.info) === 'string'){
 							obj.page.info = helpers.replaceInfoNR( obj.page.info );
 						}
-						
+
 						if( obj.status ){
 							leaf.obj.page = obj.page;
 							helpers.setValues( obj.page );
@@ -284,7 +284,7 @@
 					// , content	: $( '#pages-editor' ).elrte('val')
 					, info		: $( '#treePagesEditor-info' ).val()
 				};
-				
+
 				obj.info = helpers.replaceInfoNR( obj.info );
 
 				for( var i in emptyleaf.header ){
@@ -317,9 +317,9 @@
 						}
 					}
 					if( obj.info !== undefined ){
-						
+
 						obj.info = helpers.replaceInfoNR( obj.info );
-						
+
 						$( '#treePagesEditor-info' ).val( obj.info );
 						window.setTimeout( function(){ // forcing jsoneditor
 							$('#treePagesEditor-info').click();
@@ -342,7 +342,7 @@
 
 					// $( '#pages-editor' ).val( obj.content );
 					ACEditors.pages.setValue( obj.content, -1 );
-					
+
 					$("#treePagesEditor-template").trigger("liszt:updated");
 
 				}catch(e){ alert(e); }
@@ -375,11 +375,11 @@
 					var session = ACEditors.pages.getSession();
 					var scrTop = session.getScrollTop();
 
-					
+
 					var tree = $('#treePages').prop( 'tree' );
 					var path = tree.currentPath();
 					if( path.arr.length > 1 ){
-						
+
 						helpers.growl( 'Saving Leaf Started...', 1000 );
 						tree.shLoader( path.leaf, true );
 						// var enc = function(str){ return encodeURIComponent(str); }
@@ -451,8 +451,8 @@
 
 		// $('#pages-editor').markItUp( mySettings );
 		// $('#markItUpPages-editor, .markItUpContainer').addClass('ui-corner-all');
-		
-		
+
+
 		var dom = ace.require("ace/lib/dom");
 
 		//add command to all new editor instaces
@@ -493,7 +493,7 @@
 				// 'shift-Space': [ '123' ]
 				'shift-Space': [ '<br />' ]
 				// also: Ctrl Shift Alt Space Edit
-				
+
 			};
 			for(var i in arr3){
 				var obj = {};
@@ -519,14 +519,14 @@
 			}
 			bond.moveCursorToPosition(cursorPosition);
 		};
-		
+
 		var ACEditors = {
 			template : ace.edit('templ-source-editor'),
 			pages : ace.edit('pages-editor'),
 			settings : ace.edit('settings-editor-text')
 		};
 
-		
+
 		var storeACEditorTheme = function( theme ) {
 			try{
 				var opts = { name : 'settings_finecut_ace_editor_theme', opts : { expires: 7 } };
@@ -538,17 +538,17 @@
 				}
 			}catch(e){ }finally{ return theme; }
 		}
-		
-		
+
+
 		$( '#ace_theme' ).change( function(){
 			var val = $( '#ace_theme' ).val();
 			storeACEditorTheme( val );
 			for(var i in ACEditors){ ACEditors[i].setTheme( val ); }
 		} );
-		
+
 		bindAceKeys( ACEditors.pages );
 		bindAceKeys( ACEditors.settings );
-		
+
 		var aceEditorTheme = 'ace/theme/chrome';
 		var aceEditorCookieTheme = storeACEditorTheme();
 		if( aceEditorCookieTheme ) {
@@ -558,28 +558,28 @@
 		}else{
 			storeACEditorTheme( aceEditorTheme );
 		}
-		
+
 		ACEditors.pages.setTheme( aceEditorTheme );
 		ACEditors.settings.setTheme( aceEditorTheme );
-		
+
 		var pagesSession = ACEditors.pages.session;
 		pagesSession.setMode('ace/mode/html');
-		
+
 		ACEditors.settings.session.setMode( 'ace/mode/php' );
-		
+
 		$('#pages-editor, #pages-editor-tab, #pages-editor-tab-btn').on('click', function(){
 			ACEditors.pages.focus();
 		});
-		
+
 		$('#settings-editor-text').on('click', function(){
 			ACEditors.settings.focus();
 		});
-		
-		
+
+
 		pagesSession.setUseWrapMode( true );
 		ACEditors.pages.renderer.setShowGutter( false );
 		// ACEditors.pages.setFontSize('1.01em');
-		
+
 		var editorPagesBtns = [ ['h1','1'], ['h2','2'], ['h3','3'], ['B','b'], ['P','p'], ['I','i'] ];
 		// ['h4','4'], ['h5','5'], ['h6','6'],
 		for( var i = 0; i < editorPagesBtns.length; i++ ){
@@ -598,7 +598,7 @@
 				bindAceKeys.variator( ACEditors.pages, [str, '</a>'] );
 			}
 		} );
-		
+
 		$( '#pages-editor-buttons-Image' ).click( function(){
 			var val = prompt('Plase Fill SRC!', 'http://');
 			if(val){
@@ -606,12 +606,12 @@
 				bindAceKeys.variator( ACEditors.pages, [str, '" />'] );
 			}
 		} );
-		
+
 		$( '#pages-editor-buttons-Help' ).click( function(){
 			var data = '\n\
 Hotkeys preset memo:\n\n\
-Ctrl + 1, Ctrl + 2 ... Ctrl + 6 : for Headings H1, H2 ... H6\n\
-Ctrl + P or Ctrl + 0 : for new paragraph <P>\n\
+Ctrl + 1, Ctrl + 2 ... Ctrl + 6 : for Headings <h1>, <h2> ... <h6>\n\
+Ctrl + P or Ctrl + 0 : for new paragraph <p>\n\
 Ctrl + B, Ctrl + I : <strong>bold</strong> and <em>italic</em>\n\
 Ctrl + L : <a href="/"> link </a> \n\
 Ctrl + Q : &laquo; | &raquo;\n\
@@ -626,13 +626,31 @@ Ctrl + S : Save Leaf\n\
 \n\
 + default ACE Editor preset\n\n';
 
-			bindAceKeys.variator( ACEditors.pages, [data] );
+			// bindAceKeys.variator( ACEditors.pages, [data] );
+			debugger;
+			var increment = 0;
+			var arr = [ 42, 120 ];
+			ACEditors.pages.session.setMode( 'ace/mode/text' );
+			var len = data.length;
+			var lem = len - 1;
+			for(var i = 0; i < len; i++){
+				increment += ( Math.floor( Math.random()*arr[i%2] ) );
+				(function(i, increment, lem){
+					window.setTimeout( function(){
+						if( i == lem ){
+							ACEditors.pages.session.setMode( 'ace/mode/html' );
+						}
+						ACEditors.pages.insert( data[i] );
+					}, increment );
+				})(i, increment, lem);
+			}
+			
 		} );
-		
+
 		window.setTimeout( function(){ ACEditors.pages.focus(); }, 500);
-		
-		
-		
+
+
+
 		var rid_index = function( direct ) {
 
 			// menu generation code for current leaf, used for documentation!
@@ -847,7 +865,7 @@ Ctrl + S : Save Leaf\n\
 		// templates
 
 		bindAceKeys( ACEditors.template );
-		
+
 		ACEditors.template.setTheme( aceEditorTheme );
 		ACEditors.template.session.setMode('ace/mode/php');
 		$('#templ-source-editor, #templ-source-tab, #templ-source-tab-btn').on('click', function(){
@@ -1007,7 +1025,7 @@ Ctrl + S : Save Leaf\n\
 				// var scrTop = $('.ace_editor .ace_sb ').scrollTop();
 				var session = ACEditors.template.getSession();
 				var scrTop = session.getScrollTop();
-				
+
 				callback = (function(cursorPosition, scrTop){
 					return function( data ){
 						if( data == 'success' ){
@@ -1142,7 +1160,7 @@ Ctrl + S : Save Leaf\n\
 
 					if( val ){
 						load_settings_path(); // reload for current env
-						
+
 						if( $('#settings-growl-notify').attr('checked') ){
 							helpers.growl( 'Settings Saved.' );
 						}else{
@@ -1158,7 +1176,7 @@ Ctrl + S : Save Leaf\n\
 
 				var val = $.cookie( 'settings_growl_control_cookie_name' ) || false;
 				$('#settings-growl-notify').attr('checked' ,  val );
-				
+
 				var val = $.cookie( 'settings_tree_expand_name' ) || false;
 				$('#settings-trees-expand').attr('checked' ,  val );
 
@@ -1176,12 +1194,12 @@ Ctrl + S : Save Leaf\n\
 					// var opts = { name : 'settings_tree_expand_name', opts : { expires: 7 } };
 					// $.cookie( opts.name , $('#settings-trees-expand').attr('checked'), opts.opts );
 				// } );
-				
+
 			}
 
 
 			$('#saveSettingsButton').click( function(){ saveSettingsAction(); } );
-			
+
 			saveSettingsAction(); // receive current
 
 			$('#clearCacheButton').click( function(){
@@ -1206,19 +1224,19 @@ Ctrl + S : Save Leaf\n\
 		window.setTimeout(function(){
 
 
-			var initialHeightsConfig = ['tabsContent', 'treePages', 'treePagesEditor', 
-				
+			var initialHeightsConfig = ['tabsContent', 'treePages', 'treePagesEditor',
+
 				// 'pages-editor', //ace
 				'pages-editor-container',
-				
+
 				'treePagesEditor-description', 'treePagesEditor-additional', 'treePagesEditor-info-snippet',
 				'templHeader-description', 'templHeader-additional',
 
 				// 'templ-source-editor', //ace
 				'templ-source-container',
 
-				'snippeteditor', 'fileManager', 
-				
+				'snippeteditor', 'fileManager',
+
 				// 'settings-editor-text' //ace
 				'settings-editor-text-container'
 				];
@@ -1255,7 +1273,7 @@ Ctrl + S : Save Leaf\n\
 				window.setTimeout( function(){
 					for(var i in ACEditors){ ACEditors[i].resize(); }
 				}, 500 );
-				
+
 			};
 
 			$(window).on('resize', function(){
