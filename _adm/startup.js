@@ -527,40 +527,40 @@
 		};
 
 		
-		var storeACEditorTheeme = function( theeme ) {
+		var storeACEditorTheme = function( theme ) {
 			try{
-				var opts = { name : 'settings_finecut_ace_editor_theeme', opts : { expires: 7 } };
+				var opts = { name : 'settings_finecut_ace_editor_theme', opts : { expires: 7 } };
 				if( $.cookie ){
-					if( theeme ){
-						$.cookie( opts.name , theeme, opts.opts );
+					if( theme ){
+						$.cookie( opts.name , theme, opts.opts );
 					}
-					theeme = $.cookie( opts.name ) || false;
+					theme = $.cookie( opts.name ) || false;
 				}
-			}catch(e){ }finally{ return theeme; }
+			}catch(e){ }finally{ return theme; }
 		}
 		
 		
 		$( '#ace_theme' ).change( function(){
 			var val = $( '#ace_theme' ).val();
-			storeACEditorTheeme( val );
+			storeACEditorTheme( val );
 			for(var i in ACEditors){ ACEditors[i].setTheme( val ); }
 		} );
 		
 		bindAceKeys( ACEditors.pages );
 		bindAceKeys( ACEditors.settings );
 		
-		var aceEditorTheeme = 'ace/theme/chrome';
-		var aceEditorCookieTheeme = storeACEditorTheeme();
-		if( aceEditorCookieTheeme ) {
-			aceEditorTheeme = aceEditorCookieTheeme;
-			$( '#ace_theme' ).val( aceEditorTheeme );
+		var aceEditorTheme = 'ace/theme/chrome';
+		var aceEditorCookieTheme = storeACEditorTheme();
+		if( aceEditorCookieTheme ) {
+			aceEditorTheme = aceEditorCookieTheme;
+			$( '#ace_theme' ).val( aceEditorTheme );
 			// $( '#ace_theme' ).trigger( 'liszt:updated' );
 		}else{
-			storeACEditorTheeme( aceEditorTheeme );
+			storeACEditorTheme( aceEditorTheme );
 		}
 		
-		ACEditors.pages.setTheme( aceEditorTheeme );
-		ACEditors.settings.setTheme( aceEditorTheeme );
+		ACEditors.pages.setTheme( aceEditorTheme );
+		ACEditors.settings.setTheme( aceEditorTheme );
 		
 		var pagesSession = ACEditors.pages.session;
 		pagesSession.setMode('ace/mode/html');
@@ -848,7 +848,7 @@ Ctrl + S : Save Leaf\n\
 
 		bindAceKeys( ACEditors.template );
 		
-		ACEditors.template.setTheme( aceEditorTheeme );
+		ACEditors.template.setTheme( aceEditorTheme );
 		ACEditors.template.session.setMode('ace/mode/php');
 		$('#templ-source-editor, #templ-source-tab, #templ-source-tab-btn').on('click', function(){
 			ACEditors.template.focus();
