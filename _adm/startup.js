@@ -477,6 +477,9 @@
 				'ctrl-i': 'em',
 				'ctrl-b': 'strong',
 				'ctrl-p': 'p',
+				'ctrl-0': 'p',
+
+				'ctrl-Space': ['&nbsp; '],
 				'ctrl-9': ['&nbsp; '],
 				'ctrl-8': ['&mdash; '],
 				'ctrl-7': ['&ndash; '],
@@ -486,6 +489,11 @@
 				'ctrl-3': 'h3',
 				'ctrl-2': 'h2',
 				'ctrl-1': 'h1',
+				// 'shift-Space': [ '123' ]
+				// 'shift-Space': [ '123' ]
+				'shift-Space': [ '<br />' ]
+				// also: Ctrl Shift Alt Space Edit
+				
 			};
 			for(var i in arr3){
 				var obj = {};
@@ -514,26 +522,66 @@
 		
 		var ACEditors = {
 			template : ace.edit('templ-source-editor'),
-			pages : ace.edit('pages-editor')
+			pages : ace.edit('pages-editor'),
+			settings : ace.edit('settings-editor-text')
 		};
+
 		
-		bindAceKeys(ACEditors.pages);
+		var storeACEditorTheeme = function( theeme ) {
+			try{
+				var opts = { name : 'settings_finecut_ace_editor_theeme', opts : { expires: 7 } };
+				if( $.cookie ){
+					if( theeme ){
+						$.cookie( opts.name , theeme, opts.opts );
+					}
+					theeme = $.cookie( opts.name ) || false;
+				}
+			}catch(e){ }finally{ return theeme; }
+		}
 		
-		ACEditors.pages.setTheme('ace/theme/chrome');
+		
+		$( '#ace_theme' ).change( function(){
+			var val = $( '#ace_theme' ).val();
+			storeACEditorTheeme( val );
+			for(var i in ACEditors){ ACEditors[i].setTheme( val ); }
+		} );
+		
+		bindAceKeys( ACEditors.pages );
+		bindAceKeys( ACEditors.settings );
+		
+		var aceEditorTheeme = 'ace/theme/chrome';
+		var aceEditorCookieTheeme = storeACEditorTheeme();
+		if( aceEditorCookieTheeme ) {
+			aceEditorTheeme = aceEditorCookieTheeme;
+			$( '#ace_theme' ).val( aceEditorTheeme );
+			// $( '#ace_theme' ).trigger( 'liszt:updated' );
+		}else{
+			storeACEditorTheeme( aceEditorTheeme );
+		}
+		
+		ACEditors.pages.setTheme( aceEditorTheeme );
+		ACEditors.settings.setTheme( aceEditorTheeme );
+		
 		var pagesSession = ACEditors.pages.session;
 		pagesSession.setMode('ace/mode/html');
+		
+		ACEditors.settings.session.setMode( 'ace/mode/php' );
+		
 		$('#pages-editor, #pages-editor-tab, #pages-editor-tab-btn').on('click', function(){
 			ACEditors.pages.focus();
 		});
+		
+		$('#settings-editor-text').on('click', function(){
+			ACEditors.settings.focus();
+		});
+		
 		
 		pagesSession.setUseWrapMode( true );
 		ACEditors.pages.renderer.setShowGutter( false );
 		// ACEditors.pages.setFontSize('1.01em');
 		
-		
-		
-		var editorPagesBtns = [ ['h1','1'], ['h2','2'], ['h3','3'], ['h4','4'], 
-			['h5','5'], ['h6','6'], ['B','b'], ['P','p'], ['I','i'] ];
+		var editorPagesBtns = [ ['h1','1'], ['h2','2'], ['h3','3'], ['B','b'], ['P','p'], ['I','i'] ];
+		// ['h4','4'], ['h5','5'], ['h6','6'],
 		for( var i = 0; i < editorPagesBtns.length; i++ ){
 			(function(i){
 				var nm = editorPagesBtns[i];
@@ -563,13 +611,14 @@
 			var data = '\n\
 Hotkeys preset memo:\n\n\
 Ctrl + 1, Ctrl + 2 ... Ctrl + 6 : for Headings H1, H2 ... H6\n\
-Ctrl + P : for new paragraph <P>\n\
+Ctrl + P or Ctrl + 0 : for new paragraph <P>\n\
 Ctrl + B, Ctrl + I : <strong>bold</strong> and <em>italic</em>\n\
 Ctrl + L : <a href="/"> link </a> \n\
 Ctrl + Q : &laquo; | &raquo;\n\
 Ctrl + 7 : the dash - &ndash;\n\
 Ctrl + 8 : the long dash - &mdash;\n\
-Ctrl + 9 : &nbsp; \n\
+Ctrl + Space or Ctrl + 9 : &nbsp; \n\
+Shift + Space : <br /> \n\
 \n\
 Ctrl + Z : Undo\n\
 \n\
@@ -799,7 +848,7 @@ Ctrl + S : Save Leaf\n\
 
 		bindAceKeys( ACEditors.template );
 		
-		ACEditors.template.setTheme('ace/theme/chrome');
+		ACEditors.template.setTheme( aceEditorTheeme );
 		ACEditors.template.session.setMode('ace/mode/php');
 		$('#templ-source-editor, #templ-source-tab, #templ-source-tab-btn').on('click', function(){
 			ACEditors.template.focus();
@@ -1077,8 +1126,9 @@ Ctrl + S : Save Leaf\n\
 		// settings
 
 		var saveSettingsAction = function(){ // used for keydown Ctrl + S reaction
-			helpers.growl( 'Saving Settings.' );
-			var val = $('#settings-editor-text').val();
+			// $('#settings-editor-text').val();
+			var val = ACEditors.settings.getValue();
+			val && ( helpers.growl( 'Saving Settings.' ) );
 			$.ajax( {
 				  type: "POST"
 				, async: true
@@ -1086,12 +1136,18 @@ Ctrl + S : Save Leaf\n\
 				, dataType : 'text'
 				, url: ServerPaths.api
 				, success: function( data ){
-					$('#settings-editor-text').val(data);
-					load_settings_path();
-					if( $('#settings-growl-notify').attr('checked') ){
-						helpers.growl( 'Settings Saved.' );
-					}else{
-						helpers.message( 'Info', 'Settings Saved.' );
+
+					// $('#settings-editor-text').val(data);
+					ACEditors.settings.setValue( data, -1 );
+
+					if( val ){
+						load_settings_path(); // reload for current env
+						
+						if( $('#settings-growl-notify').attr('checked') ){
+							helpers.growl( 'Settings Saved.' );
+						}else{
+							helpers.message( 'Info', 'Settings Saved.' );
+						}
 					}
 				}
 			} );
@@ -1099,29 +1155,36 @@ Ctrl + S : Save Leaf\n\
 
 		window.setTimeout( function(){
 			if( $.cookie ){
+
 				var val = $.cookie( 'settings_growl_control_cookie_name' ) || false;
 				$('#settings-growl-notify').attr('checked' ,  val );
+				
 				var val = $.cookie( 'settings_tree_expand_name' ) || false;
 				$('#settings-trees-expand').attr('checked' ,  val );
+
+				$('#settings-growl-notify').click( function(){
+					var opts = { name : 'settings_growl_control_cookie_name', opts : { expires: 7 } };
+					$.cookie( opts.name , $('#settings-growl-notify').attr('checked'), opts.opts );
+				} );
+
+				$('#settings-trees-expand').click( function(){
+					var opts = { name : 'settings_tree_expand_name', opts : { expires: 7 } };
+					$.cookie( opts.name , $('#settings-trees-expand').attr('checked'), opts.opts );
+				} );
+
+				// $('#settings-trees-expand').click( function(){
+					// var opts = { name : 'settings_tree_expand_name', opts : { expires: 7 } };
+					// $.cookie( opts.name , $('#settings-trees-expand').attr('checked'), opts.opts );
+				// } );
+				
 			}
-			$('#settings-growl-notify').click( function(){
-				var opts = { name : 'settings_growl_control_cookie_name', opts : { expires: 7 } };
-				$.cookie( opts.name , $('#settings-growl-notify').attr('checked'), opts.opts );
-			} );
-			$('#settings-trees-expand').click( function(){
-				var opts = { name : 'settings_tree_expand_name', opts : { expires: 7 } };
-				$.cookie( opts.name , $('#settings-trees-expand').attr('checked'), opts.opts );
-			} );
-			$('#settings-trees-expand').click( function(){
-				var opts = { name : 'settings_tree_expand_name', opts : { expires: 7 } };
-				$.cookie( opts.name , $('#settings-trees-expand').attr('checked'), opts.opts );
-			} );
 
 
 			$('#saveSettingsButton').click( function(){ saveSettingsAction(); } );
+			
+			saveSettingsAction(); // receive current
 
 			$('#clearCacheButton').click( function(){
-				var val = $('#settings-editor-text').val();
 				$.ajax( {
 					  type: "POST"
 					, async: true
@@ -1143,13 +1206,22 @@ Ctrl + S : Save Leaf\n\
 		window.setTimeout(function(){
 
 
-			var initialHeightsConfig = ['tabsContent', 'treePages', 'treePagesEditor', 'pages-editor',
+			var initialHeightsConfig = ['tabsContent', 'treePages', 'treePagesEditor', 
+				
+				// 'pages-editor', //ace
+				'pages-editor-container',
+				
 				'treePagesEditor-description', 'treePagesEditor-additional', 'treePagesEditor-info-snippet',
 				'templHeader-description', 'templHeader-additional',
 
-				'templ-source-editor', 'templ-source-container',
+				// 'templ-source-editor', //ace
+				'templ-source-container',
 
-				'snippeteditor', 'fileManager', 'settings-editor-text'];
+				'snippeteditor', 'fileManager', 
+				
+				// 'settings-editor-text' //ace
+				'settings-editor-text-container'
+				];
 
 			var initialHeights = {};
 
@@ -1170,19 +1242,20 @@ Ctrl + S : Save Leaf\n\
 						$('#' + i).height( wh - 27 - diff );
 					};
 
-
 					$('#elfinder').find('div.el-finder-nav, div.el-finder-cwd')
 						.height( wh - ( starter - 530 ) - 27 );
+
 				}else{
 					for(var i in initialHeights){
 						$('#' + i).height( initialHeights[i] );
 					};
-					$('#elfinder').find('div.el-finder-nav, div.el-finder-cwd')
-						.height( 530 );
+					$('#elfinder').find('div.el-finder-nav, div.el-finder-cwd').height( 530 );
 				}
 
-				ACEditors.template.resize();
-
+				window.setTimeout( function(){
+					for(var i in ACEditors){ ACEditors[i].resize(); }
+				}, 500 );
+				
 			};
 
 			$(window).on('resize', function(){
@@ -1196,7 +1269,7 @@ Ctrl + S : Save Leaf\n\
 
 			resizer();
 
-		}, 1000);
+		}, 300);
 
 		// resizer
 
