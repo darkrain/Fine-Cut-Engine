@@ -45,7 +45,7 @@
 						<table border = "0">
 						<tr>
 						<td>
-							<?php if( !$success['isMain'] ) { echo '<a href = "/">'; } ?>
+            				<?php if( !$success['isMain'] ) { echo '<a href = "'.$success['deep'].'/">'; } ?>
 							<image border = "0" src = "<?php echo $success['deep']; ?>/stylesheets/img/logo.png" width = "25" height = "25"
 								alt = "FineCut Logo" class = "logo">
 							<?php if( !$success['isMain'] ) { echo '</a>'; } ?>
