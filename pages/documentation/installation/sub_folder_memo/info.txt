@@ -1,11 +1,11 @@
 {
-	"title": "Title",
-	"mainMenu": {
-		"menuFile": "menu.js",
-		"active": "/documentation/"
-	},
-	"leftMenu": {
-		"menuFile": "menu.js",
-		"active": "/documentation/installation/sub_folder_memo/"
-	}
+    "title": "Title",
+    "mainMenu": {
+        "menuFile": "doc.js",
+        "active": "/documentation/"
+    },
+    "leftMenu": {
+        "menuFile": "menu.js",
+        "active": "/documentation/installation/sub_folder_memo/"
+    }
 }

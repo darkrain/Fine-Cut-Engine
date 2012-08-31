@@ -1,7 +1,7 @@
 {
     "title": "Title",
     "mainMenu": {
-        "menuFile": "menu.js",
+        "menuFile": "doc.js",
         "active": "/documentation/"
     },
     "leftMenu": {
