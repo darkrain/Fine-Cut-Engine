@@ -15,5 +15,9 @@
 		"title": "Download",
 		"type": "link",
 		"link": "/download/"
+	}, {
+		"title": "Support",
+		"type": "link",
+		"link": "/documentation/resources/"
 	}
 ]
